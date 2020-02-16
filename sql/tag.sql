@@ -16,17 +16,17 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`treefrog` /*!40100 DEFAULT CHARACTER SE
 
 USE `treefrog`;
 
-/*Table structure for table `type` */
+/*Table structure for table `tag` */
 
-DROP TABLE IF EXISTS `type`;
+DROP TABLE IF EXISTS `tag`;
 
-CREATE TABLE `type` (
-  `id` int(5) NOT NULL AUTO_INCREMENT COMMENT '分类ID',
-  `name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '分类名称',
+CREATE TABLE `tag` (
+  `id` int(5) NOT NULL COMMENT '标签id',
+  `name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '标签名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-/*Data for the table `type` */
+/*Data for the table `tag` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
