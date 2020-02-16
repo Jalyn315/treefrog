@@ -1,6 +1,11 @@
 /*
+<<<<<<< HEAD
 SQLyog Ultimate v12.09 (64 bit)
 MySQL - 5.7.28 : Database - treefrog
+=======
+SQLyog Ultimate v10.00 Beta1
+MySQL - 8.0.12 : Database - treefrog
+>>>>>>> origin/master
 *********************************************************************
 */
 
@@ -41,11 +46,19 @@ CREATE TABLE `file` (
   `is_updatable` int(11) NOT NULL DEFAULT '1' COMMENT '文件是否可更新',
   `last_modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最近一次修改时间',
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `file` */
 
 insert  into `file`(`id`,`name`,`suffix`,`local_url`,`visit_url`,`size`,`create_time`,`description`,`check_times`,`download_times`,`tag`,`user_id`,`category_id`,`is_downloadable`,`is_uploadable`,`is_visible`,`is_deletable`,`is_updatable`,`last_modify_time`) values (1,'db8b6d4f-2a72-4211-8c8d-78e018c70519_文件上传.xmind','xmind','G:\\treefrogFile\\7\\0\\','',22478,'2019-12-25 14:40:24','上传流程图',0,0,'文件',2,0,0,0,0,0,0,'2019-12-25 14:40:24'),(2,'a7043d06-b943-48d3-9cf4-f4bde79bb885_DFS.doc','doc','G:\\treefrogFile\\0\\0\\','',12800,'2019-12-25 14:59:27','发',0,0,'凤飞飞',2,0,0,0,0,0,0,'2019-12-25 14:59:27'),(3,'894ee522-cd08-4f3f-b93e-52c03cb38ba7_DFS.doc','doc','G:\\treefrogFile\\12\\0\\','',12800,'2019-12-25 16:02:06','5555555',0,0,'图片',2,0,0,0,0,0,0,'2019-12-25 16:02:06'),(4,'43959965-b7f0-4787-ae2e-46e591afb423_新建文本文档.txt','txt','G:\\treefrogFile\\4\\0\\','',571,'2019-12-26 21:13:29','55',0,0,'文件',2,0,0,0,0,0,0,'2019-12-26 21:13:29'),(5,'5c762c51-29bf-4969-bb7c-1b4ca2c2e67f_DFS.doc','doc','G:\\treefrogFile\\7\\0\\','',12800,'2019-12-27 00:07:18','是',0,0,'图片',2,0,0,0,0,0,0,'2019-12-27 00:07:18'),(6,'ffdbf85a-d920-4b27-ab71-11a6ba17fd52_usingthymeleaf.pdf','pdf','G:\\treefrogFile\\4\\0\\','',677697,'2019-12-27 01:21:05','thymeleaf使用文档',0,0,'文件',2,0,0,0,0,0,0,'2019-12-27 01:21:05'),(7,'cbc9b637-ef39-49e4-ae86-015ccafeb18c_jdk api 1.8_google.chw','chw','G:\\treefrogFile\\7\\0\\','',381209,'2019-12-27 01:25:15','jaca',0,0,'文档',2,0,0,0,0,0,0,'2019-12-27 01:25:15'),(8,'1ade05e8-f249-4141-b32c-be59410c01d1_G-DRAGON、金钟万 - Today.kgm','kgm','G:\\treefrogFile\\12\\0\\','',8885769,'2019-12-27 02:35:02','我的最爱',0,0,'音乐',1,0,0,0,0,0,0,'2019-12-27 02:35:02'),(9,'d0b9e7cc-f5f1-45b3-b343-4bc38a465db2_pl.mp3','mp3','G:\\treefrogFile\\8\\0\\','',3873507,'2019-12-27 10:54:07','一首歌',0,0,'音乐',2,0,0,0,0,0,0,'2019-12-27 10:54:07'),(10,'8cf8e304-cd99-4c47-9c5e-f277f7aa9ee5_t01196a8e68182b4173.jpg','jpg','G:\\treefrogFile\\10\\0\\','',17955,'2019-12-28 13:48:30','',0,0,'',2,0,0,0,0,0,0,'2019-12-28 13:48:30'),(11,'a1781d22-40c6-42da-9aab-4ebcecf35911_G-DRAGON、金钟万 - Today.kgm','kgm','G:\\treefrogFile\\9\\0\\','',8885769,'2020-01-14 21:19:07','111',0,0,'音乐',2,0,0,0,0,0,0,'2020-01-14 21:19:07');
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+/*Data for the table `file` */
+
+insert  into `file`(`id`,`name`,`suffix`,`local_url`,`visit_url`,`size`,`create_time`,`description`,`check_times`,`download_times`,`tag`,`user_id`,`category_id`,`is_downloadable`,`is_uploadable`,`is_visible`,`is_deletable`,`is_updatable`,`last_modify_time`) values (1,'db8b6d4f-2a72-4211-8c8d-78e018c70519_文件上传.xmind','xmind','G:\\treefrogFile\\7\\0\\','',22478,'2019-12-25 14:40:24','上传流程图',0,0,'文件',2,0,0,0,0,0,0,'2019-12-25 14:40:24'),(2,'a7043d06-b943-48d3-9cf4-f4bde79bb885_DFS.doc','doc','G:\\treefrogFile\\0\\0\\','',12800,'2019-12-25 14:59:27','发',0,0,'凤飞飞',2,0,0,0,0,0,0,'2019-12-25 14:59:27'),(3,'894ee522-cd08-4f3f-b93e-52c03cb38ba7_DFS.doc','doc','G:\\treefrogFile\\12\\0\\','',12800,'2019-12-25 16:02:06','5555555',0,0,'图片',2,0,0,0,0,0,0,'2019-12-25 16:02:06'),(4,'43959965-b7f0-4787-ae2e-46e591afb423_新建文本文档.txt','txt','G:\\treefrogFile\\4\\0\\','',571,'2019-12-26 21:13:29','55',0,0,'文件',2,0,0,0,0,0,0,'2019-12-26 21:13:29'),(5,'5c762c51-29bf-4969-bb7c-1b4ca2c2e67f_DFS.doc','doc','G:\\treefrogFile\\7\\0\\','',12800,'2019-12-27 00:07:18','是',0,0,'图片',2,0,0,0,0,0,0,'2019-12-27 00:07:18'),(6,'ffdbf85a-d920-4b27-ab71-11a6ba17fd52_usingthymeleaf.pdf','pdf','G:\\treefrogFile\\4\\0\\','',677697,'2019-12-27 01:21:05','thymeleaf使用文档',0,0,'文件',2,0,0,0,0,0,0,'2019-12-27 01:21:05'),(7,'cbc9b637-ef39-49e4-ae86-015ccafeb18c_jdk api 1.8_google.chw','chw','G:\\treefrogFile\\7\\0\\','',381209,'2019-12-27 01:25:15','jaca',0,0,'文档',2,0,0,0,0,0,0,'2019-12-27 01:25:15'),(8,'1ade05e8-f249-4141-b32c-be59410c01d1_G-DRAGON、金钟万 - Today.kgm','kgm','G:\\treefrogFile\\12\\0\\','',8885769,'2019-12-27 02:35:02','我的最爱',0,0,'音乐',1,0,0,0,0,0,0,'2019-12-27 02:35:02'),(9,'d0b9e7cc-f5f1-45b3-b343-4bc38a465db2_pl.mp3','mp3','G:\\treefrogFile\\8\\0\\','',3873507,'2019-12-27 10:54:07','一首歌',0,0,'音乐',2,0,0,0,0,0,0,'2019-12-27 10:54:07');
+>>>>>>> origin/master
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
