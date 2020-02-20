@@ -18,7 +18,7 @@ public interface UserDao {
      * @return
      */
     @Select("select * from user where (username=#{name}) and password=#{password}")
-  public  User login(@RequestParam("username") String name,@RequestParam("password") String password);
+    User login(@RequestParam("username") String name,@RequestParam("password") String password);
 
     boolean updataPasswordById(int id);
     boolean insertUser(User user);
@@ -29,7 +29,7 @@ public interface UserDao {
      * @return
      */
     @Update("update user set realName=#{realName},sex=#{sex},birth=#{birth},email=#{email},phone=#{phone},description=#{description} where id = #{id}")
-    public boolean update( User user);
+    boolean update( User user);
 
     /**
      * 保存用户
@@ -38,7 +38,7 @@ public interface UserDao {
      */
     @Insert("insert into user(username,password,realName,sex,birth,email,phone,permission,description) values" +
             "(#{username},#{password},#{realName},#{sex},#{birth},#{email},#{phone},#{permission},#{description})")
-    public User saveUser(User user);
+    User saveUser(User user);
 
     /**
      * 根据用户id获取数据库中的用户
@@ -46,7 +46,7 @@ public interface UserDao {
      * @return
      */
     @Select("select * from user where id = #{id}")
-   public User get(Integer id);
+    User get(Integer id);
 
     /**
      * 根据Id获取用户名
@@ -54,7 +54,7 @@ public interface UserDao {
      * @return
      */
     @Select("select username from user where id = #{id}")
-    public String  getByUserName(Integer id);
+    String  getByUserName(Integer id);
 
     /**
      * 根据Id获取邮箱信息
@@ -62,8 +62,7 @@ public interface UserDao {
      * @return
      */
     @Select("select email from user where id = #{id}")
-    public String getByEmail(Integer id);
-
+    String getByEmail(Integer id);
 
 }
 
