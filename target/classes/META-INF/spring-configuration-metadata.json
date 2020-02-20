@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "file-upload",
+      "type": "com.shuwa.treefrog.config.MvcConfig",
+      "sourceType": "com.shuwa.treefrog.config.MvcConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

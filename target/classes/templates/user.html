@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>我的信息</title>
+
+	<link rel="stylesheet" href="" th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.css}" >
+	<link rel="stylesheet" href="../static/assets/css/user.css" th:href="@{assets/css/user.css}">
+	<link rel="stylesheet" href="../static/assets/css/bootstrap.min.css"  th:href="@{assets/css/bootstrap.min.css}">
+	<link rel="stylesheet" href="../static/assets/css/font-awesome.min.css" th:href="@{assets/css/font-awesome.min.css}">
+</head>
+<body>
+<div>
+	<nav class="navbar navbar-expand-lg navbar-light bg-success" th:replace="_fragments :: navbar">
+		<div class="row col-sm-6 offset-2 ">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<img class="" src="../static/assets/img/logo.png" width="40" height="40">
+				<h2 > TreeFrog</h2>
+				<ul id="navtag" class="navbar-nav mr-auto">
+					<li class="nav-item active ">
+						<a class="nav-link" >首页</span></a>
+					</li>
+					<li class="nav-item">
+						<a  class="nav-link " >探索</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " >发现</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row col-sm-4 float-right">
+			<ul id="navtag01" class="navbar-nav  navbar-right">
+				<li class="nav-item active ">
+					<a  class="nav-link" href="#"><img src="../static/assets/img/upload.png" alt="" width="28" height="28" ></a>
+				</li>
+				<li class="nav-item active ">
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control border-success" type="search" placeholder="文件名或作者" aria-label="Search">
+						<button class="btn " type="submit"><span class="Search"></span>
+                        <img src="../static/assets/img/Search.png" alt="" width="28" height="28" >
+						</button>
+					</form>
+				</li>
+				<li class="nav-item active ">
+					<div class="dropdown">
+						<img class="rounded-circle border" src="../static/assets/img/via.jpg" data-toggle="dropdown" width="40" height="40">
+						<ul class="dropdown-menu" role="menu" aria-labelledby="usermenu">
+							<div class="container row">
+								<div>
+									<img class="rounded-circle border" src="../static/assets/img/via.jpg" data-toggle="dropdown" width="40" height="40">
+								</div>
+								<div >
+									<span>用户名</span>
+								</div>
+							</div>
+							<div calss="divider"></div>
+							<li><a role="menuitem" href="#">查看个人资料</a></li>
+							<li><a role="menuitem" href="#">帮助</a></li>
+							<li><a role="menuitem" href="#">注销</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<!--center-->
+<div class="container col-sm-8 offset-2 row" >
+	<div class="col-sm-2">
+		<div class="offset-3">
+			<nav class="navbar navbar-light nflex-column" th:replace="_fragments :: centered">
+				<ul class="navbar-nav nav-pills" id="nav-vertical">
+					<li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="1" class="fa fa-folder-open-o" aria-hidden="true"></i>资源列表</a></li>
+					<li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="2" class="fa fa-user-circle-o" aria-hidden="true"></i>我的文件</a></li>
+					<li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="3" class="fa fa-star-o" aria-hidden="true"></i>收藏</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<!--                    内容-->
+
+	<div class="col-sm-10 ">
+		<div class="col-sm-8   offset-1">
+			<div>
+				<form th:action="@{/updateEmp}" role="form" class="" method="post">
+
+						<div class="form-group row offset-4">
+								<img src="../static/assets/img/via.jpg" th:src="@{assets/img/via.jpg}" class="rounded-circle border" with="100" height="100">
+							<div class="" style="margin-top: 40px;margin-left: 10px;">
+								<label >用户名：</label>
+								<span th:text="${session.user.username}" style="font-family: 'Bell MT';font-size: 30px">treefrog</span>
+							</div>
+						</div>
+
+						<div class="form-group  ">
+							<label>姓名：</label>
+							<div class="pc-kk-form-list">
+								<input type="text" placeholder="姓名" class="form-control" name="realName" th:value="${session.user.username}">
+							</div>
+						</div>
+
+						<div class="form-group ">
+							<label>性别：</label>
+							<div class="pc-kk-form-list pc-kk-form-list-clear">
+								<div class="nice-select" name="nice-select" >
+									<input type="text" placeholder="性别" readonly name="sex" th:value="${session.user.sex}">
+									<ul>
+										<li data-value="male">男</li>
+										<li data-value="female">女</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>出生日期：</label>
+							<div class="pc-kk-form-list">
+								<input type="date" class="form-control" placeholder="出生日期" th:value="${session.user.birth}" name="birth">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Email：</label>
+							<div class="pc-kk-form-list">
+								<input type="email" placeholder="E-mail" class="form-control" th:value="${session.user.email}" name="email">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>手机号码：</label>
+							<div class="pc-kk-form-list">
+								<input type="tel" placeholder="Phone" class="form-control" name="phone" th:value="${session.user.phone}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>个人说明：</label>
+									<textarea placeholder="个人说明" class="form-control" name="description" style="border: 1px solid ;" th:text="${session.user.description}"></textarea>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-success btn-lg btn-block">修改</button>
+							<p style="color: orange"  th:text="${message}" th:if="${ not #strings.isEmpty(message)}"></p>
+						</div>
+
+
+				</form>
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+			<div class="pc-kk-form">
+				<form th:action="@{/updateEmp}" method="post">
+					<div class="pc-kk-form-list">
+						<input type="text" :placeholder="姓名" name="realName" th:value="${session.user.username}">
+					</div>
+					<div class="pc-kk-form-list pc-kk-form-list-clear">
+						<div class="n-select" >
+							<input type="text" class="form-control" placeholder="出生日期" th:value="${session.user.birth}" name="birth">
+						</div>
+						<div class="nice-select" name="nice-select" style="float:right">
+							<input type="text" placeholder="性别" readonly name="sex" th:value="${session.user.sex}">
+							<ul>
+								<li data-value="male">男</li>
+								<li data-value="female">女</li>
+							</ul>
+						</div>
+					</div>
+					<div class="pc-kk-form-list">
+						<input type="email" placeholder="E-mail" th:value="${session.user.email}" name="email">
+					</div>
+					<div class="pc-kk-form-list">
+						<input type="tel" placeholder="Phone" name="phone" th:value="${session.user.phone}">
+					</div>
+					<div class="pc-kk-form-list" style="height:auto">
+						<textarea placeholder="个人说明" name = "description" th:text="${session.user.description}"></textarea>
+					</div>
+
+						<button type="submit" class="btn btn-success btn-lg btn-block">修改</button>
+					<p style="color: orange"  th:text="${message}" th:if="${ not #strings.isEmpty(message)}"></p>
+				</form>
+			</div>
+
+		-->
+
+		</div>
+
+	</div>
+</div>
+
+	<!--            底部栏-->
+	<div class="container  col-sm-12">
+		<div class="offset-2">
+			<p >联系我们:18177860346</p>
+			<p>email:18177860346@163.com</p>
+			<p>QQ:1921776332</p>
+		</div>
+	</div>
+ 
+
+
+	<script type="text/javascript" src="../static/assets/js/jquery.js" th:src="@{../asserts/js/jquery.js}" ></script>
+	 <script src="../static/assets/js/jquery-3.4.1.min.js" th:src="@{assets/js/jquery-3.4.1.min.js}"></script>
+	 <script src="../static/assets/js/bootstrap.bundle.min.js" th:src="@{assets/js/bootstrap.bundle.min.js}"></script>
+
+	 <script>
+
+        $('[name="nice-select"]').click(function(e){
+
+            $('[name="nice-select"]').find('ul').hide();
+
+            $(this).find('ul').show();
+
+            e.stopPropagation();
+
+        });
+
+        $('[name="nice-select"] li').hover(function(e){
+
+            $(this).toggleClass('on');
+
+            e.stopPropagation();
+
+        });
+
+        $('[name="nice-select"] li').click(function(e){
+
+            var val = $(this).text();
+
+            $(this).parents('[name="nice-select"]').find('input').val(val);
+
+            $('[name="nice-select"] ul').hide();
+
+            e.stopPropagation();
+
+        });
+
+        $(document).click(function(){
+
+            $('[name="nice-select"] ul').hide();
+
+        });
+	</script>
+
+<script>
+  $(".navbar-nav li").click(function (e) {
+		e.preventDefault();
+		$(this).addClass('active').siblings().removeClass('active');
+  });
+</script>
+
+</body>
+</html>

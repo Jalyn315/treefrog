@@ -15,6 +15,12 @@ public class LoginController {
     @Autowired
     UserService userervice;
 
+    @GetMapping("/login")
+    public String toLoginPage(){
+        return "login";
+    }
+
+
     @RequestMapping("/user_login")
     public String login(@RequestParam("username") String username, @RequestParam("password") String password
                         , Map<String,Object> map, HttpSession session){

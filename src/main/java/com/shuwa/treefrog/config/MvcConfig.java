@@ -21,7 +21,6 @@ public class MvcConfig  implements WebMvcConfigurer {
     //添加视图控制器
     public void addViewControllers(ViewControllerRegistry registry) {
         //访问路径映射
-        registry.addViewController("/").setViewName("login"); //访问/时进入login页面
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login.html").setViewName("login");
         registry.addViewController("/user.html").setViewName("user");
@@ -31,8 +30,7 @@ public class MvcConfig  implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //pringboot已经做好静态资源映射，拦截器不用处理静态资源
-        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns("/login.html","/","/user_login","/asserts/**");
-
+        //registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns("/login.html","/","/user_login","/asserts/**");
     }
     public  static final String filepath = "/File/";
 
