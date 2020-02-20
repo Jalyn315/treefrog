@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TreefrogApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TreefrogApplication.class, args);
-
+//        SpringApplication newRun = new SpringApplication(TreefrogApplication.class);
+//        newRun.setBannerMode(Banner.Mode.OFF);
+//        newRun.run(args);
+        SpringApplication.run(TreefrogApplication.class,args);
     }
 
 }
