@@ -9,10 +9,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class indexController {
 
-    @GetMapping("/")
-    public String index(HttpSession session){
-        session.setAttribute("user",new User());
-        return "index";
-    }
+//    @GetMapping("/")
+//    public String index(HttpSession session){
+//        session.setAttribute("user",new User());
+//        return "index";
+//    }
 
 }
