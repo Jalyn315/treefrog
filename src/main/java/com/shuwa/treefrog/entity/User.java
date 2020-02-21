@@ -1,7 +1,10 @@
 package com.shuwa.treefrog.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
+@Component
 public class User implements Serializable {
     private Integer id;
     private String username;
