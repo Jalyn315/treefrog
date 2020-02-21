@@ -20,6 +20,15 @@ public interface UserDao {
     @Select("select * from user where (username=#{name}) and password=#{password}")
     User login(@RequestParam("username") String name, @RequestParam("password") String password);
 
+
+    /**
+     * 用户注册-添加用户
+     *
+     * @return
+     */
+    @Insert("insert into user(user_name,password,phone) values(#{userName},#{password},#{phone})")
+    boolean addUser(User user);
+
     boolean updataPasswordById(int id);
 
     boolean insertUser(User user);
