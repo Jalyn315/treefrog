@@ -26,7 +26,7 @@ public interface UserDao {
      *
      * @return
      */
-    @Insert("insert into user(user_name,password,phone) values(#{userName},#{password},#{phone})")
+    @Insert("insert into user(username,password,phone) values(#{username},#{password},#{phone})")
     boolean addUser(User user);
 
     boolean updataPasswordById(int id);
