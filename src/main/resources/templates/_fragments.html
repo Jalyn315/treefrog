@@ -1,78 +1,84 @@
 <!doctype html>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org">
-      <head>
-        <title>treefrog</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css"  th:href="@{assets/css/bootstrap.min.css}">
-        <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css" th:href="@{assets/css/font-awesome.min.css}">
-    </head>
-      <body>
-            <nav class="navbar navbar-expand-lg navbar-light bg-success " th:fragment="navbar">
-            <div class="row col-sm-6 offset-2 ">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <img class="" src="../static/assets/img/logo.png" th:src="@{assets/img/logo.png}" width="40" height="40">
-                    <h2 > TreeFrog</h2>
-                    <small style="margin-top: 15px;">&mdash;分享你的快乐</small>
-                    <ul id="navtag" class="navbar-nav mr-auto">
-                        <li class="nav-item active ">
-                            <a th:href="@{/index}" class="nav-link" style="font-size: 20px">首页</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a   class="nav-link " style="font-size: 20px">探索</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " style="font-size: 20px">发现</a>
-                        </li>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>treefrog</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" th:href="@{assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css"
+          th:href="@{assets/css/font-awesome.min.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-success " th:fragment="navbar">
+    <div class="row col-sm-6 offset-2 ">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <img class="" src="../static/assets/img/logo.png" th:src="@{assets/img/logo.png}" width="40" height="40">
+            <h2> TreeFrog</h2>
+            <small style="margin-top: 15px;">&mdash;分享你的快乐</small>
+            <ul id="navtag" class="navbar-nav mr-auto">
+                <li class="nav-item active ">
+                    <a th:href="@{/index}" class="nav-link" style="font-size: 20px">首页</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="font-size: 20px">探索</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " style="font-size: 20px">发现</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row col-sm-4 float-right">
+        <ul id="navtag01" class="navbar-nav  navbar-right">
+            <li class="nav-item  ">
+                <a class="nav-link" th:href="@{/upload}"><img src="../static/assets/img/upload.png"
+                                                              th:src="@{assets/img/upload.png}" alt="" width="28"
+                                                              height="28"></a>
+            </li>
+            <li class="nav-item  ">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control border-success" type="search" placeholder="文件名或作者" aria-label="Search">
+                    <button class="btn " type="submit"><span class="Search"></span>
+                        <img src="../static/assets/img/Search.png" th:src="@{assets/img/Search.png}" alt="" width="28"
+                             height="28">
+                    </button>
+                </form>
+            </li>
+            <li class="nav-item ">
+                <div class="dropdown">
+                    <img class="rounded-circle border" src="../static/assets/img/via.jpg" th:src="@{assets/img/via.jpg}"
+                         data-toggle="dropdown" width="40" height="40">
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="usermenu">
+                        <div class="container row">
+                            <div>
+                                <img class="rounded-circle border" src="../static/assets/img/via.jpg"
+                                     th:src="@{assets/img/via.jpg}" data-toggle="dropdown" width="40" height="40">
+                            </div>
+                            <div>
+                                <span th:text="${session.user.username}">用户名</span>
+                            </div>
+                        </div>
+                        <div class="offset-1">
+                            <li><a role="menuitem" th:href="@{/updatePage}">个人中心</a></li>
+                            <li><a role="menuitem" href="#">账号设置</a></li>
+                            <li><a role="menuitem" href="#">意见反馈</a></li>
+                            <li><a role="menuitem" href="#">帮助</a></li>
+                            <li><a role="menuitem" th:href="@{/logout}">退出</a></li>
+                        </div>
                     </ul>
                 </div>
-            </div>
-            <div class="row col-sm-4 float-right">
-                    <ul id="navtag01" class="navbar-nav  navbar-right">
-                        <li class="nav-item  ">
-                            <a  class="nav-link" th:href="@{/upload}"><img src="../static/assets/img/upload.png" th:src="@{assets/img/upload.png}" alt="" width="28" height="28" ></a>
-                        </li>
-                        <li class="nav-item  ">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control border-success" type="search" placeholder="文件名或作者" aria-label="Search">
-                            <button class="btn " type="submit"><span class="Search"></span>
-                                <img src="../static/assets/img/Search.png" th:src="@{assets/img/Search.png}" alt="" width="28" height="28" >
-                            </button>
-                        </form>
-                        </li>
-                        <li class="nav-item ">
-                           <div class="dropdown">
-                                <img class="rounded-circle border" src="../static/assets/img/via.jpg" th:src="@{assets/img/via.jpg}" data-toggle="dropdown" width="40" height="40">
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="usermenu">
-                                    <div class="container row">
-                                        <div>
-                                        <img class="rounded-circle border" src="../static/assets/img/via.jpg" th:src="@{assets/img/via.jpg}" data-toggle="dropdown" width="40" height="40">
-                                        </div>
-                                        <div >
-                                            <span th:text="${session.user.username}">用户名</span>
-                                        </div>
-                                    </div>
-                                    <div class="offset-1">
-                                        <li><a role="menuitem" th:href="@{/updatePage}">个人中心</a></li>
-                                        <li><a role="menuitem" href="#">账号设置</a></li>
-                                        <li><a role="menuitem" href="#">意见反馈</a></li>
-                                        <li><a role="menuitem" href="#">帮助</a></li>
-                                        <li><a role="menuitem" th:href="@{/logout}">退出</a></li>
-                                    </div>
-                                </ul>
-                           </div>
-                        </li>
-                        <li class="nav-item ">
-                            <a  class="nav-link" th:href="@{/login}">登陆</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a  class="nav-link" href="">注册</a>
-                        </li>
-                    </ul>
-            </div>
-            </nav>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" th:href="@{/login}">登陆</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" th:href="@{register}">注册</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <!--            中间栏-->
             <div class="container col-sm-8 offset-2 row" >
                 <div class="col-sm-2">
