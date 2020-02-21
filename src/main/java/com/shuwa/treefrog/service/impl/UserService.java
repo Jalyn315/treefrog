@@ -7,6 +7,8 @@ import com.shuwa.treefrog.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService implements IUserService {
     @Autowired
@@ -50,5 +52,40 @@ public class UserService implements IUserService {
     @Override
     public User get(Integer id) {
         return userDao.get(id);
+    }
+
+    @Override
+    public boolean register(User user) {
+        return userDao.addUser(user);
+    }
+
+    @Override
+    public boolean isAllowRegister(String username, String phone) {
+        if (username.equals(userDao.isUserNameExist(username)) && phone.equals(userDao.isPhoneExist(phone))) {
+            return false;
+        }
+        return true;
+    }
+
+
+
+    @Override
+    public boolean isPhoneExist(String phone) {
+        return phone.equals(userDao.isPhoneExist(phone));
+    }
+
+    @Override
+    public boolean isUserNameExist(String username) {
+        return username.equals(userDao.isUserNameExist(username));
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+        return userDao.deleteUser(id);
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return userDao.getAllUser();
     }
 }
