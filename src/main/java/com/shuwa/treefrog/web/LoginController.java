@@ -4,7 +4,6 @@ import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +30,7 @@ public class LoginController {
             session.setAttribute("userId",user.getId());  //存入用户ID
             session.setAttribute("user",user);
             map.put("user",user);
-            return"index";
+            return "index";
         }else {
             map.put("msg", "用户名或密码错误");
             return "login";
