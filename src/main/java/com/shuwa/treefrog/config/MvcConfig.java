@@ -21,6 +21,7 @@ public class MvcConfig  implements WebMvcConfigurer {
     //添加视图控制器
     public void addViewControllers(ViewControllerRegistry registry) {
         //访问路径映射
+        registry.addViewController("/").setViewName("welcome");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login.html").setViewName("login");
         registry.addViewController("/user.html").setViewName("user");
