@@ -4,6 +4,7 @@ package com.shuwa.treefrog.constant;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.convert.Property;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,12 +19,13 @@ public class ConfigConstant {
 
     @Value("${file.maxSize}")
     public  void setMaxSize(long maxSize) {
-        MAX_SIZE = maxSize;
+        ConfigConstant.MAX_SIZE = maxSize;
     }
 
     @Value("${file.uploadPath}")
     public void setUploadPath(String uploadPath) {
-        UPLOAD_PATH = uploadPath;
+        ConfigConstant.UPLOAD_PATH = uploadPath;
     }
+
 
 }
