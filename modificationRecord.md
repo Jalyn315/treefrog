@@ -29,3 +29,9 @@
 19. 发现的问题：使用的 webjars 的版本不同，我使用的 3.4.1, 而你使用的是 3.3.1
 20. 添加 modificationRecord.md 文件，用于将每次所做的小的操作记录下来
 
+## 2020年2月22日16点12分
+## by summer
+1. 给 UserController 和 ViewController 中的每个处理请求的方法加了打印日志信息：
+形式：logger.info("类名->方法名");
+
+
