@@ -21,7 +21,6 @@ public class ViewController {
      */
     @RequestMapping("/index")
     public String index() {
-//        System.out.println("ViewController->index");
         logger.info("ViewController->index");
         return "index";
     }
@@ -33,7 +32,6 @@ public class ViewController {
      */
     @RequestMapping("/welcome")
     public String welcome() {
-//        System.out.println("ViewController->index");
         logger.info("ViewController->welcome");
         return "welcome";
     }
@@ -46,9 +44,7 @@ public class ViewController {
      */
     @RequestMapping("/register")
     public String register() {
-//        System.out.println("ViewController->register");
         logger.info("ViewController->register");
-
         return "signup";
     }
 
@@ -59,7 +55,6 @@ public class ViewController {
      */
     @RequestMapping(value = "/signin")
     public String signin() {
-//        System.out.println("ViewController->signin");
         logger.info("ViewController->signin");
         return "login";
     }

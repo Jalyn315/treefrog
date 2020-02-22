@@ -37,6 +37,7 @@ public class UserController {
      */
     @GetMapping("/updatePage")
     public String toChangePage(){
+        logger.info("UserController->toChangePage");
         return "user";
     }
 
@@ -47,7 +48,7 @@ public class UserController {
      */
     @PostMapping("/updateEmp")
     public String update(User user,HttpSession session,Model model){
-
+        logger.info("UserController->update");
         User u = (User) session.getAttribute("user");
         user.setId(u.getId());
         if( userService.update(user)){
@@ -76,7 +77,7 @@ public class UserController {
             , @RequestParam("password") String password
             , @RequestParam("phone") String phone
             , HttpServletRequest request) {
-
+        logger.info("UserController->signup");
         boolean isNotAllowRegister = userService.isUserNameExist(userName);
         if (isNotAllowRegister) {
             UserConstant.errorMap.put("userNameDup", "用户名已存在！");
@@ -100,8 +101,7 @@ public class UserController {
     @ResponseBody
     @PostMapping(value = "/sms")
     public String smsSender(HttpServletRequest request) {
-        System.out.println("ViewController->smsSender");
-
+        logger.info("UserController->smsSender");
         //得到json参数值（phone）
         String phoneNum = request.getParameter("phone");
         //需要对手机号进行验证
