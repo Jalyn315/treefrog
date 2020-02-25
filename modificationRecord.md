@@ -34,4 +34,20 @@
 1. 给 UserController 和 ViewController 中的每个处理请求的方法加了打印日志信息：
 形式：logger.info("类名->方法名");
 
+## 2020年2月25日15点11分
+## by summer
+1. 修改 LoginController.java 里面
+return "redirect:/login.html"; //返回主页 -> return "redirect:login"; //返回主页
+2. UserController
+增加：
+userUpdate() 用户更新方法 <br>
+userDelete() 用户删除方法 <br>
+users() 返回用户列表 <br>
+ViewController 增加： <br>
+user() 返回用户主页面 <br>
+userList() 返回用户列表 <br>
+3. 新增 list.html 列出所有用户，userUpdate.html 用户更新信息页面
+
+
+
 
