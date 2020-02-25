@@ -48,7 +48,7 @@ public class LoginController {
 
         session.removeAttribute("loginUser");
         session.removeAttribute("userId");
-        return "redirect:/login.html"; //返回主页
+        return "redirect:login"; //返回主页
     }
 
 
