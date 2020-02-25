@@ -9,13 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -129,5 +127,49 @@ public class UserController {
         int verifCode = min + (int) (Math.random() * (max - min + 1));
         return verifCode;
     }// end getVerifCode()
+
+    /**
+     * 编辑个人信息
+     * [https://blog.csdn.net/leo3070/article/details/81046383]
+     * @return 用户修改页面
+     */
+    @RequestMapping("/userUpdate/{id}")
+    public String userUpdate(@PathVariable("id") Integer id
+            , Model model
+            , HttpSession session) {
+        logger.info("UserController->userUpdate");
+        User user = userService.get(id);
+        session.setAttribute("userId", user.getId());
+        model.addAttribute("user", user);
+        userService.update(user);
+        return "userUpdate";
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/userDelete/{id}")
+    public String userDelete(@PathVariable("id") int id) {
+        logger.info("UserController->userDelete");
+        //判断用户权限，如果不是管理员，则显示不能删除
+        userService.deleteUser(id);
+        return "list";
+    }
+
+    /**
+     * 传递到 users 页面
+     *
+     * @return
+     */
+    @GetMapping(value = "/users")
+    public String users(Model model) {
+        logger.info("UserController->users");
+        List<User> users = userService.getAllUser();
+        model.addAttribute("users", users);
+        return "list";
+    }
 
 }

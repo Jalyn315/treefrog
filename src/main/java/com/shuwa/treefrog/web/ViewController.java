@@ -60,5 +60,27 @@ public class ViewController {
     }
 
 
+    /**
+     * 传递到 user 页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/user_home")
+    public String user() {
+        logger.info("ViewController->user");
+        return "user";
+    }
+
+    /**
+     * 传递到主页面
+     * 主页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/user_list")
+    public String userList() {
+        logger.info("ViewController->userList");
+        return "list";
+    }
 
 }
