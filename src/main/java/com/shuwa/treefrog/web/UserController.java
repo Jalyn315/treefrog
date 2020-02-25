@@ -142,7 +142,7 @@ public class UserController {
         session.setAttribute("userId", user.getId());
         model.addAttribute("user", user);
         userService.update(user);
-        return "userUpdate";
+        return "admin/userUpdate";
     }
 
     /**
@@ -156,7 +156,7 @@ public class UserController {
         logger.info("UserController->userDelete");
         //判断用户权限，如果不是管理员，则显示不能删除
         userService.deleteUser(id);
-        return "list";
+        return "admin/list";
     }
 
     /**
@@ -169,7 +169,7 @@ public class UserController {
         logger.info("UserController->users");
         List<User> users = userService.getAllUser();
         model.addAttribute("users", users);
-        return "list";
+        return "admin/list";
     }
 
 }
