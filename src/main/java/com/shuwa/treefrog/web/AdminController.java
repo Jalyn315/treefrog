@@ -98,15 +98,15 @@ public class AdminController {
         //进行简单的密码重复验证
         if (password != null && !password.equals(rePassword)) {
             registerErrorMap.put("passwordNotEquals","注册两次密码不相同！");
-            return "admin/login";
+            return "admin/login :: adminRegisterForm";
         }
         try {
             adminService.register(userName,password);
         } catch (RegisterException e) {
             registerErrorMap.put("registerError",e.getMessage());
             request.setAttribute("registerErrorMap",registerErrorMap);
-            return "admin/login";
+            return "admin/login :: adminRegisterForm";
         }
-        return "admin/login";
+        return "admin/login :: adminLoginForm";
     }
 }
