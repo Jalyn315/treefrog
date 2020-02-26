@@ -1,76 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        body{
+
+        body {
             background-color: #808080;
         }
 
-        h1{
+        h1 {
             display: block;
             position: absolute;
             top: 18%;
-            left:44%;
+            left: 44%;
         }
 
-        .box{
+        .box {
             width: 306px;
             height: 312px;
-            background-color:white;
+            background-color: white;
             position: absolute;
             top: 25%;
-            left:40%;
+            left: 40%;
             border: 1px #ccc solid;
         }
 
-        .box1{
+        .box1 {
             width: 100%;
             height: 38px;
             border-bottom: 1px solid #656565;
             /* 背景颜色从下往上渐变 */
-            background:linear-gradient(to bottom,#787677,#060606);
+            background: linear-gradient(to bottom, #787677, #060606);
         }
-        .box1 a{
-            display:inline-block;
+
+        .box1 a {
+            display: inline-block;
             text-decoration: none;
             color: white;
             /* 文字间距 */
             letter-spacing: 3px;
-            
+
             margin-top: 12px;
             margin-left: 12px;
             font-weight: bold;
-            
+
         }
 
-        .active{
+        .active {
             border-bottom: 2px solid #016cd4;
         }
-    
-        .login{
+
+        .login {
             padding: 35px 18px;
-           
+
         }
-        .login div{
+
+        .login div {
             height: 38px;
             margin-bottom: 30px;
             border: 1px #ccc solid;
         }
 
-        .login div label{
-           
+        .login div label {
+
             width: 38px;
             height: 38px;
             background-color: #006cc7;
         }
-        .login div input{
+
+        .login div input {
             display: inline-block;
             border: none;
             height: 38px;
@@ -78,26 +82,28 @@
             font-size: 18px;
         }
 
-        .login button{
-            
+        .login button {
+
             display: block;
-             width: 100%;
+            width: 100%;
             height: 38px;
-            background-color:#006cc7;
+            background-color: #006cc7;
             border: none;
-           
+
         }
 
-        .signup{
+        .signup {
             padding: 35px 18px;
             display: none;
         }
-        .signup div{
+
+        .signup div {
             height: 38px;
             margin-bottom: 30px;
             border: 1px #ccc solid;
-        }        
-        .signup div input{
+        }
+
+        .signup div input {
             display: inline-block;
             border: none;
             height: 38px;
@@ -105,73 +111,76 @@
             font-size: 18px;
         }
 
-        .signup button{
-            
+        .signup button {
+
             display: block;
-             width: 100%;
+            width: 100%;
             height: 38px;
-            background-color:#006cc7;
+            background-color: #006cc7;
             border: none;
-            margin-top: -20px;  
+            margin-top: -20px;
         }
     </style>
     <script>
-        window.onload=function(){
+        window.onload = function () {
             var oLogin = document.getElementById('login');
             var oSignUp = document.getElementById('signup');
             var aBtn = document.getElementsByTagName('a');
 
-                aBtn[0].onclick=function(){
-            
-                            aBtn[0].className='active';
-                            aBtn[1].className='';
-                            oLogin.style.display='block'
-                            oSignUp.style.display='none'
-                        
-                    }
-                aBtn[1].onclick=function(){
-                            aBtn[1].className='active';
-                            aBtn[0].className='';
-                            oLogin.style.display='none'
-                            oSignUp.style.display='block'
-                    }
+            aBtn[0].onclick = function () {
+
+                aBtn[0].className = 'active';
+                aBtn[1].className = '';
+                oLogin.style.display = 'block'
+                oSignUp.style.display = 'none'
+
+            }
+            aBtn[1].onclick = function () {
+                aBtn[1].className = 'active';
+                aBtn[0].className = '';
+                oLogin.style.display = 'none'
+                oSignUp.style.display = 'block'
+            }
         }
     </script>
 </head>
-<body>  
-        <h1>后台管理系统</h1>
-        <div class="box">
-            <div class="box1">
-                <a href="#" class="active">登录</a>
-                <a href="#">注册</a>
+<body>
+<h1>后台管理系统</h1>
+<div class="box">
+    <div class="box1">
+        <a href="#" class="active">登录</a>
+        <a href="#">注册</a>
+    </div>
+    <!-- 登录框 -->
+    <div class="login" id="login">
+        <p style="color: red" th:text="${loginErrorMap['loginError']}" th:if="${loginErrorMap}"></p>
+        <form action="/admin/adminLoginForm" method="POST">
+            <div>
+                <input type="text" placeholder="帐号" name="username">
             </div>
-                <!-- 登录框 -->
-                <div class="login" id="login">
-                <form action="" method="POST"> 
-                     <div>
-                        <input type="text" placeholder="帐号"  name="username">
-                    </div>
-                    <div>
-                        <input type="passowrd" placeholder="密码"  name="password">
-                    </div>
-                    <button>登录</button>
-                </form>
-                </div>
-                <!-- 注册框 -->
-                <div class="signup" id="signup">
-                    <form action="" method="POST"> 
-                         <div>
-                            <input type="text" placeholder="帐号"  name="username">
-                        </div>
-                        <div>
-                            <input type="passowrd" placeholder="密码"  name="password">
-                        </div>
-                        <div>
-                            <input type="passowrd" placeholder="确认密码"  name="password">
-                        </div>
-                        <button>注册</button>
-                    </form>
-                </div>
-        </div>
+            <div>
+                <input type="passowrd" placeholder="密码" name="password">
+            </div>
+            <button>登录</button>
+        </form>
+    </div>
+    <!-- 注册框 -->
+    <div class="signup" id="signup">
+        <p style="color: red" th:text="${registerErrorMap['registerError']}" th:if="${registerErrorMap}"></p>
+        <form action="admin/adminRegisterForm" method="POST">
+            <div>
+                <input type="text" placeholder="帐号" name="username">
+            </div>
+            <div>
+                <input type="passowrd" placeholder="密码" name="password">
+            </div>
+            <div>
+                <input type="passowrd" placeholder="确认密码" name="rePassword">
+                <p style="color: red" th:text="${registerErrorMap['passwordNotEquals']}" th:if="${registerErrorMap}"></p>
+            </div>
+            <button>注册</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
