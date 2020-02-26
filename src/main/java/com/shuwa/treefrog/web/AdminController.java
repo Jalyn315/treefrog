@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -22,12 +23,23 @@ import java.util.Map;
  * 用于转发 管理员 相关页面
  */
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserService userService; // userervice -> userService
     @Autowired
     private AdminService adminService;
+
+    /**
+     * 进入登录界面
+     * @return
+     */
+    @GetMapping
+    public String toLoginPage(){
+        return "admin/login";
+    }
+
     /**
      * 传递到主页面
      * 主页面
@@ -70,7 +82,7 @@ public class AdminController {
      * 处理 管理员登陆
      * @return
      */
-    @PostMapping(value = "admin/adminLoginForm")
+    @PostMapping(value = "/adminLoginForm")
     public String adminLoginForm(
             @RequestParam("username") String userName
             ,@RequestParam("password") String password
@@ -87,26 +99,28 @@ public class AdminController {
         return "admin/list"; //登录成功，到用户管理页面 list.html
     }
 
-    @PostMapping(value = "admin/adminRegisterForm")
+    @PostMapping(value = "/adminRegisterForm")
     public String adminRegisterForm(
             @RequestParam("username") String userName
-            ,@RequestParam("password") String password
-            ,@RequestParam("rePassword") String rePassword
-            ,HttpServletRequest request) {
+            , @RequestParam("password") String password
+            , @RequestParam("rePassword") String rePassword
+            ,Model model
+            ) {
         logger.info("AdminController->adminRegisterForm");
         Map<String,String> registerErrorMap = new HashMap<>();
         //进行简单的密码重复验证
         if (password != null && !password.equals(rePassword)) {
-            registerErrorMap.put("passwordNotEquals","注册两次密码不相同！");
-            return "admin/login :: adminRegisterForm";
+           model.addAttribute("passwordmsg","两次密码不匹配！");
+            return "admin/login";
         }
         try {
             adminService.register(userName,password);
         } catch (RegisterException e) {
-            registerErrorMap.put("registerError",e.getMessage());
-            request.setAttribute("registerErrorMap",registerErrorMap);
-            return "admin/login :: adminRegisterForm";
+            logger.info(e.toString());
+            model.addAttribute("usernamemsg","用户名重复！");
+            return "admin/login";
         }
-        return "admin/login :: adminLoginForm";
+//        注册成功后重定向的登录页面，否则再次注册转调路径会出错
+        return "redirect:/admin";
     }
 }
