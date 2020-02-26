@@ -121,28 +121,7 @@
             margin-top: -20px;
         }
     </style>
-    <script>
-        window.onload = function () {
-            var oLogin = document.getElementById('login');
-            var oSignUp = document.getElementById('signup');
-            var aBtn = document.getElementsByTagName('a');
 
-            aBtn[0].onclick = function () {
-
-                aBtn[0].className = 'active';
-                aBtn[1].className = '';
-                oLogin.style.display = 'block'
-                oSignUp.style.display = 'none'
-
-            }
-            aBtn[1].onclick = function () {
-                aBtn[1].className = 'active';
-                aBtn[0].className = '';
-                oLogin.style.display = 'none'
-                oSignUp.style.display = 'block'
-            }
-        }
-    </script>
 </head>
 <body>
 <h1>后台管理系统</h1>
@@ -153,34 +132,87 @@
     </div>
     <!-- 登录框 -->
     <div class="login" id="login" th:fragment="adminLoginForm">
+
         <p style="color: red" th:text="${loginErrorMap['loginError']}" th:if="${loginErrorMap}"></p>
         <form action="/admin/adminLoginForm" method="POST">
             <div>
                 <input type="text" placeholder="帐号" name="username">
             </div>
             <div>
-                <input type="passowrd" placeholder="密码" name="password">
+                <input type="password" placeholder="密码" name="password">
             </div>
             <button>登录</button>
         </form>
     </div>
     <!-- 注册框 -->
     <div class="signup" id="signup" th:fragment="adminRegisterForm">
-        <p style="color: red" th:text="${registerErrorMap['registerError']}" th:if="${registerErrorMap}"></p>
-        <form action="admin/adminRegisterForm" method="POST">
+        <form action="/admin/adminRegisterForm" method="POST">
+            <p style="color: red;margin-top:-25px" th:text="${usernamemsg}" th:if="${ not #strings.isEmpty(usernamemsg)}"></p>
             <div>
                 <input type="text" placeholder="帐号" name="username">
             </div>
             <div>
-                <input type="passowrd" placeholder="密码" name="password">
+                <input type="password" placeholder="密码" name="password" id="psw">
             </div>
+            <p style="color: red;margin-top:-25px" th:text="${passwordmsg}" th:if="${ not #strings.isEmpty(passwordmsg)}"></p>
             <div>
-                <input type="passowrd" placeholder="确认密码" name="rePassword">
-                <p style="color: red" th:text="${registerErrorMap['passwordNotEquals']}" th:if="${registerErrorMap}"></p>
+                <input type="password" placeholder="确认密码" name="rePassword" id="psw_ag">
             </div>
-            <button>注册</button>
+            <button id="register">注册</button>
         </form>
     </div>
 </div>
+
 </body>
+<!--若是想在javascript代码块内直接地使用model的对象值，则必须通过内联来实现。代码如下：-->
+<script type="text/javascript" th:inline="javascript">
+    window.onload = function () {
+        var oLogin = document.getElementById('login');
+        var oSignUp = document.getElementById('signup');
+        var aBtn = document.getElementsByTagName('a');
+
+        aBtn[0].onclick = function () {
+
+            aBtn[0].className = 'active';
+            aBtn[1].className = '';
+            oLogin.style.display = 'block'
+            oSignUp.style.display = 'none'
+
+        }
+        aBtn[1].onclick = function () {
+            aBtn[1].className = 'active';
+            aBtn[0].className = '';
+            oLogin.style.display = 'none'
+            oSignUp.style.display = 'block'
+        }
+
+        var u = [[${passwordmsg}]];
+        var p =[[${usernamemsg}]]
+        if(u!=null||p!=null){
+            aBtn[1].click();
+        }
+
+    }
+        
+
+    
+    /*
+    $("#psw_ag").bind('input propertychange',function () {
+            if ($("#psw").val()!=$("#psw_ag")) {
+                $("#msg").css({
+
+                    "margin-top": "-25px",
+                    "display":"inline",
+                });
+            }
+            if ($("#psw").val()==$("#psw_ag")) {
+                $("#msg").css('display','none').css({
+                    "display":"inline",
+                    "margin-top":"-25px"
+                });
+            }
+        }
+    );
+     */
+</script>
 </html>
