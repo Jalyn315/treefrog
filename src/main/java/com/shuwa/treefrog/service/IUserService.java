@@ -37,7 +37,7 @@ public interface IUserService {
     /**
      * 将传递过来的用户名、手机号码检查是否在数据库中有相同值
      *
-     * @param userName
+     * @param username
      * @param phone
      * @return
      */
