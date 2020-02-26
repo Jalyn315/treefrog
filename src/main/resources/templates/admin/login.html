@@ -152,7 +152,7 @@
         <a href="#">注册</a>
     </div>
     <!-- 登录框 -->
-    <div class="login" id="login">
+    <div class="login" id="login" th:fragment="adminLoginForm">
         <p style="color: red" th:text="${loginErrorMap['loginError']}" th:if="${loginErrorMap}"></p>
         <form action="/admin/adminLoginForm" method="POST">
             <div>
@@ -165,7 +165,7 @@
         </form>
     </div>
     <!-- 注册框 -->
-    <div class="signup" id="signup">
+    <div class="signup" id="signup" th:fragment="adminRegisterForm">
         <p style="color: red" th:text="${registerErrorMap['registerError']}" th:if="${registerErrorMap}"></p>
         <form action="admin/adminRegisterForm" method="POST">
             <div>
