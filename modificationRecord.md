@@ -48,6 +48,18 @@ user() 返回用户主页面 <br>
 userList() 返回用户列表 <br>
 3. 新增 list.html 列出所有用户，userUpdate.html 用户更新信息页面
 
+## 2020年2月25日18点49分
+## by summer
+1. 增加 admin.sql 文件
 
+## 2020年2月26日09点46分
+## by summer
+1. application.properties 中添加 #配置 mybatis 驼峰命名转换
+2. 增加 IAdminService AdminService AdminServiceTest
+ AdmingDao AdmingDaoTest
+3. 增加 AdminController 并将 ViewController 中 userList
+方法移植到 AdminController 内
+4. 将 UserController 内方法 users() userDelete() 移植到 AdminController 内
+5.   
 
 
