@@ -3,6 +3,7 @@ package com.shuwa.treefrog.web;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -71,16 +72,24 @@ public class ViewController {
         return "user";
     }
 
+
     /**
-     * 传递到主页面
-     * 主页面
-     *
+     * 控制页面转发到 /admin/login.html 不带数据
      * @return
      */
-    @RequestMapping(value = "/user_list")
-    public String userList() {
-        logger.info("ViewController->userList");
-        return "list";
+    @GetMapping(value = "/adminLogin")
+    public String adminLogin() {
+        logger.info("ViewController->adminLogin");
+        return "admin/login";
+    }
+    /**
+     * 控制页面转发到 /admin/adminRegister.html 不带数据
+     * @return
+     */
+    @GetMapping(value = "/adminRegister")
+    public String adminRegister() {
+        logger.info("ViewController->adminRegister");
+        return "admin/adminRegister";
     }
 
 }

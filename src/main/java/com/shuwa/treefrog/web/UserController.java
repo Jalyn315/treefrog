@@ -145,31 +145,5 @@ public class UserController {
         return "admin/userUpdate";
     }
 
-    /**
-     * 删除用户
-     *
-     * @param id
-     * @return
-     */
-    @DeleteMapping("/userDelete/{id}")
-    public String userDelete(@PathVariable("id") int id) {
-        logger.info("UserController->userDelete");
-        //判断用户权限，如果不是管理员，则显示不能删除
-        userService.deleteUser(id);
-        return "admin/list";
-    }
-
-    /**
-     * 传递到 users 页面
-     *
-     * @return
-     */
-    @GetMapping(value = "/users")
-    public String users(Model model) {
-        logger.info("UserController->users");
-        List<User> users = userService.getAllUser();
-        model.addAttribute("users", users);
-        return "admin/list";
-    }
 
 }
