@@ -1,0 +1,86 @@
+.type{
+    margin-top: 100px;
+    width: 1200px;
+    
+}
+
+
+.List1{
+    width: 300px;
+    height: 200px;
+   margin-left: 300px;
+   margin-right: 20px;
+   margin-top: 50px;
+   display: inline-block;
+   background-color: white;
+}
+
+.List1 h2{
+    text-align: center;
+    line-height: 60px;
+    font-family: "微软雅黑"";
+}
+
+.List1 input{
+    margin: 10px  auto;
+    display:block;
+    height: 30px;
+    width: 200px;
+}
+.List1 button{
+    margin: 20px  auto;
+    display:block;
+    height: 30px;
+    width: 200px;
+    border: 1px solid #ccc;
+    background-color:  #007bff;
+}
+
+
+
+
+.List2{
+    padding-top: 10px;
+    padding-right: 10px;
+    width: 500px;
+    margin-right: 30px;
+    background-color: white;
+    float: right;
+}
+
+table tbody tr:hover{
+    background-color: white;
+}
+
+.edit{
+    display: inline-block;
+    width: 55px;
+    height: 25px;
+    background-color: #007bff;
+    
+    border-radius: 2px;
+    color: white;
+}
+
+.edit:hover{
+    background-color: #0c64c2;
+}
+
+.edit:active{
+    background-color: #1b4a7d;
+}
+
+.del{
+    display: inline-block;
+    width: 55px;
+    height: 25px;
+    background-color: red;
+    border-radius: 2px;
+    color: white;
+}
+.del:hover{
+    background-color: #b12323;
+}
+.del:active{
+    background-color:  #731c1c;
+}

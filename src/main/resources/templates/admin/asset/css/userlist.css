@@ -1,0 +1,42 @@
+.user{
+    margin-top: 50px;
+}
+/* 调节宽度 */
+.List{
+    width: 900px;
+}
+.List1{
+    width: 900px;
+    background-color: white;
+    margin: 30px 300px;
+    padding: 20px 0px;
+}
+
+.List1 input{
+    display: inline-block;
+    width: 300px;
+    height: 35px;
+    margin-right: 40px;
+    margin-left: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;   
+    outline:none;
+}
+
+.List1 input:focus{
+    border: 2px solid #007bff;
+}
+
+.btn{
+   left: 50%;
+}
+ .btn div{
+    height: 40px;
+    width: 200px;
+}
+
+ .btn a{
+   width: 200px;
+   height: 30px;
+ 
+}

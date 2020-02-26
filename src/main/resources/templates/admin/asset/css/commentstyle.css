@@ -1,0 +1,206 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html,body{
+    height: 100%;
+    background-color: #f5f5f5;
+}
+.nav{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    background: #28a745;
+}
+
+.box{
+    height: 30px;
+    border-bottom: 1px #ccc solid;
+    text-align: center;
+    color: white;
+}
+
+.nav a{
+    display: block;
+    /* 溢出隐藏 */
+    overflow: hidden;
+    padding-left: 50px;
+    line-height: 46px;
+    max-height: 46px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav li:hover{
+    background-color: #99cc99;
+    border-left: 2px solid green;
+}
+
+.active{
+    background-color: #99cc99;
+    border-left: 2px solid green;
+}
+
+.pagediv{
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.pageBtn{
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color:#28a745;
+    color: white;
+    text-decoration: none;
+    line-height: 30px;
+    text-align: center;
+}
+
+.pageBtn:hover{
+    background-color: #1e7a34;
+}
+
+table{
+    border-collapse:collapse;
+    margin-left: 50px;
+}
+
+ table tr{
+    height: 50px;
+    border: 1px #ccc solid;
+}
+
+table tbody tr:hover{
+    background-color: #b1ffc3;
+}
+
+ table th{
+    border-left: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #28a745;
+}
+ table td{
+    border: 1px solid #ccc;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+ .List{
+     width: 800px;
+     background-color: white;
+     margin: 30px 300px;
+}
+
+.clearfix ::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.btn:before{
+    content: "";
+    display: table;
+}
+
+
+
+
+ .btn{
+    margin-top: 10px;
+    height: 40px;
+    position: relative;
+    left: 40%;
+    overflow: hidden;
+   
+}
+
+ .btn div{
+    height: 40px;
+    width: 85px;
+    display: inline-block;
+    padding-top: 5px;
+}
+
+ .btn a{
+    position: absolute;
+   text-decoration: none;
+   display: inline-block;
+   width: 80px;
+   height: 30px;
+   text-align: center;
+   border-radius: 5px;
+   
+}
+
+ .btn a span{
+    line-height: 30px;
+    color: white;
+}
+
+    /* 按钮效果 */
+.share{
+    background-color: #007bff;
+}
+.share:hover{
+    background-color: #006cdf;
+    cursor: pointer;
+}
+.share:active{
+    border: 2px solid #3e93ee;
+    
+}
+
+.up{
+    background-color: #28a745;
+}
+.up:hover{
+    background-color: #238e3c;
+    cursor: pointer;
+}
+.up:active{
+    border: 2px solid #61bf77;
+}
+
+.modify{
+    background-color: #ffc107;
+}
+.modify:hover{
+    background-color: #d09d05;
+    cursor: pointer;
+}
+.modify:active{
+    border: 2px solid #e6c35a;
+}
+
+.permission{
+    background-color: #343a40;
+}
+.permission:hover{
+    background-color:  #5b5b5b;
+    cursor: pointer;
+}
+.permission:active{
+    border: 2px solid  #4b4d4f;
+}
+
+.delete{
+    background-color: #dc3545;
+}
+.delete:hover{
+    background-color: #c13341;
+    cursor: pointer;
+}
+.delete:active{
+    border: 2px solid  #fa6473;
+}
+
