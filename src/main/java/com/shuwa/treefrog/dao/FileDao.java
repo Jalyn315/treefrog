@@ -247,6 +247,4 @@ public interface FileDao {
 
     @Select("select * from file where ")
     File findByname(String name);
-
-
 }
