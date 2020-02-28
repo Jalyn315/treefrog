@@ -1,6 +1,7 @@
 package com.shuwa.treefrog.web;
 
 import com.shuwa.treefrog.entity.User;
+import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,8 @@ public class LoginController {
             session.setAttribute("userId",user.getId());  //存入用户ID
             session.setAttribute("user",user);
             map.put("user",user);
+            //第一次进入主页初始化分页
+            map.put("page",new PageParam());
             return "index";
         }else {
             map.put("msg", "用户名或密码错误");
