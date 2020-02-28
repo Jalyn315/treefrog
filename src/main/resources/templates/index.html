@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.css}" >
-    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" th:href="@{../static/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css" th:href="@{../static/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css" th:href="@{/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/assets/css/indexstyle.css">
     <title>threefrog</title>
 </head>
 <body>
@@ -81,13 +82,18 @@
     </div>
 <!--                    内容-->
 
-    <div class="col-sm-8  ">
+    <div class="col-sm-8 "  th:fragment="filelist">
             <table>
-                <tr th:each="file:${fileList}">
+                <tr th:each="file:${files}">
                     <td><a th:href="@{/downloadFile/}+${file.id}" class="list-group-item list-group-item-action" th:text="${file.name}"></a></td>
                     <td>作者:</td><td th:text="${file.userName}"></td><td>上传时间:</td><td th:text="${#dates.format(file.createTime,'yyyy-MM-dd')}"></td><td>下载:</td><td th:text="${file.downloadTimes}"></td>
                 </tr>
             </table>
+              <div>
+                    <a th:href="@{/listfile/}+${page.pageNum - 1}" id="down" class="btn btn-primary" href="">上一页</a>
+                    <a th:href="@{/listfile/}+${page.pageNum + 1}" id="up" class="btn btn-primary" href="">下一页</a>
+
+              </div>
         </div>
 
 
@@ -98,8 +104,8 @@
 
 
 
-<script src="../static/assets/js/jquery-3.4.1.min.js" th:src="@{../static/assets/js/jquery-3.4.1.min.js}"></script>
-<script src="../static/assets/js/bootstrap.bundle.min.js" th:src="@{../static/assets/js/bootstrap.bundle.min.js}"></script>
+<script src="../static/assets/js/jquery-3.4.1.min.js" th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+<script src="../static/assets/js/bootstrap.bundle.min.js" th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 </html>
