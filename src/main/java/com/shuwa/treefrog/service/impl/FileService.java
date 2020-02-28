@@ -1,5 +1,7 @@
 package com.shuwa.treefrog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.constant.ConfigConstant;
 import com.shuwa.treefrog.dao.FileDao;
 import com.shuwa.treefrog.dao.UserDao;
@@ -94,7 +96,6 @@ public class FileService implements IFileService {
 
     @Override
     public boolean downloadFile(HttpServletResponse response, long id) {
-
         File file = fileDao.getFile(id);
         //获取文件名称
         String fileName = file.getName();
@@ -124,11 +125,6 @@ public class FileService implements IFileService {
             e.printStackTrace();
         }
 
-
-
-
-
-
         return false;
     }
 
@@ -149,6 +145,24 @@ public class FileService implements IFileService {
         return fileList;
     }
 
+    /**
+     * 分页查询
+     * @param page 当前页数
+     * @param limit 每页显示多少条数据
+     * @return
+     */
+    @Override
+    public PageInfo<File> listFiles(Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);  //这条必须在条用持久层接口之前执行，它会帮我们自动拼接sql语句
+        List<File> fileList = fileDao.findAll();
+            //将文件列表中的所有文件名去掉UUID唯一标识符
+            for ( File file:fileList){
+                file.setName(FileUtils.getFileRealName(file.getName()));
+                file.setUserName(userDao.getByUserName(file.getUserId()));
+            }
+
+        return new PageInfo<>(fileList);
+    }
 
     @Override
     public File findOne(Integer id) {
