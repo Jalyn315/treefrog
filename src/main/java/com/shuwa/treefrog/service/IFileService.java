@@ -1,5 +1,6 @@
 package com.shuwa.treefrog.service;
 
+import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.model.UploadedRecord;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,4 +59,12 @@ public interface IFileService {
      * @return
      */
      File findByUserName(String userName);
+
+    /**
+     * 分页查询
+     * @param page 当前页
+     * @param limit 每页显示多少条数据
+     * @return
+     */
+     PageInfo<File> listFiles(Integer page, Integer limit);
 }
