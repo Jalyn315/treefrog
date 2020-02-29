@@ -2,6 +2,7 @@ package com.shuwa.treefrog.web;
 
 import com.shuwa.treefrog.constant.UserConstant;
 import com.shuwa.treefrog.entity.User;
+import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.impl.UserService;
 import com.shuwa.treefrog.util.sendSMS.SmsSDKDemo;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -59,6 +60,55 @@ public class UserController {
         return "user";
     }
 
+    /**
+     * 登陆
+     * @return
+     */
+    @GetMapping("/login")
+    public String toLoginPage(){
+        return "login";
+    }
+
+    /**
+     * 注销
+     * @param username
+     * @param password
+     * @param map
+     * @param session
+     * @return
+     */
+    @RequestMapping("/user_login")
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password
+            , Map<String,Object> map, HttpSession session){
+
+        User user = userService.login(username,password);
+        if(user != null){
+            session.setAttribute("loginUser",username);  //登录成功将用户名存入会话对象
+            session.setAttribute("userId",user.getId());  //存入用户ID
+            session.setAttribute("user",user);
+            map.put("user",user);
+            //第一次进入主页初始化分页
+            map.put("page",new PageParam());
+            return "index";
+        }else {
+            map.put("msg", "用户名或密码错误");
+            return "login";
+        }
+    }
+
+
+    /**
+     * 注销登录
+     * 重定向前台页面。清空session中的缓存
+     * @return
+     */
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+
+        session.removeAttribute("loginUser");
+        session.removeAttribute("userId");
+        return "redirect:login"; //返回主页
+    }
 
 
     /**
