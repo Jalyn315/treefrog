@@ -1,9 +1,10 @@
 package com.shuwa.treefrog.web;
 
-import com.shuwa.treefrog.constant.UserConstant;
+import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.exception.LoginException;
 import com.shuwa.treefrog.exception.RegisterException;
+import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.impl.AdminService;
 import com.shuwa.treefrog.service.impl.UserService;
 import org.slf4j.Logger;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -122,5 +122,28 @@ public class AdminController {
         }
 //        注册成功后重定向的登录页面，否则再次注册转调路径会出错
         return "redirect:/admin";
+    }
+
+    /**
+     * 管理员进行用户分页查询功能
+     * @param currentPage
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/listUser/{id}")
+    public String userList(@PathVariable("id") Integer currentPage, Model model) {
+        int limit = 6; //页面数据个数
+        PageInfo<User> pageInfo = adminService.getAllUserByPageingQuery(currentPage,limit);
+        PageParam pageParam = new PageParam();
+        pageParam.setPageNum(pageInfo.getPageNum());
+        pageParam.setPageTotal(pageInfo.getTotal());
+        pageParam.setLastPage(limit);
+        pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
+        //传递到 admin/userlist.html 的参数
+        model.addAttribute("users",pageInfo.getList());
+        model.addAttribute("page",pageParam);
+
+        return "admin/userlist";
+
     }
 }
