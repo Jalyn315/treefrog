@@ -47,7 +47,6 @@ public class FileController {
     @GetMapping("/listfile/{id}")
     public String fils(@PathVariable("id") Integer page, Model model){
         int limit = 4; //页面数据个数
-        System.out.println(page);
         PageInfo<File> pageInfo = fileService.listFiles(page,limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
