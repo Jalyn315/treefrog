@@ -48,7 +48,7 @@ public class AdminController {
     @RequestMapping(value = "/user_list")
     public String userList() {
         logger.info("AdminController->userList");
-        return "admin/list";
+        return "admin/userlist";
     }
 
     /**
@@ -62,7 +62,7 @@ public class AdminController {
         logger.info("AdminController->userDelete");
         //判断用户权限，如果不是管理员，则显示不能删除
         userService.deleteUser(id);
-        return "admin/list";
+        return "admin/userlist";
     }
 
     /**
@@ -75,7 +75,7 @@ public class AdminController {
         logger.info("AdminController->users");
         List<User> users = userService.getAllUser();
         model.addAttribute("users", users);
-        return "admin/list";
+        return "admin/userlist";
     }
 
     /**
@@ -96,7 +96,7 @@ public class AdminController {
             request.setAttribute("loginErrorMap", loginErrorMap);
             return "admin/login";
         }
-        return "admin/list"; //登录成功，到用户管理页面 list.html
+        return "admin/userlist"; //登录成功，到用户管理页面
     }
 
     @PostMapping(value = "/adminRegisterForm")
@@ -145,5 +145,31 @@ public class AdminController {
 
         return "admin/userlist";
 
+    }
+
+    @GetMapping(value = "/uploads")
+    public String uploads(){
+        return "admin/uploadlist";
+    }
+
+    @GetMapping(value = "/downloads")
+    public String downloads(){
+        return "admin/downloadlist";
+    }
+    @GetMapping(value = "/files")
+    public String files(){
+        return "admin/filelist";
+    }
+    @GetMapping(value = "/types")
+    public String types(){
+        return "admin/typelist";
+    }
+    @GetMapping(value = "/permissions")
+    public String permissions(){
+        return "admin/permissionlist";
+    }
+    @GetMapping(value = "/systemset")
+    public String systemSet(){
+        return "admin/system";
     }
 }
