@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="nav" th:fragment="navbar">
+    <div class="box"><h3>treefrog后台管理系统</h3></div>
+    <ul>
+        <li><a th:href="@{/admin/uploads}" id="s1"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传记录</b></span></a></li>
+        <li><a th:href="@{/admin/downloads}" id="s2"><span class="fa fa-cloud-download" aria-hidden="true">&nbsp;<b>下载记录</b></span></a></li>
+        <li><a th:href="@{/admin/files}" id="s3"><span class="fa fa-file" aria-hidden="true">&nbsp;<b>文件管理</b></span></a></li>
+        <li><a th:href="@{/admin/permissions}" id="s4"><span class="fa fa-lock" aria-hidden="true">&nbsp;<b>权限管理</b></span></a></li>
+        <li><a th:href="@{/admin/types}" id="s5"><span class="fa fa-filter" aria-hidden="true">&nbsp;<b>分类管理</b></span></a></li>
+        <li><a th:href="@{/admin/users}" id="s6"><span class="fa fa-user" aria-hidden="true">&nbsp;<b>用户管理</b></span></a></li>
+        <li><a th:href="@{/admin/systemset}" id="s7"><span class="fa fa-cogs" aria-hidden="true">&nbsp;<b>系统设置</b></span></a></li>
+    </ul>
+</div>
+</body>
+<script th:fragment="active">
+    $(".nav ul a").click(function () {
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+    });
+</script>
+</html>
