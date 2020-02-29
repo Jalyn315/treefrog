@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="asset/css/commentstyle.css">
     <link rel="stylesheet" href="asset/css/userlist.css">
-    <link rel="stylesheet" href="asset/css/font-awesome.min.css">
+    <link rel="stylesheet" href="asset/css/font-awesome.min.css"  th:href="asset/css/font-awesome.min.css">
+    <script src="asset/js/jquery-3.4.1.min.js"></script>
     <title>用户管理</title>
 </head>
 <body>
@@ -26,7 +27,7 @@
          <table></table>
          <div class="user addtable">
             <div class="List1">
-                <input type="text" placeholder="用户名或者手机号">
+                <input type="text" id="textSearch" placeholder="用户名或者手机号">
             </div>
             <div class="List">
                 <table></table>
@@ -55,7 +56,7 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>shuwa</td>
+                            <td>Jalyn</td>
                             <td>2020-02-26</td>
                             <td>1921776332@qq.com</td>
                             <td>18177860349</td>
@@ -65,7 +66,7 @@
                          </tr>
                         <tr>
                             <td>1</td>
-                            <td>shuwa</td>
+                            <td>treefrog</td>
                             <td>2020-02-26</td>
                             <td>1921776332@qq.com</td>
                             <td>18177860349</td>
@@ -93,4 +94,66 @@
             </div>
         </div>
     </body>
+
+
+
+    <script>
+        //入口函数
+        $(function(){
+            
+            /*      
+            function search(){
+                $().on('keyup',function(){
+                  var searchInfo = $('#textSearch');
+                  for(var i = 0; i < $('tbody tr').length; i++){
+                    var tdUserName = $('tbody tr').eq(i).children().eq(1);
+                    
+
+
+
+                     if(searchInfo.val().toLowerCase() == tdUserName .text().toLowerCase()){
+                        $('tbody tr').eq(i).css('backgroundColor','#fff312');
+                     }else{
+                        $('tbody tr').eq(i).css('backgroundColor','white');
+                     }
+                  }
+                });
+            }*/
+        search();
+
+        function search(){
+                $('#textSearch').on('keyup',function(){
+                    var strValue = $(this).val();
+                    searchList(strValue);
+                });
+            }
+        function searchList(strValue){
+            var count = 0;
+            if(strValue != ''){
+                $('tbody tr').each(function(i){
+                    var contentValue = $(this).children().eq(1).text();
+                    console.log(this);
+                    if(contentValue.toLowerCase().indexOf(strValue.toLowerCase()) < 0){
+                        $(this).hide();
+                        count++;
+                    }else{
+                        $(this).show();
+                    }
+                    if(count == (i + 1)){
+                        $('tbody').hide();
+                    }else{
+                        $('tbody').show();
+                    }
+                });
+            }else{
+                $('tbody tr').each(function(i){
+                    $(this).show();
+                    $('tbody').show();
+                });
+            } 
+
+        }
+        });
+        
+    </script>
 </html>
