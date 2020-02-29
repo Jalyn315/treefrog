@@ -92,4 +92,14 @@ public class ViewController {
         return "admin/adminRegister";
     }
 
+    /**
+     * 控制页面转发到 /admin/userlist.html 不带数据
+     * @return
+     */
+    @RequestMapping(value = "/adminUserList")
+    public String adminUserList() {
+        logger.info("ViewController->adminUserList");
+        return "admin/userlist";
+    }
+
 }
