@@ -1,11 +1,8 @@
 package com.shuwa.treefrog.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.dao.UserDao;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.service.IUserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,26 +15,27 @@ public class UserService implements IUserService {
 
     /**
      * 用户登录
+     *
      * @param username
      * @param password
      * @return
      */
     @Override
     public User login(String username, String password) {
-        User user = userDao.login(username,password);
-        if(user == null){
+        User user = userDao.login(username, password);
+        if (user == null) {
             return null;
         }
-        if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
             return user;
-        }
-        else {
+        } else {
             return null;
         }
     }
 
     /**
      * 修改个人信息
+     *
      * @param user
      * @return
      */
@@ -48,6 +46,7 @@ public class UserService implements IUserService {
 
     /**
      * 根据Id获取用户对像
+     *
      * @param id
      * @return
      */
@@ -70,7 +69,6 @@ public class UserService implements IUserService {
     }
 
 
-
     @Override
     public boolean isPhoneExist(String phone) {
         return phone.equals(userDao.isPhoneExist(phone));
@@ -90,13 +88,5 @@ public class UserService implements IUserService {
     public List<User> getAllUser() {
         return userDao.getAllUser();
     }
-
-    @Override
-    public PageInfo<User> getAllUserByPageingQuery(Integer currentPage, Integer limit) {
-        PageHelper.startPage(currentPage,limit);
-        List<User> userList = userDao.getAllUser();
-        return new PageInfo<>(userList);
-    }
-
 
 }

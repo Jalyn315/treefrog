@@ -1,6 +1,5 @@
 package com.shuwa.treefrog.service;
 
-import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.entity.User;
 
 import java.util.List;
@@ -8,6 +7,7 @@ import java.util.List;
 public interface IUserService {
     /**
      * 用户登录
+     *
      * @param username
      * @param password
      * @return
@@ -16,6 +16,7 @@ public interface IUserService {
 
     /**
      * 用户嘻嘻更新
+     *
      * @param user
      * @return
      */
@@ -23,6 +24,7 @@ public interface IUserService {
 
     /**
      * 跟前用户ID获取用户对象
+     *
      * @param id
      * @return
      */
@@ -46,6 +48,7 @@ public interface IUserService {
 
     /**
      * 检查手机号是否已注册
+     *
      * @param phone 手机号
      * @return
      */
@@ -54,6 +57,7 @@ public interface IUserService {
 
     /**
      * 检查用户名是否存在
+     *
      * @param username
      * @return
      */
@@ -69,17 +73,10 @@ public interface IUserService {
 
     /**
      * 得到全部用户
+     *
      * @return
      */
     List<User> getAllUser();
-    /**
-     * 分页查询得到全部用户
-     * @param currentPage 当前页数
-     * @param limit 每页显示多少条数据
-     * @return
-     */
-    PageInfo<User> getAllUserByPageingQuery(Integer currentPage, Integer limit);
-
 
 
 }
