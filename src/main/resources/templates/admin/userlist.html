@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="asset/css/commentstyle.css" th:href="@{/asset/css/commentstyle.css}">
-    <link rel="stylesheet" href="asset/css/userlist.css">
-    <link rel="stylesheet" href="asset/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/commentstyle.css" th:href="@{/adminStyle/asset/css/commentstyle.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/userlist.css" th:href="@{/adminStyle/asset/css/userlist.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css" th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
+    <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js" th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
     <title>用户管理</title>
 </head>
 <body>
-        <div class="nav">
+        <div class="nav" th:replace="commons/nav_fragments::navbar">
             <div class="box"><h3>treefrog后台管理系统</h3></div>
             <ul>
                 <li><a href="uploadlist.html"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传记录</b></span></a></li>
@@ -26,7 +27,7 @@
          <table></table>
          <div class="user addtable">
             <div class="List1">
-                <input type="text" placeholder="用户名或者手机号">
+                <input type="text" id="textSearch" placeholder="用户名或者手机号">
             </div>
             <div class="List">
                 <table></table>
@@ -63,6 +64,36 @@
                             <td>2020-06-26</td>
                             <td>2020-02-26</td>
                          </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Jalyn</td>
+                            <td>2020-02-26</td>
+                            <td>1921776332@qq.com</td>
+                            <td>18177860349</td>
+                            <td>管理员</td>
+                            <td>2020-06-26</td>
+                            <td>2020-02-26</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>treefrog</td>
+                            <td>2020-02-26</td>
+                            <td>1921776332@qq.com</td>
+                            <td>18177860349</td>
+                            <td>管理员</td>
+                            <td>2020-06-26</td>
+                            <td>2020-02-26</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>shuwa</td>
+                            <td>2020-02-26</td>
+                            <td>1921776332@qq.com</td>
+                            <td>18177860349</td>
+                            <td>管理员</td>
+                            <td>2020-06-26</td>
+                            <td>2020-02-26</td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="pagediv">
@@ -72,4 +103,45 @@
             </div>
         </div>
     </body>
+<script>
+    //入口函数
+    $(function(){
+
+        search();
+
+        function search(){
+            $('#textSearch').on('keyup',function(){
+                var strValue = $(this).val();
+                searchList(strValue);
+            });
+        }
+        function searchList(strValue){
+            var count = 0;
+            if(strValue != ''){
+                $('tbody tr').each(function(i){
+                    var contentValue = $(this).children().eq(1).text();
+                    console.log(this);
+                    if(contentValue.toLowerCase().indexOf(strValue.toLowerCase()) < 0){
+                        $(this).hide();
+                        count++;
+                    }else{
+                        $(this).show();
+                    }
+                    if(count == (i + 1)){
+                        $('tbody').hide();
+                    }else{
+                        $('tbody').show();
+                    }
+                });
+            }else{
+                $('tbody tr').each(function(i){
+                    $(this).show();
+                    $('tbody').show();
+                });
+            }
+
+        }
+        $('#s6').addClass('active')
+    });
+</script>
 </html>

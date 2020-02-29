@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="asset/css/commentstyle.css">
-    <link rel="stylesheet" href="asset/css/filelist.css">
-    <link rel="stylesheet" href="asset/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/commentstyle.css" th:href="@{/adminStyle/asset/css/commentstyle.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/downloadlist.css" th:href="@{/adminStyle/asset/css/filelist.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css" th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
+    <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js" th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
     <title>文件管理</title>
 </head>
 <body>
-        <div class="nav">
+        <div class="nav" th:replace="commons/nav_fragments::navbar">
             <div class="box"><h3>treefrog后台管理系统</h3></div>
             <ul>
                 <li><a href="uploadlist.html"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传记录</b></span></a></li>
@@ -96,8 +97,12 @@
                     <a href="" class="pageBtn">上一页</a>
                     <a href="" class="pageBtn">下一页</a>
                 </div>
-
             </div>
         </div>
     </body>
+    <script >
+        $(function () {
+            $('#s3').addClass('active')
+        });
+    </script>
 </html>
