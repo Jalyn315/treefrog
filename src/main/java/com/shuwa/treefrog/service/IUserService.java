@@ -1,5 +1,6 @@
 package com.shuwa.treefrog.service;
 
+import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.entity.User;
 
 import java.util.List;
@@ -71,5 +72,14 @@ public interface IUserService {
      * @return
      */
     List<User> getAllUser();
+    /**
+     * 分页查询得到全部用户
+     * @param currentPage 当前页数
+     * @param limit 每页显示多少条数据
+     * @return
+     */
+    PageInfo<User> getAllUserByPageingQuery(Integer currentPage, Integer limit);
+
+
 
 }

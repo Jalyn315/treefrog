@@ -1,5 +1,7 @@
 package com.shuwa.treefrog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.dao.UserDao;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.service.IUserService;
@@ -88,4 +90,13 @@ public class UserService implements IUserService {
     public List<User> getAllUser() {
         return userDao.getAllUser();
     }
+
+    @Override
+    public PageInfo<User> getAllUserByPageingQuery(Integer currentPage, Integer limit) {
+        PageHelper.startPage(currentPage,limit);
+        List<User> userList = userDao.getAllUser();
+        return new PageInfo<>(userList);
+    }
+
+
 }
