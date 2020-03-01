@@ -9,8 +9,8 @@ public class SmsSDKDemo {
     	boolean flag = false;
     	try {
     		//请根据实际 accesskey 和 secretkey，保密，不能外传
-    		String accesskey = "5d7dd33887b65f1f37d69075";
-    		String secretkey ="3c8554aed05749709b7020c7ba34b9cf";
+    		String accesskey = "";
+    		String secretkey ="";
     		 //初始化单发
 	    	SmsSingleSender singleSender = new SmsSingleSender(accesskey, secretkey);
 	    	 //普通单发,注意前面必须为【】符号包含，置于头或者尾部。
