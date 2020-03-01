@@ -16,18 +16,6 @@
 <body>
 <div class="nav" th:replace="commons/nav_fragments::navbar">
     <div class="box"><h3>treefrog后台管理系统</h3></div>
-    <ul>
-        <li><a href="uploadlist.html"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传记录</b></span></a>
-        </li>
-        <li><a href="downloadlist.html"><span class="fa fa-cloud-download"
-                                              aria-hidden="true">&nbsp;<b>下载记录</b></span></a></li>
-        <li><a href="filelist.html"><span class="fa fa-file" aria-hidden="true">&nbsp;<b>文件管理</b></span></a></li>
-        <li><a href="permissionlist.html"><span class="fa fa-lock" aria-hidden="true">&nbsp;<b>权限管理</b></span></a></li>
-        <li><a href="typelist.html"><span class="fa fa-filter" aria-hidden="true">&nbsp;<b>分类管理</b></span></a></li>
-        <li><a href="userlist.html" class="active"><span class="fa fa-user" aria-hidden="true">&nbsp;<b>用户管理</b></span></a>
-        </li>
-        <li><a href="system.html"><span class="fa fa-cogs" aria-hidden="true">&nbsp;<b>系统设置</b></span></a></li>
-    </ul>
 </div>
 
 <!-- 用户管理 -->
@@ -71,41 +59,11 @@
                 <td>2020-06-26</td>
                 <td>2020-02-26</td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Jalyn</td>
-                <td>2020-02-26</td>
-                <td>1921776332@qq.com</td>
-                <td>18177860349</td>
-                <td>管理员</td>
-                <td>2020-06-26</td>
-                <td>2020-02-26</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>treefrog</td>
-                <td>2020-02-26</td>
-                <td>1921776332@qq.com</td>
-                <td>18177860349</td>
-                <td>管理员</td>
-                <td>2020-06-26</td>
-                <td>2020-02-26</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>shuwa</td>
-                <td>2020-02-26</td>
-                <td>1921776332@qq.com</td>
-                <td>18177860349</td>
-                <td>管理员</td>
-                <td>2020-06-26</td>
-                <td>2020-02-26</td>
-            </tr>
             </tbody>
         </table>
         <div class="pagediv">
-            <a href="" th:ref="@{/listUser/}+${model.page.pageNum-1}" th:if="${model}" class="pageBtn">上一页</a>
-            <a href="" th:ref="@{/listUser/}+${model.page.pageNum+1}" th:if="${model}" class="pageBtn">下一页</a>
+            <a href="" th:href="@{/admin/users/}+${page.pageNum-1}" th:if="${page}" class="pageBtn">上一页</a>
+            <a href="" th:href="@{/admin/users/}+${page.pageNum+1}" th:if="${page}" class="pageBtn">下一页</a>
         </div>
     </div>
 </div>

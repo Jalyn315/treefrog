@@ -67,19 +67,6 @@ public class AdminController {
     }
 
     /**
-     * 传递到 users 页面
-     *
-     * @return
-     */
-    @GetMapping(value = "/users")
-    public String users(Model model) {
-        logger.info("AdminController->users");
-        List<User> users = userService.getAllUser();
-        model.addAttribute("users", users);
-        return "admin/userlist";
-    }
-
-    /**
      * 处理 管理员登陆
      * @return
      */
