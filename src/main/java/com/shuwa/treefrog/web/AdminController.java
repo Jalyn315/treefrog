@@ -46,8 +46,9 @@ public class AdminController {
      * @return
      */
     @RequestMapping(value = "/user_list")
-    public String userList() {
+    public String userList(Model model) {
         logger.info("AdminController->userList");
+        model.addAttribute("page",new PageParam());
         return "admin/userlist";
     }
 
@@ -86,7 +87,8 @@ public class AdminController {
     public String adminLoginForm(
             @RequestParam("username") String userName
             ,@RequestParam("password") String password
-            ,HttpServletRequest request) {
+            ,HttpServletRequest request
+            ,Model model) {
         logger.info("AdminController->adminLoginForm");
         Map<String,String> loginErrorMap = new HashMap<>();
         try {
@@ -96,6 +98,7 @@ public class AdminController {
             request.setAttribute("loginErrorMap", loginErrorMap);
             return "admin/login";
         }
+        model.addAttribute("firstLoad",'1');//判断是否是第一次加载
         return "admin/userlist"; //登录成功，到用户管理页面
     }
 
@@ -130,7 +133,7 @@ public class AdminController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/listUser/{id}")
+    @GetMapping(value = "/users/{id}")
     public String userList(@PathVariable("id") Integer currentPage, Model model) {
         int limit = 6; //页面数据个数
         PageInfo<User> pageInfo = adminService.getAllUserByPageingQuery(currentPage,limit);
@@ -142,9 +145,7 @@ public class AdminController {
         //传递到 admin/userlist.html 的参数
         model.addAttribute("users",pageInfo.getList());
         model.addAttribute("page",pageParam);
-
         return "admin/userlist";
-
     }
 
     @GetMapping(value = "/uploads")
