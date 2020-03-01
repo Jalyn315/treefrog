@@ -64,46 +64,16 @@
                             <td>2020-06-26</td>
                             <td>2020-02-26</td>
                          </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Jalyn</td>
-                            <td>2020-02-26</td>
-                            <td>1921776332@qq.com</td>
-                            <td>18177860349</td>
-                            <td>管理员</td>
-                            <td>2020-06-26</td>
-                            <td>2020-02-26</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>treefrog</td>
-                            <td>2020-02-26</td>
-                            <td>1921776332@qq.com</td>
-                            <td>18177860349</td>
-                            <td>管理员</td>
-                            <td>2020-06-26</td>
-                            <td>2020-02-26</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>shuwa</td>
-                            <td>2020-02-26</td>
-                            <td>1921776332@qq.com</td>
-                            <td>18177860349</td>
-                            <td>管理员</td>
-                            <td>2020-06-26</td>
-                            <td>2020-02-26</td>
-                        </tr>
                     </tbody>
                 </table>
                 <div class="pagediv">
-                    <a href="" th:ref="@{/listUser/}+${model.page.pageNum-1}" th:if="${model}" class="pageBtn">上一页</a>
-                    <a href="" th:ref="@{/listUser/}+${model.page.pageNum+1}"  th:if="${model}" class="pageBtn">下一页</a>
+                    <a href="" th:href="@{/users/}+${page.pageNum-1}" th:if="${page}" class="pageBtn">上一页</a>
+                    <a href="" th:href="@{/users/}+${page.pageNum+1}"  th:if="${page}" class="pageBtn">下一页</a>
                 </div>
             </div>
         </div>
     </body>
-<script>
+<script type="text/javascript" th:inline="javascript">
     //入口函数
     $(function(){
 
@@ -141,7 +111,13 @@
             }
 
         }
-        $('#s6').addClass('active')
+        //
+        $('#s6').addClass('active');
+        //解决第一次访问默认进行一次分页查询
+        if([[${firstLoad}]]){
+            $('.active')[0].click();
+        }
+
     });
 </script>
 </html>
