@@ -1,11 +1,14 @@
 package com.shuwa.treefrog.web;
 
 import com.github.pagehelper.PageInfo;
+import com.shuwa.treefrog.entity.Type;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.exception.LoginException;
 import com.shuwa.treefrog.exception.RegisterException;
+import com.shuwa.treefrog.exception.TypeNameException;
 import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.impl.AdminService;
+import com.shuwa.treefrog.service.impl.TypeService;
 import com.shuwa.treefrog.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +33,8 @@ public class AdminController {
     private UserService userService; // userervice -> userService
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private TypeService typeService;
 
     /**
      * 进入登录界面
@@ -135,11 +140,49 @@ public class AdminController {
         return "admin/userlist";
     }
 
+    /**
+     * typelist 的分页查询
+     * @param currentPage
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/types/{id}")
+    public String types(@PathVariable("id") Integer currentPage, Model model){
+        int limit = 2;//页面显示数据个数
+        PageInfo<Type> pageInfo = typeService.typePageQuery(currentPage,limit);
+        PageParam pageParam = new PageParam();
+        pageParam.setPageNum(pageInfo.getPageNum());
+        pageParam.setPageTotal(pageInfo.getTotal());
+        pageParam.setLastPage(limit);
+        pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
+        //传递到 admin/userlist.html 的参数
+        model.addAttribute("types",pageInfo.getList());
+        model.addAttribute("page",pageParam);
+        return "admin/typelist";
+    }
+
+    /**
+     * 保存一个 Type
+     * @param typeName
+     * @param model
+     * @return
+     */
+    @PostMapping(value = "/saveType")
+    public String saveType(@RequestParam("typeName") String typeName,Model model) {
+        logger.info("AdminController->saveType");
+        try {
+            typeService.addType(typeName,new Date());
+        } catch (TypeNameException e) {
+            model.addAttribute("addTypeError",e.getMessage());
+        }
+        model.addAttribute("page",new PageParam());
+        return "admin/typelist";
+    }
+
     @GetMapping(value = "/uploads")
     public String uploads(){
         return "admin/uploadlist";
     }
-
     @GetMapping(value = "/downloads")
     public String downloads(){
         return "admin/downloadlist";
@@ -147,10 +190,6 @@ public class AdminController {
     @GetMapping(value = "/files")
     public String files(){
         return "admin/filelist";
-    }
-    @GetMapping(value = "/types")
-    public String types(){
-        return "admin/typelist";
     }
     @GetMapping(value = "/permissions")
     public String permissions(){

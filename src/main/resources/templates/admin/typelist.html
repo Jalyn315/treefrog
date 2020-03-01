@@ -3,101 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/adminStyle/asset/css/commentstyle.css" th:href="@{/adminStyle/asset/css/commentstyle.css}">
-    <link rel="stylesheet" href="../../static/adminStyle/asset/css/downloadlist.css" th:href="@{/adminStyle/asset/css/typelist.css}">
-    <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css" th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
-    <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js" th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/commentstyle.css"
+          th:href="@{/adminStyle/asset/css/commentstyle.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/downloadlist.css"
+          th:href="@{/adminStyle/asset/css/typelist.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css"
+          th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
+    <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js"
+            th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
     <title>下载记录</title>
 </head>
 <body>
-        <div class="nav" th:replace="commons/nav_fragments::navbar">
-            <div class="box"><h3>treefrog后台管理系统</h3></div>
-            <ul>
-                <li><a href="uploadlist.html"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传记录</b></span></a></li>
-                <li><a href="downloadlist.html"><span class="fa fa-cloud-download" aria-hidden="true">&nbsp;<b>下载记录</b></span></a></li>
-                <li><a href="filelist.html"><span class="fa fa-file" aria-hidden="true">&nbsp;<b>文件管理</b></span></a></li>
-                <li><a href="permissionlist.html" ><span class="fa fa-lock" aria-hidden="true">&nbsp;<b>权限管理</b></span></a></li>
-                <li><a href="typelist.html" class="active"><span class="fa fa-filter" aria-hidden="true">&nbsp;<b>分类管理</b></span></a></li>
-                <li><a href="userlist.html" ><span class="fa fa-user" aria-hidden="true">&nbsp;<b>用户管理</b></span></a></li>
-                <li><a href="system.html"><span class="fa fa-cogs" aria-hidden="true">&nbsp;<b>系统设置</b></span></a></li>
-            </ul>
-        </div>
+<div class="nav" th:replace="commons/nav_fragments::navbar"></div>
+<table></table>
+<div class="type">
+    <div class="List1">
+        <form action="/admin/saveType" method="POST">
+            <h2>添加分类</h2>
+            <input type="text" placeholder="新分类名称" name="typeName">
+            <p style="color: red;margin-top:-25px" th:text="${addTypeError}" th:if="${ not #strings.isEmpty(addTypeError)}"></p>
+            <button>保存</button>
+        </form>
+    </div>
+    <div class="List2">
+        <table>
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="type:${types}">
+                <td th:text="${type.getId()}"></td>
+                <td th:text="${type.getTypeName()}"></td>
+                <td th:text="${#dates.format(type.getCreateTime(),'yyyy-MM-dd')}"></td>
+                <td>
 
-        <table></table>
-        <div class="type">
-            <div class="List1">
-                <form action="">
-                    <h2>添加分类</h2>
-                    <input type="text" placeholder="新分类名称">
-                    <button>保存</button>
-                 </form>
-            </div>
-            <div class="List2">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>编号</th>
-                            <th>名称</th>
-                            <th>创建时间</th>
-                            <th>操作</th>   
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>视频</td>
-                            <td>2020-02-26</td>
-                            <td>    
-                                
-                                    <a href="#" class="edit"><span class="fa fa-pencil-square-o" aria-hidden="true">&nbsp;<b>编辑</b></span></a>
-                                    <a href="#" class="del"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
-                            </td>
-                         </tr>
-                            <td>1</td>
-                            <td>视频</td>
-                            <td>2020-02-26</td>
-                            <td>    
-                                
-                                    <a href="#" class="edit"><span class="fa fa-pencil-square-o" aria-hidden="true">&nbsp;<b>编辑</b></span></a>
-                                    <a href="#" class="del"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
-                            </td>
-                         </tr>
-                            <td>1</td>
-                            <td>视频</td>
-                            <td>2020-02-26</td>
-                            <td>    
-                                
-                                    <a href="#" class="edit"><span class="fa fa-pencil-square-o" aria-hidden="true">&nbsp;<b>编辑</b></span></a>
-                                    <a href="#" class="del"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
-                            </td>
-                         </tr>
-                            <td>1</td>
-                            <td>视频</td>
-                            <td>2020-02-26</td>
-                            <td>    
-                                
-                                    <a href="#" class="edit"><span class="fa fa-pencil-square-o" aria-hidden="true">&nbsp;<b>编辑</b></span></a>
-                                    <a href="#" class="del"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
-                            </td>
-                         </tr>
-                            <td>1</td>
-                            <td>视频</td>
-                            <td>2020-02-26</td>
-                            <td>    
-                                
-                                    <a href="#" class="edit"><span class="fa fa-pencil-square-o" aria-hidden="true">&nbsp;<b>编辑</b></span></a>
-                                    <a href="#" class="del"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
-                            </td>
-                         </tr>
-                        
-                    </tbody>
-                </table>
-                <div class="pagediv">
-                    <a href="" class="pageBtn">上一页</a>
-                    <a href="" class="pageBtn">下一页</a>
-                </div>
-            </div>
+                    <a href="#" class="edit"><span class="fa fa-pencil-square-o"
+                                                   aria-hidden="true">&nbsp;<b>编辑</b></span></a>
+                    <a href="#" class="del"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagediv">
+            <a href="" th:href="@{/admin/types/}+${page.pageNum-1}" th:if="${page}" class="pageBtn">上一页</a>
+            <a href="" th:href="@{/admin/types/}+${page.pageNum+1}" th:if="${page}" class="pageBtn">下一页</a>
         </div>
+    </div>
+</div>
 </body>
 <script>
     $(function () {

@@ -95,4 +95,16 @@ public class ViewController {
         return "admin/userlist";
     }
 
+    /**
+     * 控制页面转发到 /admin/typelist.html
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/adminTypeList")
+    public String adminTypeList(Model model) {
+        logger.info("ViewController->adminTypeList");
+        model.addAttribute("page",new PageParam());
+        return "admin/typelist";
+    }
+
 }
