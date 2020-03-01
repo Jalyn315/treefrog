@@ -1,8 +1,10 @@
 package com.shuwa.treefrog.web;
 
+import com.shuwa.treefrog.model.PageParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -83,22 +85,13 @@ public class ViewController {
         return "admin/login";
     }
     /**
-     * 控制页面转发到 /admin/adminRegister.html 不带数据
-     * @return
-     */
-    @GetMapping(value = "/adminRegister")
-    public String adminRegister() {
-        logger.info("ViewController->adminRegister");
-        return "admin/adminRegister";
-    }
-
-    /**
      * 控制页面转发到 /admin/userlist.html 不带数据
      * @return
      */
     @RequestMapping(value = "/adminUserList")
-    public String adminUserList() {
+    public String adminUserList(Model model) {
         logger.info("ViewController->adminUserList");
+        model.addAttribute("page",new PageParam());
         return "admin/userlist";
     }
 

@@ -135,7 +135,7 @@ public class AdminController {
      */
     @GetMapping(value = "/users/{id}")
     public String userList(@PathVariable("id") Integer currentPage, Model model) {
-        int limit = 6; //页面数据个数
+        int limit = 2; //页面数据个数
         PageInfo<User> pageInfo = adminService.getAllUserByPageingQuery(currentPage,limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
