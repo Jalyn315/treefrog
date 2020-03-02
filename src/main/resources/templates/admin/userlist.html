@@ -62,8 +62,11 @@
             </tbody>
         </table>
         <div class="pagediv">
-            <a href="" th:href="@{/admin/users/}+${page.pageNum-1}" th:if="${page}" class="pageBtn">上一页</a>
-            <a href="" th:href="@{/admin/users/}+${page.pageNum+1}" th:if="${page}" class="pageBtn">下一页</a>
+            <a id="last" th:href="@{/admin/users/}+${page.pageNum-1}" th:if="not ${page.isFirstPage}" class="pageBtn">上一页</a>
+            <ul class="pageIndex" th:each="i:${#numbers.sequence(1,page.pageTotal)}" th:if="${page}">
+                <li><a th:href="@{/admin/users/}+${i}" ><p th:text="${i}"></p></a></li>
+            </ul>
+            <a id="next" th:href="@{/admin/users/}+${page.pageNum+1}" th:if="not ${page.isLastPage}" class="pageBtn">下一页</a>
         </div>
     </div>
 </div>
@@ -108,11 +111,22 @@
 
         }
 
+        /**
+         * 实现导航栏点击提示
+         */
         $('#s6').addClass('active');
        var a = [[${firstLoad}]];
         if(a){
             $('#s6')[0].click();
         }
+        
+        var pageNum = [[${page.pageNum}]];
+        console.log(pageNum);
+        //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
+        $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
+        console.log( $('.pageIndex li:eq('+(pageNum-1)+')').children());
+
+        //$('.pageIndex li').get(pageNum).siblings().children().removeClass('active');
     });
 </script>
 </html>
