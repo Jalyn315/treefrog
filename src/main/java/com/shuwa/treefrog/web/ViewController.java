@@ -97,14 +97,28 @@ public class ViewController {
 
     /**
      * 控制页面转发到 /admin/typelist.html
+     *
      * @param model
      * @return
      */
     @RequestMapping(value = "/adminTypeList")
     public String adminTypeList(Model model) {
         logger.info("ViewController->adminTypeList");
-        model.addAttribute("page",new PageParam());
+        model.addAttribute("page", new PageParam());
         return "admin/typelist";
+    }
+
+    /**
+     * 控制页面转发到 /admin/filelist.html
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/adminFileList")
+    public String adminFileList(Model model) {
+        logger.info("ViewController->adminFileList");
+        model.addAttribute("page", new PageParam());
+        return "admin/filelist";
     }
 
 }

@@ -239,6 +239,7 @@ public interface FileDao {
 
     /**
      * 根据用户Id获取用户上传的文件
+     *
      * @param userId
      * @return
      */
@@ -247,4 +248,12 @@ public interface FileDao {
 
     @Select("select * from file where ")
     File findByname(String name);
+
+    /**
+     * 查询所有的 类型
+     *
+     * @return
+     */
+    @Select("select * from file")
+    List<File> filePageQuery();
 }

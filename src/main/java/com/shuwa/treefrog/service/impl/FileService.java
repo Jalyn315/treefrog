@@ -12,6 +12,7 @@ import com.shuwa.treefrog.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -177,5 +178,11 @@ public class FileService implements IFileService {
     @Override
     public File findByUserName(String userName) {
         return null;
+    }
+
+    @Override
+    public PageInfo<File> filePageQuery(Integer currentPage, Integer limit) {
+        PageHelper.startPage(currentPage, limit);
+        return new PageInfo<>(fileDao.filePageQuery());
     }
 }

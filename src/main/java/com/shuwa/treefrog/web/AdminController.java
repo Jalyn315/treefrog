@@ -1,6 +1,7 @@
 package com.shuwa.treefrog.web;
 
 import com.github.pagehelper.PageInfo;
+import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.entity.Type;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.exception.LoginException;
@@ -8,6 +9,7 @@ import com.shuwa.treefrog.exception.RegisterException;
 import com.shuwa.treefrog.exception.TypeNameException;
 import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.impl.AdminService;
+import com.shuwa.treefrog.service.impl.FileService;
 import com.shuwa.treefrog.service.impl.TypeService;
 import com.shuwa.treefrog.service.impl.UserService;
 import org.slf4j.Logger;
@@ -35,13 +37,16 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private FileService fileService;
 
     /**
      * 进入登录界面
+     *
      * @return
      */
     @GetMapping
-    public String toLoginPage(){
+    public String toLoginPage() {
         return "admin/login";
     }
 
@@ -168,29 +173,50 @@ public class AdminController {
      * @return
      */
     @PostMapping(value = "/saveType")
-    public String saveType(@RequestParam("typeName") String typeName,Model model) {
+    public String saveType(@RequestParam("typeName") String typeName, Model model) {
         logger.info("AdminController->saveType");
         try {
-            typeService.addType(typeName,new Date());
+            typeService.addType(typeName, new Date());
         } catch (TypeNameException e) {
-            model.addAttribute("addTypeError",e.getMessage());
+            model.addAttribute("addTypeError", e.getMessage());
         }
-        model.addAttribute("page",new PageParam());
+        model.addAttribute("page", new PageParam());
         return "admin/typelist";
     }
 
-    @GetMapping(value = "/uploads")
-    public String uploads(){
-        return "admin/uploadlist";
-    }
-    @GetMapping(value = "/downloads")
-    public String downloads(){
-        return "admin/downloadlist";
-    }
-    @GetMapping(value = "/files")
-    public String files(){
+    /**
+     * 分页查询 file
+     *
+     * @param currentPage
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/files/{id}")
+    public String files(@PathVariable("id") Integer currentPage, Model model) {
+        int limit = 2;//页面显示数据个数
+        PageInfo<File> pageInfo = fileService.filePageQuery(currentPage, limit);
+        PageParam pageParam = new PageParam();
+        pageParam.setPageNum(pageInfo.getPageNum());
+        pageParam.setPageTotal(pageInfo.getTotal());
+        pageParam.setLastPage(limit);
+        pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
+        //传递到 admin/userlist.html 的参数
+        model.addAttribute("files", pageInfo.getList());
+        model.addAttribute("page", pageParam);
         return "admin/filelist";
     }
+
+
+    @GetMapping(value = "/uploads")
+    public String uploads() {
+        return "admin/uploadlist";
+    }
+
+    @GetMapping(value = "/downloads")
+    public String downloads() {
+        return "admin/downloadlist";
+    }
+
     @GetMapping(value = "/permissions")
     public String permissions(){
         return "admin/permissionlist";

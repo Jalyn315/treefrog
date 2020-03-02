@@ -10,19 +10,7 @@
     <title>文件管理</title>
 </head>
 <body>
-        <div class="nav" th:replace="commons/nav_fragments::navbar">
-            <div class="box"><h3>treefrog后台管理系统</h3></div>
-            <ul>
-                <li><a href="uploadlist.html"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传记录</b></span></a></li>
-                <li><a href="downloadlist.html"><span class="fa fa-cloud-download" aria-hidden="true">&nbsp;<b>下载记录</b></span></a></li>
-                <li><a href="filelist.html" class="active"><span class="fa fa-file" aria-hidden="true">&nbsp;<b>文件管理</b></span></a></li>
-                <li><a href="permissionlist.html" ><span class="fa fa-lock" aria-hidden="true">&nbsp;<b>权限管理</b></span></a></li>
-                <li><a href="typelist.html"><span class="fa fa-filter" aria-hidden="true">&nbsp;<b>分类管理</b></span></a></li>
-                <li><a href="userlist.html"><span class="fa fa-user" aria-hidden="true">&nbsp;<b>用户管理</b></span></a></li>
-                <li><a href="system.html"><span class="fa fa-cogs" aria-hidden="true">&nbsp;<b>系统设置</b></span></a></li>
-            </ul>
-        </div>
-
+<div class="nav" th:replace="commons/nav_fragments::navbar"></div>
          <!-- 文件管理 -->
          <table></table>
          <div class="file ">
@@ -60,42 +48,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>22</td>
-                            <td>shuwa</td>
-                            <td>G://shuwa</td>
-                            <td>视频</td>
-                            <td>www.shuwa.com</td>
-                            <td>208</td>
-                            <td>2020-02-26</td>
-                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>22</td>
-                            <td>shuwa</td>
-                            <td>G://shuwa</td>
-                            <td>视频</td>
-                            <td>www.shuwa.com</td>
-                            <td>208</td>
-                            <td>2020-02-26</td>
-                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>22</td>
-                            <td>shuwa</td>
-                            <td>G://shuwa</td>
-                            <td>视频</td>
-                            <td>www.shuwa.com</td>
-                            <td>208</td>
-                            <td>2020-02-26</td>
-                         </tr>
-                         
+                    <tr th:each="file:${files}">
+                        <td th:text="${file.getId()}"></td>
+                        <td th:text="${file.getCategoryId()}"></td>
+                        <td th:text="${file.getUserName()}"></td>
+                        <td th:text="${file.getLocalUrl()}"></td>
+                        <td th:text="${file.getTag()}"></td>
+                        <td th:text="${file.getVisitUrl()}"></td>
+                        <td th:text="${file.getDownloadTimes()}"></td>
+                        <td th:text="${#dates.format(file.getCreateTime(),'yyyy-MM-dd')}"></td>
+                    </tr>
                     </tbody>
                 </table>
                 <div class="pagediv">
-                    <a href="" class="pageBtn">上一页</a>
-                    <a href="" class="pageBtn">下一页</a>
+                    <a href="" th:href="@{/admin/files/}+${page.pageNum-1}" th:if="${page}" class="pageBtn">上一页</a>
+                    <a href="" th:href="@{/admin/files/}+${page.pageNum+1}" th:if="${page}" class="pageBtn">下一页</a>
                 </div>
             </div>
         </div>

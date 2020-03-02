@@ -58,13 +58,17 @@ public interface IFileService {
      * @param userName
      * @return
      */
-     File findByUserName(String userName);
+    File findByUserName(String userName);
 
     /**
      * 分页查询
-     * @param page 当前页
+     *
+     * @param page  当前页
      * @param limit 每页显示多少条数据
      * @return
      */
-     PageInfo<File> listFiles(Integer page, Integer limit);
+    PageInfo<File> listFiles(Integer page, Integer limit);
+
+
+    PageInfo<File> filePageQuery(Integer currentPage, Integer limit);
 }
