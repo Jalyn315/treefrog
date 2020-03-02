@@ -68,7 +68,7 @@
     </div>
 </div>
 </body>
-<script>
+<script  type="text/javascript" th:inline="javascript">
     //入口函数
     $(function () {
 
@@ -108,7 +108,11 @@
 
         }
 
-        $('#s6').addClass('active')
+        $('#s6').addClass('active');
+       var a = [[${firstLoad}]];
+        if(a){
+            $('#s6')[0].click();
+        }
     });
 </script>
 </html>
