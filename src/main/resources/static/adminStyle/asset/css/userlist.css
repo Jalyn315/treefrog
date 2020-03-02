@@ -38,5 +38,40 @@
  .btn a{
    width: 200px;
    height: 30px;
- 
+}
+
+.pageIndex{
+    display: inline-block;
+    list-style: none;
+    height: 40px;
+    background-color: white;
+
+}
+.pageIndex li{
+    display: inline-block;
+    margin: 0px 2px;
+}
+
+.pageIndex li a{
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    color: black;
+
+}
+.pageIndex li a p{
+    margin-top: 4px;
+    font-size: 10px;
+    font-weight: bold;
+}
+.pageIndex li p:hover{
+    color: green;
+}
+.select{
+    background-color: green;
 }

@@ -121,7 +121,7 @@ table tbody tr:hover{
     position: relative;
     left: 40%;
     overflow: hidden;
-   
+
 }
 
  .btn div{
@@ -139,7 +139,7 @@ table tbody tr:hover{
    height: 30px;
    text-align: center;
    border-radius: 5px;
-   
+
 }
 
  .btn a span{
@@ -157,7 +157,7 @@ table tbody tr:hover{
 }
 .share:active{
     border: 2px solid #3e93ee;
-    
+
 }
 
 .up{

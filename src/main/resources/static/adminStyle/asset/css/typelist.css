@@ -1,9 +1,7 @@
 .type{
     margin-top: 100px;
     width: 1200px;
-    
 }
-
 
 .List1{
     width: 300px;
@@ -18,7 +16,7 @@
 .List1 h2{
     text-align: center;
     line-height: 60px;
-    font-family: "微软雅黑"";
+    font-family: "微软雅黑";
 }
 
 .List1 input{
@@ -84,3 +82,4 @@ table tbody tr:hover{
 .del:active{
     background-color:  #731c1c;
 }
+
