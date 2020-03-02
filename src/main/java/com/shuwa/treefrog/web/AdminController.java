@@ -185,7 +185,7 @@ public class AdminController {
             model.addAttribute("addTypeError", e.getMessage());
         }
         model.addAttribute("page", new PageParam());
-        return "admin/typelist";
+        return "redirect:/types/1";
     }
 
     /**
