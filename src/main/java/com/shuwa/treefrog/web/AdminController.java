@@ -96,6 +96,7 @@ public class AdminController {
             return "admin/login";
         }
         model.addAttribute("firstLoad",'1');//判断是否是第一次加载
+        model.addAttribute("page",new PageParam());//判断是否是第一次加载
         return "admin/userlist"; //登录成功，到用户管理页面
     }
 
@@ -132,13 +133,15 @@ public class AdminController {
      */
     @GetMapping(value = "/users/{id}")
     public String userList(@PathVariable("id") Integer currentPage, Model model) {
-        int limit = 2; //页面数据个数
+        int limit =2; //页面数据个数
         PageInfo<User> pageInfo = adminService.getAllUserByPageingQuery(currentPage,limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
-        pageParam.setPageTotal(pageInfo.getTotal());
+        pageParam.setPageTotal(pageInfo.getPages());
+        System.out.println(pageInfo.getPages());
         pageParam.setLastPage(limit);
         pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
+        pageParam.setIsLastPage(pageInfo.isIsLastPage());
         //传递到 admin/userlist.html 的参数
         model.addAttribute("users",pageInfo.getList());
         model.addAttribute("page",pageParam);
