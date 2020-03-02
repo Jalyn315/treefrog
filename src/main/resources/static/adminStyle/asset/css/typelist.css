@@ -83,3 +83,11 @@ table tbody tr:hover{
     background-color:  #731c1c;
 }
 
+#msg{
+    display: block;
+    height: 30px;
+    width: 200px;
+    margin: 0px  auto;
+    line-height: 30px;
+    text-align: center;
+}

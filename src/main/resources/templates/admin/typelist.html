@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/adminStyle/asset/css/commentstyle.css"
           th:href="@{/adminStyle/asset/css/commentstyle.css}">
-    <link rel="stylesheet" href="../../static/adminStyle/asset/css/downloadlist.css"
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/typelist.css"
           th:href="@{/adminStyle/asset/css/typelist.css}">
     <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css"
           th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
     <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js"
             th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
-    <title>下载记录</title>
+    <title>权限管理</title>
 </head>
 <body>
 <div class="nav" th:replace="commons/nav_fragments::navbar"></div>
@@ -21,8 +21,10 @@
         <form action="/admin/saveType" method="POST">
             <h2>添加分类</h2>
             <input type="text" placeholder="新分类名称" name="typeName">
-            <p style="color: red;margin-top:-25px" th:text="${addTypeError}" th:if="${ not #strings.isEmpty(addTypeError)}"></p>
             <button>保存</button>
+            <p id="msg" style="color: red;margin-top:-15px" th:text="${addTypeError}" th:if="${ not #strings.isEmpty(addTypeError)}">55555</p>
+<!--            <p id="msg" style="color: red;margin-top:-15px" >55555</p>-->
+
         </form>
     </div>
     <div class="List2">
@@ -42,16 +44,18 @@
                 <td th:text="${#dates.format(type.getCreateTime(),'yyyy-MM-dd')}"></td>
                 <td>
 
-                    <a href="#" class="edit"><span class="fa fa-pencil-square-o"
-                                                   aria-hidden="true">&nbsp;<b>编辑</b></span></a>
+                    <a href="#" class="edit"><span class="fa fa-pencil-square-o"aria-hidden="true">&nbsp;<b>编辑</b></span></a>
                     <a href="#" class="del"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
                 </td>
             </tr>
             </tbody>
         </table>
         <div class="pagediv">
-            <a href="" th:href="@{/admin/types/}+${page.pageNum-1}" th:if="${page}" class="pageBtn">上一页</a>
-            <a href="" th:href="@{/admin/types/}+${page.pageNum+1}" th:if="${page}" class="pageBtn">下一页</a>
+            <a href="" th:href="@{/admin/types/}+${page.pageNum-1}" th:if="not ${page.isFirstPage}" class="pageBtn">上一页</a>
+                <ul class="pageIndex" th:each="i:${#numbers.sequence(1,page.pageTotal)}" th:if="${page}">
+                    <li><a th:href="@{/admin/types/}+${i}" ><p th:text="${i}"></p></a></li>
+               </ul>
+            <a href="" th:href="@{/admin/types/}+${page.pageNum+1}" th:if="not ${page.isLastPage}" class="pageBtn">下一页</a>
         </div>
     </div>
 </div>
@@ -59,6 +63,9 @@
 <script>
     $(function () {
         $('#s5').addClass('active')
+        var pageNum = [[${page.pageNum}]];
+        //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
+        $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
     });
 </script>
 </html>

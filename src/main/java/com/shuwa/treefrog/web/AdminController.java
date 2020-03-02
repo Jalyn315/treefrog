@@ -160,9 +160,10 @@ public class AdminController {
         PageInfo<Type> pageInfo = typeService.typePageQuery(currentPage,limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
-        pageParam.setPageTotal(pageInfo.getTotal());
+        pageParam.setPageTotal(pageInfo.getPages());
         pageParam.setLastPage(limit);
         pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
+        pageParam.setIsLastPage(pageInfo.isIsLastPage());
         //传递到 admin/userlist.html 的参数
         model.addAttribute("types",pageInfo.getList());
         model.addAttribute("page",pageParam);
