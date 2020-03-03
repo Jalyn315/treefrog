@@ -8,8 +8,8 @@ public class DownloadRecord {
     private String userName;
     private String fileName;
     private String fileUrl;
-    private String fileSize;
-    private  Date downloadTime;
+    private Integer fileSize;
+    private Date downloadTime;
 
     public long getId() {
         return id;
@@ -43,11 +43,11 @@ public class DownloadRecord {
         this.fileUrl = fileUrl;
     }
 
-    public String getFileSize() {
+    public Integer getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(String fileSize) {
+    public void setFileSize(Integer fileSize) {
         this.fileSize = fileSize;
     }
 
