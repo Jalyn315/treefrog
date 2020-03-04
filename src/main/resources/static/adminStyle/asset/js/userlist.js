@@ -9,8 +9,7 @@ function searchList(strValue) {
     var count = 0;
     if (strValue != '') {
         $('tbody tr').each(function (i) {
-            var contentValue = $(this).children().eq(1).text();
-            console.log(this);
+            var contentValue = $(this).children().eq(2).text();
             if (contentValue.toLowerCase().indexOf(strValue.toLowerCase()) < 0) {
                 $(this).hide();
                 count++;
@@ -29,8 +28,12 @@ function searchList(strValue) {
             $('tbody').show();
         });
     }
-
 }
+
+
+
+
+
 function  checkbox() {
     //change表示当当状态改变时，可用来判断是否被选中
     $('tbody input').change(function () {
