@@ -5,6 +5,7 @@ import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.impl.UserService;
 import com.shuwa.treefrog.util.sendSMS.SmsSDKDemo;
+import com.shuwa.treefrog.util.slidingcodeutils.GeeTestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +67,13 @@ public class UserController {
      */
     @GetMapping("/login")
     public String toLoginPage(){
+        logger.info("UserController->toLoginPage");
         return "login";
     }
 
     /**
      * 注销
+     *
      * @param username
      * @param password
      * @param map
@@ -78,19 +81,24 @@ public class UserController {
      * @return
      */
     @RequestMapping("/user_login")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password
-            , Map<String,Object> map, HttpSession session){
-
-        User user = userService.login(username,password);
-        if(user != null){
-            session.setAttribute("loginUser",username);  //登录成功将用户名存入会话对象
-            session.setAttribute("userId",user.getId());  //存入用户ID
-            session.setAttribute("user",user);
-            map.put("user",user);
+    public String login(@RequestParam("username") String username
+            , @RequestParam("password") String password
+            , Map<String, Object> map, HttpSession session
+            , String geetest_challenge, String geetest_validate, String geetest_seccode) {
+        if (!GeeTestUtil.validate(session, geetest_challenge, geetest_validate, geetest_seccode)) {
+            map.put("result", "验证失败!!!");
+            return "login";
+        }
+        User user = userService.login(username, password);
+        if (user != null) {
+            session.setAttribute("loginUser", username);  //登录成功将用户名存入会话对象
+            session.setAttribute("userId", user.getId());  //存入用户ID
+            session.setAttribute("user", user);
+            map.put("user", user);
             //第一次进入主页初始化分页
-            map.put("page",new PageParam());
+            map.put("page", new PageParam());
             return "index";
-        }else {
+        } else {
             map.put("msg", "用户名或密码错误");
             return "login";
         }
