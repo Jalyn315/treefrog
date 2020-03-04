@@ -11,13 +11,51 @@
           th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
     <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js"
             th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/adminStyle/asset/js/userlist.js}"></script>
     <title>用户管理</title>
 </head>
 <body>
+
 <div class="nav" th:replace="commons/nav_fragments::navbar">
     <div class="box"><h3>treefrog后台管理系统</h3></div>
 </div>
 
+<div id="dispose-box">
+    <!--用户权限模态框-->
+    <div class="permissionBox">
+    <div class="userBuddle">
+        <div id="buddle1">
+            <div class="message">
+                <p>用户名</p>
+            </div>
+            <div class="arrows"></div>
+        </div>
+    </div>
+    <div class="permissionBuddle">
+        <div id="buddle2">
+            <div class="message">
+                <p>新密码</p>
+            </div>
+            <div class="arrows"></div>
+        </div>
+    </div>
+    <div class="titlebox"><h4>重置用户权限</h4><button>×</button></div>
+    <div class="inputbox">
+        <div class="usern">
+            <input type="text" value="Jalyn">
+        </div>
+        <div class="userp">
+            <input type="password">
+        </div>
+    </div>
+    <div class="btnbox">
+        <button id="update">更新</button>
+        <button id="close">×关闭</button>
+        <button id="next1">下一个</button>
+        <button id="last1">上一个</button>
+    </div>
+</div>
+</div>
 <!-- 用户管理 -->
 <table></table>
 <div class="user addtable">
@@ -26,10 +64,7 @@
     </div>
     <div class="List">
         <table></table>
-        <div class="btn addtable">
-            <div>
-                <a href="#" class="up"><span class="fa fa-wrench" aria-hidden="true">&nbsp;<b>修改用权限</b></span></a>
-            </div>
+        <div class="btn ">
             <div>
                 <a href="#" class="delete"><span class="fa fa-refresh" aria-hidden="true">&nbsp;<b>重置用户密码</b></span></a>
             </div>
@@ -38,6 +73,7 @@
         <table>
             <thead>
             <tr>
+                <th></th>
                 <th>编号</th>
                 <th>用户名</th>
                 <th>生日</th>
@@ -50,6 +86,7 @@
             </thead>
             <tbody>
             <tr th:each="user:${users}">
+                <td><input type="checkbox" ></td>
                 <td th:text="${user.getId()}"></td>
                 <td th:text="${user.getUsername()}"></td>
                 <td th:text="${user.getBirth()}"></td>
@@ -74,43 +111,16 @@
 <script  type="text/javascript" th:inline="javascript">
     //入口函数
     $(function () {
-
+        //启动模糊查询
         search();
-
-        function search() {
-            $('#textSearch').on('keyup', function () {
-                var strValue = $(this).val();
-                searchList(strValue);
-            });
-        }
-
-        function searchList(strValue) {
-            var count = 0;
-            if (strValue != '') {
-                $('tbody tr').each(function (i) {
-                    var contentValue = $(this).children().eq(1).text();
-                    console.log(this);
-                    if (contentValue.toLowerCase().indexOf(strValue.toLowerCase()) < 0) {
-                        $(this).hide();
-                        count++;
-                    } else {
-                        $(this).show();
-                    }
-                    if (count == (i + 1)) {
-                        $('tbody').hide();
-                    } else {
-                        $('tbody').show();
-                    }
-                });
-            } else {
-                $('tbody tr').each(function (i) {
-                    $(this).show();
-                    $('tbody').show();
-                });
-            }
-
-        }
-
+        //启动复选框事件
+        checkbox();
+        //提示框
+        buddle();
+        //按钮关闭功能
+        btnClose();
+        //修改权限
+        resetPassword();
         /**
          * 实现导航栏点击提示
          */
@@ -119,14 +129,16 @@
         if(a){
             $('#s6')[0].click();
         }
-        
+        //分页下标处于选择选择状态
         var pageNum = [[${page.pageNum}]];
-        console.log(pageNum);
         //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
         $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
-        console.log( $('.pageIndex li:eq('+(pageNum-1)+')').children());
 
-        //$('.pageIndex li').get(pageNum).siblings().children().removeClass('active');
+        /**
+         * 修改权限按钮点击事件
+         */
     });
+
+
 </script>
 </html>
