@@ -85,7 +85,6 @@ public interface FileDao {
      */
     @Select("select count(*) from file where visit_url=#{visitUrl}")
     int checkVisitUrl(String visitUrl);
-
     /**
      * 添加一个文件
      * @param file
