@@ -71,7 +71,7 @@
 <div class="container col-sm-8 offset-2 row"  >
     <div class="col-sm-2">
         <div class="offset-3">
-           <nav class="navbar navbar-light nflex-column" th:replace="_fragments :: centered">
+           <nav class="navbar navbar-light nflex-column" th:replace="commons/_fragments :: centered">
             <ul class="navbar-nav nav-pills" id="nav-vertical">
                 <li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="1" class="fa fa-folder-open-o" aria-hidden="true"></i>资源列表</a></li>
                 <li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="2" class="fa fa-user-circle-o" aria-hidden="true"></i>我的文件</a></li>
@@ -82,7 +82,7 @@
     </div>
 <!--                    内容-->
 
-    <div class="col-sm-8 "  th:fragment="filelist">
+    <div class="col-sm-8 " >
             <table>
                 <tr th:each="file:${files}">
                     <td><a th:href="@{/downloadFile/}+${file.id}" class="list-group-item list-group-item-action" th:text="${file.name}"></a></td>
