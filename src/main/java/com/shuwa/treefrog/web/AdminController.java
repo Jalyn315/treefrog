@@ -216,12 +216,10 @@ public class AdminController {
     public String uploads() {
         return "admin/uploadlist";
     }
-
     @GetMapping(value = "/downloads")
     public String downloads() {
         return "admin/downloadlist";
     }
-
     @GetMapping(value = "/permissions")
     public String permissions(){
         return "admin/permissionlist";
