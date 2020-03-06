@@ -68,7 +68,7 @@ public interface UserDao {
      * @return
      */
     @Update("update user set password=#{password} where id = #{id}")
-    boolean updataPasswordById(@Param("password") String password, @Param("id") int id);
+    boolean updataPasswordById(@Param("password") String password, @Param("id") Integer id);
 
     /**
      * 更新数据库中的用户信息
