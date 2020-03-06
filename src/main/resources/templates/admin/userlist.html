@@ -45,7 +45,7 @@
             <input type="text" value="Jalyn">
         </div>
         <div class="userp">
-            <input type="password">
+            <input type="password" id="newPassword">
         </div>
     </div>
     <div class="btnbox">
@@ -111,6 +111,8 @@
 <script  type="text/javascript" th:inline="javascript">
     //入口函数
     $(function () {
+        //提示框
+        msg();
         //启动模糊查询
         search();
         //启动复选框事件
@@ -133,7 +135,6 @@
         var pageNum = [[${page.pageNum}]];
         //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
         $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
-
         /**
          * 修改权限按钮点击事件
          */
