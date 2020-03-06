@@ -139,7 +139,6 @@ public class AdminController {
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
         pageParam.setPageTotal(pageInfo.getPages());
-        System.out.println(pageInfo.getPages());
         pageParam.setLastPage(limit);
         pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
         pageParam.setIsLastPage(pageInfo.isIsLastPage());
