@@ -15,7 +15,7 @@ public interface IUserService {
     User login(String username, String password);
 
     /**
-     * 用户嘻嘻更新
+     * 用户信息更新
      *
      * @param user
      * @return
@@ -78,5 +78,11 @@ public interface IUserService {
      */
     List<User> getAllUser();
 
-
+    /**
+     * 根据用户id更改密码
+     * @param id 用户id
+     * @param password 新密码
+     * @return
+     */
+    boolean resetassword(String password, Integer id);
 }
