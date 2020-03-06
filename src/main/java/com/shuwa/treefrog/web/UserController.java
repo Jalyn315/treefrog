@@ -3,8 +3,8 @@ package com.shuwa.treefrog.web;
 import com.shuwa.treefrog.constant.UserConstant;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.model.PageParam;
+import com.shuwa.treefrog.service.impl.SmsService;
 import com.shuwa.treefrog.service.impl.UserService;
-import com.shuwa.treefrog.util.sendSMS.SmsSDKDemo;
 import com.shuwa.treefrog.util.slidingcodeutils.GeeTestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +26,17 @@ public class UserController {
     @Autowired
     private User user; //这里给 User.java 头部加了个 @Component 修饰符
 
+//    @Autowired
+//    private SmsSDKDemo smsSDKDemo; //控制短信服务的功能类
+
     @Autowired
-    private SmsSDKDemo smsSDKDemo; //控制短信服务的功能类
+    private SmsService smsService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 编辑个人信息
+     *
      * @return 用户修改页面
      */
     @GetMapping("/updatePage")
@@ -134,10 +138,18 @@ public class UserController {
             , @RequestParam("phone") String phone
             , HttpServletRequest request) {
         logger.info("UserController->signup");
-        boolean isNotAllowRegister = userService.isUserNameExist(userName);
-        if (isNotAllowRegister) {
+        boolean isUserNameDup = userService.isUserNameExist(userName);
+        boolean isPhoneDup = userService.isPhoneExist(phone);
+        //判断用户名是否重复
+        if (isUserNameDup) {
             UserConstant.errorMap.put("userNameDup", "用户名已存在！");
-            request.setAttribute("errorMap", UserConstant.errorMap);
+        }
+        //判断手机号是否重复
+        if (isPhoneDup) {
+            UserConstant.errorMap.put("phoneDup", "手机号已注册！");
+        }
+        request.setAttribute("errorMap", UserConstant.errorMap);
+        if (isUserNameDup || isPhoneDup) {
             return "signup";
         } else {
             user.setUsername(userName);
@@ -156,35 +168,27 @@ public class UserController {
      */
     @ResponseBody
     @PostMapping(value = "/sms")
-    public String smsSender(HttpServletRequest request) {
+    public void smsSender(HttpServletRequest request) {
         logger.info("UserController->smsSender");
-        //得到json参数值（phone）
+//        //得到json参数值（phone）
+//        String phoneNum = request.getParameter("phone");
+//        //需要对手机号进行验证
+//        if (!userService.isPhoneExist(phoneNum)) {
+//            UserConstant.errorMap.put("phoneDup", "手机号已注册！");
+//        }
+////        int verifiCode = getVerifCode();
+//        int verifiCode = 111111;
+//        //调用SmsSDKDemo发送手机验证码
+////        smsSDKDemo.sendSms(phoneNum,verifiCode);
+//        //将结果存入session中
+//        request.getSession().setAttribute("verifiCode", verifiCode + ""); // 将验证码保存在session中        //返回发送的结果（成功，失败）
+//        return "11111";
         String phoneNum = request.getParameter("phone");
-        //需要对手机号进行验证
-        if (!userService.isPhoneExist(phoneNum)) {
-            UserConstant.errorMap.put("phoneDup", "手机号已注册！");
+        if (!smsService.sendSms(phoneNum)) {
+            UserConstant.errorMap.put("codeDup", "验证码已发送，请一分钟后再点击发送！");
         }
-//        int verifiCode = getVerifCode();
-        int verifiCode = 111111;
-        //调用SmsSDKDemo发送手机验证码
-//        smsSDKDemo.sendSms(phoneNum,verifiCode);
-        //将结果存入session中
-        request.getSession().setAttribute("verifiCode", verifiCode + ""); // 将验证码保存在session中        //返回发送的结果（成功，失败）
-        return "11111";
-    }
 
-    /**
-     * 生成六位数验证码
-     *
-     * @return
-     */
-    protected int getVerifCode() {
-        // 100000~999999
-        int max = 999999;
-        int min = 100000;
-        int verifCode = min + (int) (Math.random() * (max - min + 1));
-        return verifCode;
-    }// end getVerifCode()
+    }
 
     /**
      * 编辑个人信息

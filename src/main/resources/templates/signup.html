@@ -69,6 +69,7 @@
                     class="validate">
                 </div>
                 <p style="color: red" th:text="${errorMap['verifiCode']}" th:if="${errorMap}"></p>
+                <p style="color: red" th:text="${errorMap['codeDup']}" th:if="${errorMap}"></p>
                 <div class="input-field">
                     <input id="getVerifiCode" value="获取验证码" type="button" class="btn btn-sm btn-success validate">
                 </div>

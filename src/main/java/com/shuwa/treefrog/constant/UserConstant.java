@@ -49,6 +49,10 @@ public class UserConstant {
      * 用户是否不存在
      */
     public static boolean isUserNotExists = false;
+    /**
+     * 手机号是否重复
+     */
+    public static boolean isPhoneDup = false;
 
     /**
      * 用于存储错误信息
