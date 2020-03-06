@@ -203,5 +203,20 @@ public class UserController {
         return "admin/userUpdate";
     }
 
+    @PostMapping("/resetPassword")
+    @ResponseBody
+    public String resetPassword(String password, Integer id){
+        String msg = "";
+        if (!"".equals(password)) {
+            if (userService.resetassword(password, id)) {
+                msg = "修改成功!";
+            }else {
+                msg = "修改失败!";
+            }
+        }else {
+            msg = "密码不能为空!";
+        }
+        return msg;
+    }
 
 }
