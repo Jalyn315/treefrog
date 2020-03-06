@@ -68,7 +68,6 @@ public class UserService implements IUserService {
         return true;
     }
 
-
     @Override
     public boolean isPhoneExist(String phone) {
         return phone.equals(userDao.isPhoneExist(phone));
@@ -89,4 +88,14 @@ public class UserService implements IUserService {
         return userDao.getAllUser();
     }
 
+    /**
+     * 重置用户密码
+     * @param password 新密码
+     * @param id 用户id
+     * @return
+     */
+    @Override
+    public boolean resetassword(String password, Integer id) {
+        return userDao.updataPasswordById(password, id);
+    }
 }
