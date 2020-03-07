@@ -181,6 +181,7 @@ public class AdminController {
         logger.info("AdminController->saveType");
         try {
             typeService.addType(typeName, new Date());
+            model.addFlashAttribute("msg","创建成功!");
         } catch (TypeNameException e) {
             model.addFlashAttribute("addTypeError", e.getMessage());
         }
@@ -188,6 +189,22 @@ public class AdminController {
         return "redirect:/admin/types/1";
     }
 
+    /**
+     * 删除一个type
+     * @param id
+     * @return
+     */
+    @GetMapping("/typeDelete")
+    @ResponseBody
+    public String typeDel(Integer id){
+        String msg = "";
+        if(typeService.deleteType(id)){
+            msg = "删除成功!";
+        }else {
+            msg = "删除失败!";
+        }
+        return msg;
+    }
     /**
      * 分页查询 file
      *
@@ -209,7 +226,6 @@ public class AdminController {
         model.addAttribute("page", pageParam);
         return "admin/filelist";
     }
-
 
     @GetMapping(value = "/uploads")
     public String uploads() {
