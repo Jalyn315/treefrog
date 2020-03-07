@@ -71,6 +71,9 @@ html,body{
 .geetest_radar_tip span{
     margin-top: 12px;
 }
+.geetest_success_radar_tip span{
+    margin-top: 2px;
+}
 .box a{
     color: white;
     font-size: 12px;
