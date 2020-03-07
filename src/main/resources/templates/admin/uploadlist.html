@@ -33,34 +33,38 @@
                             <th>编号</th>
                             <th>用户名</th>
                             <th>文件名称</th>
-                            <th>文件路径</th>
                             <th>分类名</th>
                             <th>文件大小</th>
                             <th>上传时间</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>shuwa</td>
-                            <td>Jquery尚硅谷教学</td>
-                            <td>G://shuwa</td>
-                            <td>视频</td>
-                            <td>2GB</td>
-                            <td>2020-02-26</td>
+                        <tr th:each="upload:${uploads}">
+                            <td th:text="${upload.id}">1</td>
+                            <td th:text="${upload.userName}">shuwa</td>
+                            <td th:text="${upload.name}">Jquery尚硅谷教学</td>
+                            <td th:text="${upload.tag}">视频</td>
+                            <td th:text="${upload.size}">2GB</td>
+                            <td  th:text="${#dates.format(upload.createTime,'yyyy-MM-dd')}">2020-02-26</td>
                          </tr>
                     </tbody>
                 </table>
                 <div class="pagediv">
-                    <a href="" class="pageBtn">上一页</a>
-                    <a href="" class="pageBtn">下一页</a>
+                    <a href="" id="lastPage" th:href="@{/admin/uploads/}+${uploadPage.pageNum-1}" th:if="not ${uploadPage.isFirstPage}" class="pageBtn">上一页</a>
+                    <ul class="pageIndex" th:each="i:${#numbers.sequence(1,uploadPage.pageTotal)}" th:if="${uploadPage}">
+                        <li><a th:href="@{/admin/uploads/}+${i}" ><p th:text="${i}"></p></a></li>
+                    </ul>
+                    <a href="" th:href="@{/admin/uploads/}+${uploadPage.pageNum+1}" th:if="not ${uploadPage.isLastPage}" class="pageBtn">下一页</a>
                 </div>
             </div>
         </div>
     </body>
-<script>
+<script th:inline="javascript">
     $(function () {
         $('#s1').addClass('active');
+        var pageNum = [[${uploadPage.pageNum}]];
+        //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
+        $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
     });
 </script>
 </html>

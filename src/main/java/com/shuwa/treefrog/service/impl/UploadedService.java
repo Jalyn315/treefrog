@@ -1,6 +1,9 @@
 package com.shuwa.treefrog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.dao.UserDao;
+import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.model.UploadedRecord;
 import com.shuwa.treefrog.service.IFileService;
 import com.shuwa.treefrog.service.IUploadedService;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UploadedService implements IUploadedService {
@@ -25,8 +29,6 @@ public class UploadedService implements IUploadedService {
         String fileName = FileUtils.getFileName(file.getOriginalFilename());
         //获取上传路径
         String uploadPath = FileUtils.getUploadPath();
-
-
         /**
          * 将所有文件上信息存入上传记录类对象中
          */
@@ -44,6 +46,16 @@ public class UploadedService implements IUploadedService {
             //上传失败
             return false;
         }
+    }
 
+    @Override
+    public PageInfo<File> fileUploadInfo(Integer page, Integer limit) {
+        PageHelper.startPage(page,limit);
+        List<File> uploadInfo = fileService.getFileList();
+        for(File file : uploadInfo){
+            file.setName(FileUtils.getFileRealName(file.getName()));
+            file.setUserName(userDao.getByUserName(file.getUserId()));
+        }
+        return new PageInfo<>(uploadInfo);
     }
 }

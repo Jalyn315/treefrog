@@ -161,7 +161,6 @@ public class FileService implements IFileService {
                 file.setName(FileUtils.getFileRealName(file.getName()));
                 file.setUserName(userDao.getByUserName(file.getUserId()));
             }
-
         return new PageInfo<>(fileList);
     }
 
