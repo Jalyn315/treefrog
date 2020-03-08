@@ -86,7 +86,7 @@
             <table>
                 <tr th:each="file:${files}">
                     <td><a th:href="@{/downloadFile/}+${file.id}" class="list-group-item list-group-item-action" th:text="${file.name}"></a></td>
-                    <td>作者:</td><td th:text="${file.userName}"></td><td>上传时间:</td><td th:text="${#dates.format(file.createTime,'yyyy-MM-dd')}"></td><td>下载:</td><td th:text="${file.downloadTimes}"></td>
+                    <td>作者:</td><td th:text="${file.userName}"></td><td>上传时间:</td><td th:text="${#dates.format(file.createTime,'yyyy-MM-dd')}"></td><td>下载:</td><td th:text="${file.downloadCount}"></td>
                 </tr>
             </table>
               <div>

@@ -238,3 +238,6 @@ table tbody tr:hover{
 .select{
     background-color: green;
 }
+.checked{
+    background-color: #b1ffc3;
+}

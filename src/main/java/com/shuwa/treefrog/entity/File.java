@@ -22,7 +22,7 @@ public class File {
 
     private int checkTimes;
 
-    private int downloadTimes;
+    private int downloadCount;
 
     private String tag;
 
@@ -124,12 +124,12 @@ public class File {
         this.checkTimes = checkTimes;
     }
 
-    public int getDownloadTimes() {
-        return downloadTimes;
+    public int getDownloadCount() {
+        return downloadCount;
     }
 
-    public void setDownloadTimes(int downloadTimes) {
-        this.downloadTimes = downloadTimes;
+    public void setDownloadCount(int downloadCount) {
+        this.downloadCount = downloadCount;
     }
 
     public String getTag() {
@@ -237,12 +237,12 @@ public class File {
      * @param createTime   上传时间
      * @param description   文件描述
      * @param checkTimes   文件浏览次数
-     * @param downloadTimes 文件下载时间
+     * @param downloadCount 文件下载次数
      * @param tag              文件标签
      * @param userId            上传用户id
      * @param categoryId        文件类别
      */
-    public File(long id, String name, String suffix, String localUrl, String visitUrl, long size, Date createTime, String description, int checkTimes, int downloadTimes, String tag, int userId, int categoryId) {
+    public File(long id, String name, String suffix, String localUrl, String visitUrl, long size, Date createTime, String description, int checkTimes, int downloadCount, String tag, int userId, int categoryId) {
         this.id = id;
         this.name = name;
         this.suffix = suffix;
@@ -252,7 +252,7 @@ public class File {
         this.createTime = createTime;
         this.description = description;
         this.checkTimes = checkTimes;
-        this.downloadTimes = downloadTimes;
+        this.downloadCount = downloadCount;
         this.tag = tag;
         this.userId = userId;
         this.categoryId = categoryId;

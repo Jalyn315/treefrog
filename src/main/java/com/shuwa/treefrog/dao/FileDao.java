@@ -190,7 +190,7 @@ public interface FileDao {
      *
      * @param id 编号
      */
-    @Update("update file set download_times=download_times+1 where id=#{id}")
+    @Update("update file set download_count=download_count+1 where id=#{id}")
     void updateDownloadTimesById(long id);
 
     /**

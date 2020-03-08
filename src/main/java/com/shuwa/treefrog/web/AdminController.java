@@ -217,16 +217,17 @@ public class AdminController {
      */
     @GetMapping(value = "/files/{id}")
     public String files(@PathVariable("id") Integer currentPage, Model model) {
-        int limit = 2;//页面显示数据个数
+        int limit = 5;//页面显示数据个数
         PageInfo<File> pageInfo = fileService.filePageQuery(currentPage, limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
-        pageParam.setPageTotal(pageInfo.getTotal());
+        pageParam.setPageTotal(pageInfo.getPages());
         pageParam.setLastPage(limit);
         pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
         //传递到 admin/userlist.html 的参数
         model.addAttribute("files", pageInfo.getList());
-        model.addAttribute("page", pageParam);
+        model.addAttribute("filePage", pageParam);
+
         return "admin/filelist";
     }
 

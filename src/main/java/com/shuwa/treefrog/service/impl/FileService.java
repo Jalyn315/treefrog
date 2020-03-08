@@ -114,7 +114,7 @@ public class FileService implements IFileService {
             System.out.println("文件已经删除");
             return false;
         }
-
+        fileDao.updateDownloadTimesById(file.getId());
         DownloadRecord downloadRecord = new DownloadRecord();
         downloadRecord.setFileName(FileUtils.getFileRealName(file.getName()));
         downloadRecord.setUserName(username);
@@ -196,6 +196,11 @@ public class FileService implements IFileService {
     @Override
     public PageInfo<File> filePageQuery(Integer currentPage, Integer limit) {
         PageHelper.startPage(currentPage, limit);
-        return new PageInfo<>(fileDao.filePageQuery());
+        List<File> fileInfo = fileDao.filePageQuery();
+        for(File file : fileInfo){
+            file.setName(FileUtils.getFileRealName(file.getName()));
+            file.setUserName(userDao.getByUserName(file.getUserId()));
+        }
+        return new PageInfo<>(fileInfo);
     }
 }
