@@ -18,20 +18,16 @@
     <div class="row">
         <div class="col-12">
             <div class="tm-home-left">
-                <h1 class="tm-site-title">INPUT</h1>
+                <h1 class="tm-site-title">TREEFROG</h1>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
             <div class="tm-home-left mt-3 font-weight-light">
-                <p class="tm-mb-35">This is a free <a href="">HTML Form Package</a> provided by Tooplate. Five different
-                    input forms included.</p>
-                <p class="tm-mb-35">Feel free to modify and use any form design. Please share it to your friends.</p>
-                <p>Thank you!</p>
+                <p class="tm-mb-35">This is a website for sharing learning resources for the Internet</p>
             </div>
         </div>
-        <div class="tlinks">Collect from <a href="http://www.cssmoban.com/">建站模板</a></div>
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
             <ul class="list-group tm-home-list tm-bg-black font-weight-light">
                 <li class="d-flex justify-content-between align-items-center">
@@ -45,15 +41,30 @@
     </div>
 </div>
 <footer class="row tm-mt-big mb-3">
-    <div class="col-xl-12 text-center font-weight-light">
-        <p class="d-inline-block tm-bg-black white-text py-2 tm-px-5">
-            Copyright &copy; 2018 Company Name - Design: Tooplate / More Templates <a href="http://www.cssmoban.com/"
-                                                                                      target="_blank"
-                                                                                      title="模板之家">模板之家</a> - Collect
-            from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-        </p>
+
     </div>
 </footer>
+<div class="face">
+    <div class="eyes">
+        <div class="eye"></div>
+        <div class="eye"></div>
+    </div>
+</div>
 </body>
-
 </html>
+<script>
+    window.onload=function(){
+        document.querySelector('html').addEventListener('mousemove',eyeball);
+        function eyeball(){
+            var eyes = document.querySelectorAll('.eye');
+            eyes.forEach(function(eye){
+                let x =   eye.getBoundingClientRect().left + (eye.clientWidth / 2);
+                let y =   eye.getBoundingClientRect().top + (eye.clientHeight / 2);
+                let radian = Math.atan2(event.pageX - x, event.pageY - y);
+                let rot = (radian * (180 / Math.PI) * -1) - 90;
+                eye.style.transform = "rotate(" + rot + "deg)";
+            });
+        }
+
+    }
+</script>

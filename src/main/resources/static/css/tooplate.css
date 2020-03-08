@@ -100,7 +100,7 @@ ul.tm-home-list:not(.browser-default) {
 }
 
 #home {
-  background-image: url(../img/input-bg-05.jpg);
+  background-image: url(../img/bg-image.jpeg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
@@ -583,4 +583,71 @@ input[type="email"]:not(.browser-default).tm-input-white-bg {
   .tm-mt-big {
     margin-top: 80px;
   }
+}
+
+
+.face{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 105px 105px 100px 100px;
+  background: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 58%;
+  top: 120px;
+  border: 2px solid black;
+  z-index: 999;
+}
+
+.face::before{
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  left: 50px;
+  top: 100px;
+  background: #fd79a8;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border: 1px solid black;
+  transition: 0.5s;
+}
+
+.face:hover::before{
+  top: 130px;
+  height: 20px;
+  background: #fd79a8;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.eyes{
+  position: relative;
+  top: -80px;
+  display: flex;
+}
+.eyes .eye{
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: block;
+  background: #fff;
+  margin: 0 15px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.eyes .eye::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  /* 弹性布局移动元素布局的方式 */
+  transform: translate(-50%,-50%);
+  width: 30px;
+  height: 30px;
+  background: #333;
+  border-radius: 50%;
 }
