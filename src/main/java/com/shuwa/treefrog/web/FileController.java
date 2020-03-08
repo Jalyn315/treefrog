@@ -68,8 +68,8 @@ public class FileController {
      * @return
      */
     @GetMapping("/downloadFile/{id}")
-    public String downloadFile(HttpServletResponse response,@PathVariable("id") long id){
-        fileService.downloadFile(response,id);
+    public String downloadFile(HttpServletResponse response,@PathVariable("id") long id, HttpSession session){
+        fileService.downloadFile(response,id,(String) session.getAttribute("loginUser"));
         return null;
     }
 

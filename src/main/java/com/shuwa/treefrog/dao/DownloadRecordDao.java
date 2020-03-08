@@ -20,7 +20,7 @@ public interface DownloadRecordDao {
      * @param downloadRecord
      * @return
      */
-    @Insert("insert into download(user_name,file_name,file_url,file_size,time) values(#{userName},#{fileName},#{fileUrl},#{fileSize},#{downloadTime})")
+    @Insert("insert into download(user_name,file_name,file_url,file_size,time) values(#{userName},#{fileName},#{fileUrl},#{fileSize},#{time})")
     boolean addDownloadRecord(DownloadRecord downloadRecord);
 
     /**

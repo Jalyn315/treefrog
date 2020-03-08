@@ -28,7 +28,7 @@ public interface IFileService {
      * @param id 文件id
      * @return
      */
-     boolean downloadFile(HttpServletResponse response,long id);
+     boolean downloadFile(HttpServletResponse response,long id, String username);
 
     /**
      * 跟前用户id获取用户的所有上传文件

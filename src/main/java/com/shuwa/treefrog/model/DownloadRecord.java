@@ -8,11 +8,20 @@ public class DownloadRecord {
     private String userName;
     private String fileName;
     private String fileUrl;
-    private Integer fileSize;
-    private Date downloadTime;
+    private long fileSize;
+    private String type;
+    private Date time;
 
     public long getId() {
         return id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setId(long id) {
@@ -43,19 +52,19 @@ public class DownloadRecord {
         this.fileUrl = fileUrl;
     }
 
-    public Integer getFileSize() {
+    public long getFileSize() {
         return fileSize;
     }
 
-    public void setFileSize(Integer fileSize) {
+    public void setFileSize(long fileSize) {
         this.fileSize = fileSize;
     }
 
     public Date getDownloadTime() {
-        return downloadTime;
+        return time;
     }
 
     public void setDownloadTime(Date downloadTime) {
-        this.downloadTime = downloadTime;
+        this.time = downloadTime;
     }
 }

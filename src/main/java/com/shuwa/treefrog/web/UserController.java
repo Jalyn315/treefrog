@@ -76,7 +76,7 @@ public class UserController {
     }
 
     /**
-     * 注销
+     *用户登录
      *
      * @param username
      * @param password

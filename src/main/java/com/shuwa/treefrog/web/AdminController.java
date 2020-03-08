@@ -7,7 +7,9 @@ import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.exception.LoginException;
 import com.shuwa.treefrog.exception.RegisterException;
 import com.shuwa.treefrog.exception.TypeNameException;
+import com.shuwa.treefrog.model.DownloadRecord;
 import com.shuwa.treefrog.model.PageParam;
+import com.shuwa.treefrog.service.IDownloadRecordService;
 import com.shuwa.treefrog.service.impl.AdminService;
 import com.shuwa.treefrog.service.impl.FileService;
 import com.shuwa.treefrog.service.impl.TypeService;
@@ -40,7 +42,8 @@ public class AdminController {
     private TypeService typeService;
     @Autowired
     private FileService fileService;
-
+    @Autowired
+    IDownloadRecordService downloadRecordService;
     /**
      * 进入登录界面
      *
@@ -226,6 +229,28 @@ public class AdminController {
         model.addAttribute("page", pageParam);
         return "admin/filelist";
     }
+
+    /**
+     * 分页查询下载记录
+     * @param page
+     * @param model
+     * @return
+     */
+    @GetMapping("downloads/{page}")
+    public String uploadInfo(@PathVariable("page") Integer page, Model model){
+        int limit = 4;
+        PageInfo<DownloadRecord> downloadInfo = downloadRecordService.getDownloadRecordS(page, limit);
+        PageParam pageParam = new PageParam();
+        pageParam.setPageNum(downloadInfo.getPageNum());
+        pageParam.setPageTotal(downloadInfo.getPages());
+        pageParam.setLastPage(limit);
+        pageParam.setIsFirstPage(downloadInfo.isIsFirstPage());
+        pageParam.setIsLastPage(downloadInfo.isIsLastPage());
+        model.addAttribute("downloads",downloadInfo.getList());
+        model.addAttribute("downloadPage",pageParam);
+        return "admin/downloadlist";
+    }
+
 
     @GetMapping(value = "/uploads")
     public String uploads() {

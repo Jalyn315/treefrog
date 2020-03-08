@@ -6,7 +6,9 @@ import com.shuwa.treefrog.constant.ConfigConstant;
 import com.shuwa.treefrog.dao.FileDao;
 import com.shuwa.treefrog.dao.UserDao;
 import com.shuwa.treefrog.entity.File;
+import com.shuwa.treefrog.model.DownloadRecord;
 import com.shuwa.treefrog.model.UploadedRecord;
+import com.shuwa.treefrog.service.IDownloadRecordService;
 import com.shuwa.treefrog.service.IFileService;
 import com.shuwa.treefrog.util.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,6 +35,8 @@ public class FileService implements IFileService {
     FileDao fileDao;
     @Autowired
     UserDao userDao;
+    @Autowired
+    IDownloadRecordService downloadRecordService;
     /**
      * 文件上传
      * @param file
@@ -96,7 +101,7 @@ public class FileService implements IFileService {
      */
 
     @Override
-    public boolean downloadFile(HttpServletResponse response, long id) {
+    public boolean downloadFile(HttpServletResponse response, long id, String username) {
         File file = fileDao.getFile(id);
         //获取文件名称
         String fileName = file.getName();
@@ -109,6 +114,15 @@ public class FileService implements IFileService {
             System.out.println("文件已经删除");
             return false;
         }
+
+        DownloadRecord downloadRecord = new DownloadRecord();
+        downloadRecord.setFileName(FileUtils.getFileRealName(file.getName()));
+        downloadRecord.setUserName(username);
+        downloadRecord.setDownloadTime(new Date());
+        downloadRecord.setFileSize(file.getSize());
+        downloadRecord.setType(file.getTag());
+        downloadRecord.setFileUrl(file.getLocalUrl());
+        downloadRecordService.addDownloadRecord(downloadRecord);
         response.setContentType("application/gorce-download");
         response.addHeader("Content-disposition","attachment;fileName="+ FileUtils.getFileRealName(fileName));
         try {
