@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>填写邮件</title>
+</head>
+<body>
+<form th:action="@{/sendEmail}" method="post">
+    <p style="color: red" th:text="${emaillError}" th:if="${ not #strings.isEmpty(emaillError)}"></p>
+    输入邮箱：<input type="text" name="email">
+    <button type="submit">提交</button>
+</form>
+</body>
+</html>
