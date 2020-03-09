@@ -8,6 +8,10 @@ import java.util.Map;
  */
 public class UserConstant {
     /**
+     * 用于邮箱验证的正则表达式
+     */
+    public static final String emailRegex = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
+    /**
      * 这个正则表示的是4-16位字母,数字,汉字,下划线 其中两个汉字是可以注册成功的,表示4个字符
      */
     public static final String userNameRegex =
