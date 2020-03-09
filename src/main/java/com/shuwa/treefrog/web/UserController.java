@@ -170,19 +170,6 @@ public class UserController {
     @PostMapping(value = "/sms")
     public void smsSender(HttpServletRequest request) {
         logger.info("UserController->smsSender");
-//        //得到json参数值（phone）
-//        String phoneNum = request.getParameter("phone");
-//        //需要对手机号进行验证
-//        if (!userService.isPhoneExist(phoneNum)) {
-//            UserConstant.errorMap.put("phoneDup", "手机号已注册！");
-//        }
-////        int verifiCode = getVerifCode();
-//        int verifiCode = 111111;
-//        //调用SmsSDKDemo发送手机验证码
-////        smsSDKDemo.sendSms(phoneNum,verifiCode);
-//        //将结果存入session中
-//        request.getSession().setAttribute("verifiCode", verifiCode + ""); // 将验证码保存在session中        //返回发送的结果（成功，失败）
-//        return "11111";
         String phoneNum = request.getParameter("phone");
         if (!smsService.sendSms(phoneNum)) {
             UserConstant.errorMap.put("codeDup", "验证码已发送，请一分钟后再点击发送！");
