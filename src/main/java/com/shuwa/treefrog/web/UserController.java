@@ -200,7 +200,7 @@ public class UserController {
         String msg = "";
         if (!"".equals(password)) {
             if (userService.resetassword(password, id)) {
-                msg = "修改成功!";
+                msg = "修改成功! ";
             }else {
                 msg = "修改失败!";
             }
