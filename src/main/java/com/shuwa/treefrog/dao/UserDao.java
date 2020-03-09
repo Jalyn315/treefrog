@@ -134,5 +134,35 @@ public interface UserDao {
     @Select("select email from user where id = #{id}")
     String getByEmail(Integer id);
 
+    /*---------------------👇新增👇--------------------*/
+
+    /**
+     * 根据给定邮箱查看数据库中是否有该邮箱
+     *
+     * @param email
+     * @return
+     */
+    @Select("select email from user where email = #{email}")
+    String getEmail(@Param("email") String email);
+
+    /**
+     * 根据 email 得到用户名
+     *
+     * @param email
+     * @return
+     */
+    @Select("select username from user where email = #{email}")
+    String getUserNameByEmail(@Param("email") String email);
+
+    /**
+     * 根据邮箱来重置密码
+     *
+     * @param email
+     * @param password
+     * @return
+     */
+    @Update("update user set password = #{password} where email = #{email}")
+    boolean resetPasswordByEmail(@Param("password") String password, @Param("email") String email);
+
 }
 
