@@ -80,9 +80,35 @@ public interface IUserService {
 
     /**
      * 根据用户id更改密码
-     * @param id 用户id
+     *
+     * @param id       用户id
      * @param password 新密码
      * @return
      */
     boolean resetassword(String password, Integer id);
+
+    /**
+     * 根据邮箱查询邮箱是否存在于数据库
+     *
+     * @param email
+     * @return
+     */
+    String getEmail(String email);
+
+    /**
+     * 根据邮箱重置密码
+     *
+     * @param password
+     * @param email
+     * @return
+     */
+    boolean resetPasswordByEmail(String password, String email);
+
+    /**
+     * 根据邮箱得到 用户名
+     *
+     * @param email
+     * @return
+     */
+    String getUserNameByEmail(String email);
 }

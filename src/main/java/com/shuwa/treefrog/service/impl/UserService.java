@@ -90,12 +90,28 @@ public class UserService implements IUserService {
 
     /**
      * 重置用户密码
+     *
      * @param password 新密码
-     * @param id 用户id
+     * @param id       用户id
      * @return
      */
     @Override
     public boolean resetassword(String password, Integer id) {
         return userDao.updataPasswordById(password, id);
+    }
+
+    @Override
+    public String getEmail(String email) {
+        return userDao.getEmail(email);
+    }
+
+    @Override
+    public boolean resetPasswordByEmail(String password, String email) {
+        return userDao.resetPasswordByEmail(password, email);
+    }
+
+    @Override
+    public String getUserNameByEmail(String email) {
+        return userDao.getUserNameByEmail(email);
     }
 }
