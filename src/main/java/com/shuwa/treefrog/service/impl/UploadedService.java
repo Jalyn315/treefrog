@@ -47,14 +47,17 @@ public class UploadedService implements IUploadedService {
             return false;
         }
     }
-
     @Override
     public PageInfo<File> fileUploadInfo(Integer page, Integer limit) {
         PageHelper.startPage(page,limit);
         List<File> uploadInfo = fileService.getFileList();
         for(File file : uploadInfo){
             file.setName(FileUtils.getFileRealName(file.getName()));
-            file.setUserName(userDao.getByUserName(file.getUserId()));
+            if( file.getUserId() != 0) {
+                file.setUserName(userDao.getByUserName(file.getUserId()));
+            }else {
+                file.setUserName("管理员");
+            }
         }
         return new PageInfo<>(uploadInfo);
     }

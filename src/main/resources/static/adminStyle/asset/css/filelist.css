@@ -6,4 +6,120 @@
 .List{
     width: 850px;
 }
+#dispose-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.4);
+    left: 0;
+    top: 0;
+    z-index: 999;
+    display: none;
+}
+/*上传模态框*/
 
+.uploadBox{
+    width: 400px;
+    height: 400px;
+    background: white;
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    border: 1px solid green;
+    border-radius: 0 0 5px 5px;
+
+}
+
+
+.uploadTitle{
+    width: 401px;
+    height: 40px;
+    background-color: green;
+
+}
+
+.uploadTitle button{
+    float:right;
+    margin-top: -40px;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    background: none;
+    border: 0;
+    outline: none;
+}
+
+.uploadTitle p {
+    color: white;
+    font-family: "微软雅黑";
+    line-height: 40px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.filebox{
+    height: 40px;
+    background: white;
+    border: 1px solid #cdcdcd;
+    margin: 20px 30px;
+    overflow: hidden;
+}
+.filebox #browse{
+    float: right;
+    height: 40px;
+    width: 80px;
+    background: green;
+    border: none;
+    color: white;
+    margin-top: -40px;
+}
+
+.filebox #fileName{
+    float: left;
+    display: block;
+    height: 40px;
+    width: 310px;
+    line-height: 40px;
+}
+
+.filebox input{
+    opacity: 0;
+}
+
+.filetype{
+    width: 100px;
+    height: 40px;
+    background: white;
+    border: 1px solid #cdcdcd;
+    margin: 30px 30px;
+}
+
+.filetype select{
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    border: none;
+    outline: none ;
+}
+
+.fileDescription{
+    height: 100px;
+    background: white;
+    margin: 20px 30px;
+}
+
+.uploadBtns{
+
+    height: 40px;
+    background: white;
+    margin: 20px 30px;
+}
+
+.uploadBtns button{
+    width: 100%;
+    height: 40px;
+    background: green;
+    color: white;
+    font-size: 20px;
+    border: none;
+}

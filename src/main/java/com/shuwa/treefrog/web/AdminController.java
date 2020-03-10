@@ -9,7 +9,9 @@ import com.shuwa.treefrog.exception.RegisterException;
 import com.shuwa.treefrog.exception.TypeNameException;
 import com.shuwa.treefrog.model.DownloadRecord;
 import com.shuwa.treefrog.model.PageParam;
+import com.shuwa.treefrog.model.UploadedRecord;
 import com.shuwa.treefrog.service.IDownloadRecordService;
+import com.shuwa.treefrog.service.IUploadedService;
 import com.shuwa.treefrog.service.impl.AdminService;
 import com.shuwa.treefrog.service.impl.FileService;
 import com.shuwa.treefrog.service.impl.TypeService;
@@ -20,8 +22,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,6 +48,9 @@ public class AdminController {
     private FileService fileService;
     @Autowired
     IDownloadRecordService downloadRecordService;
+    @Autowired
+    IUploadedService uploadService;
+
     /**
      * 进入登录界面
      *
@@ -265,6 +272,31 @@ public class AdminController {
             msg = "删除成功!";
         }else {
             msg = "删除失败!";
+        }
+        return msg;
+    }
+
+    /**
+     * 管理员上传文件
+     * @param file
+     * @param tag
+     * @param description
+     * @return
+     */
+    @PostMapping("/upload")
+    @ResponseBody
+    public String adminUploadFiles(@RequestParam("file") MultipartFile file, String tag, String description){
+        String msg = "上传成功";
+        UploadedRecord uploadedRecord = new UploadedRecord();
+        uploadedRecord.setUserId(0); //0表示管理员上传
+        uploadedRecord.setTag(tag);
+        uploadedRecord.setDescription(description);
+        if(uploadService.uploadRecord(file, uploadedRecord)){
+            logger.info("文件上传成功");
+           msg = "文件上传成功!";
+        }else{
+            logger.info("文件上传失败");
+            msg = "文件上传失败";
         }
         return msg;
     }

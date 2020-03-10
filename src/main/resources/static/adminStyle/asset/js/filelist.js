@@ -50,3 +50,49 @@ function removeFiles() {
         }
     });
 }
+function flieUpload() {
+    //显示上传窗口
+    $('.up').click(function () {
+        $('#dispose-box').show();
+    });
+    //关闭窗口
+    $('.uploadTitle button').click(function (event) {
+        $('#dispose-box').hide();
+        $('#fileName').html("");
+        $('#description').val("");  //清空内容
+    });
+    //选择文件
+    $('#browse').click(function(){
+        $('#file')[0].click();
+
+    });
+    //获取文件名
+    $('#file').on("input propertychange",function(){
+        $('#fileName').html( $('#file').val());
+    });
+
+    $('#uploadBtn').click(function () {
+        var fileobj = $('#file')[0].files[0];
+        var form = new FormData();
+        form.append('file',fileobj);
+        var description = $('#description').val();
+        var tag = $('#type option:selected').text();
+        form.append('tag',tag);
+        form.append('description',description);
+        $.post({
+            url:"/admin/upload",
+            data: form,
+            processData: false,  //告诉jquery要传输data对象
+            contentType: false,   //告诉jquery不需要增加请求头对于contentType的设置
+            success:function (data) {
+                $('.msgbox #info').html(data);
+                $('.msgbox').show();
+                $('#fileName').html("");
+                $('#description').val("");
+                setTimeout($('#dispose-box').hide(), 500);
+            }
+        });
+    });
+
+
+}
