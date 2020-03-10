@@ -255,4 +255,10 @@ public interface FileDao {
      */
     @Select("select * from file")
     List<File> filePageQuery();
+
+
+    @Update("update file set is_downloadable = #{upload}, " +
+            "is_deletable = #{delete}, is_updatable = #{edit}, is_visible = #{visit} where id = #{id}")
+    boolean updatePermission(long id, Integer upload, Integer delete, Integer edit, Integer visit );
+
 }

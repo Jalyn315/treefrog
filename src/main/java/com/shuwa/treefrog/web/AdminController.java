@@ -301,6 +301,39 @@ public class AdminController {
         return msg;
     }
 
+    /**
+     * 权限管理
+     * @param currentPage
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/permissions/{id}")
+    public String permission(@PathVariable("id") Integer currentPage, Model model) {
+        int limit = 5;//页面显示数据个数
+        PageInfo<File> pageInfo = fileService.filePageQuery(currentPage, limit);
+        PageParam pageParam = new PageParam();
+        pageParam.setPageNum(pageInfo.getPageNum());
+        pageParam.setPageTotal(pageInfo.getPages());
+        pageParam.setLastPage(limit);
+        pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
+        //传递到 admin/userlist.html 的参数
+        model.addAttribute("files", pageInfo.getList());
+        model.addAttribute("filePage", pageParam);
+        return "admin/permissionlist";
+    }
+    @PostMapping("/editPermission")
+    @ResponseBody
+    public String editPermisson(Long id, Integer upload, Integer delete, Integer edit, Integer visit){
+        String msg = "";
+        if (fileService.updatePermission(id,upload,delete,edit,visit)){
+            msg = "权限已更新!";
+        }else {
+            msg =  "权限更新失败!";
+        }
+        return msg;
+    }
+
+
     @GetMapping(value = "/uploads")
     public String uploads() {
         return "admin/uploadlist";
@@ -313,6 +346,10 @@ public class AdminController {
     public String permissions(){
         return "admin/permissionlist";
     }
+
+
+
+
     @GetMapping(value = "/systemset")
     public String systemSet(){
         return "admin/system";

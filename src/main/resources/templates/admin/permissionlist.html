@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../static/adminStyle/asset/css/downloadlist.css" th:href="@{/adminStyle/asset/css/permissionlist.css}">
     <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css" th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
     <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js" th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
+   <script th:src="@{/adminStyle/asset/js/permission.js}"></script>
     <title>权限管理</title>
 </head>
 <body>
@@ -22,35 +23,74 @@
                 <li><a href="system.html"><span class="fa fa-cogs" aria-hidden="true">&nbsp;<b>系统设置</b></span></a></li>
             </ul>
         </div>
+<!--        权限修改模态框-->
+        <div id="dispose-box">
+            <div class="permissionBox">
+                <div class="titlebox"><h4>权限编辑</h4><button>×</button></div>
+                <div class="inputbox">
+                    <div class="filen">
+                        <input type="text" value="文件名">
+                    </div>
 
+                    <div class="editBox">
+
+                        <div>
+                            <label for="up" style="color: green;">下载</label>
+                            <select name="" id="up">
+                                <option value="0">拒绝</option>
+                                <option value="1">允许</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="de" style="color: red;">删除</label>
+                            <select name="" id="de">
+                                <option value="0">拒绝</option>
+                                <option value="1">允许</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ed" style="color: purple;">修改</label>
+                            <select name="" id="ed">
+                                <option value="0">拒绝</option>
+                                <option value="1">允许</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="vi" style="color:rgb(0, 115, 255);">可见</label>
+                            <select name="" id="vi">
+                                <option value="0">拒绝</option>
+                                <option value="1">允许</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="btnbox">
+                    <button id="update">更新</button>
+                    <button id="close">×关闭</button>
+                    <button id="next1">下一个</button>
+                    <button id="last1">上一个</button>
+                </div>
+            </div>
+        </div>
          <!-- 文件管理 -->
          <table></table>
          <div class="file addtable">
             <div class="List1">
-                <input type="text" placeholder="用户名或者手机号">
                 <input type="text" placeholder="文件名，模糊搜索">
             </div>
             <div class="List">
                 <table></table>
                 <div class="btn addtable">
                     <div>
-                        <a href="#" class="share"><span class="fa fa-plus-circle" aria-hidden="true">&nbsp;<b>新增</b></span></a>
-                    </div>
-                    <div>
                         <a href="#" class="up"><span class="fa fa-pencil-square-o" aria-hidden="true">&nbsp;<b>编辑</b></span></a>
                     </div>
-                    <div>
-                        <a href="#" class="delete"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
-                    </div>
-                   
                 </div>
                 <table>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>编号</th>
-                            <th>用户名</th>
                             <th>文件名</th>
-                            <th>本地路径</th>
                             <th>下载权限</th>
                             <th>删除权限</th>
                             <th>修改权限</th>
@@ -59,40 +99,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>shuwa</td>
-                            <td>java学习视频</td>
-                            <td>G://shuwa</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>2020-02-26</td>
-                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>shuwa</td>
-                            <td>java学习视频</td>
-                            <td>G://shuwa</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>2020-02-26</td>
-                         </tr>
+                    <tr th:each="file:${files}">
+                        <td><input type="checkbox" ></td>
+                        <td th:text="${file.id}"></td>
+                        <td th:text="${file.name}"></td>
+                        <td th:text="${file.isDownloadable}"></td>
+                        <td th:text="${file.isDeletable}"></td>
+                        <td th:text="${file.isUpdatable}"></td>
+                        <td th:text="${file.isVisible}"></td>
+                        <td th:text="${#dates.format(file.createTime,'yyyy-MM-dd')}"></td>
+                    </tr>
                     </tbody>
                 </table>
                 <div class="pagediv">
-                    <a href="" class="pageBtn">上一页</a>
-                    <a href="" class="pageBtn">下一页</a>
+                    <a href="" id="lastPage" th:href="@{/admin/permissions/}+${filePage.pageNum-1}" th:if="not ${filePage.isFirstPage}" class="pageBtn">上一页</a>
+                    <ul class="pageIndex" th:each="i:${#numbers.sequence(1,filePage.pageTotal)}" th:if="${filePage}">
+                        <li><a th:href="@{/admin/permissions/}+${i}" ><p th:text="${i}"></p></a></li>
+                    </ul>
+                    <a href="" th:href="@{/admin/permissions/}+${filePage.pageNum+1}" th:if="not ${filePage.isLastPage}" class="pageBtn">下一页</a>
                 </div>
             </div>
         </div>
     </body>
 <script>
+    checkbox();
+    msg();
+    editPermission();
+    search();
+    btnClose();
     $(function () {
         $('#s4').addClass('active')
     });
+    var pageNum = [[${filePage.pageNum}]];
+    //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
+    $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
 </script>
 </html>

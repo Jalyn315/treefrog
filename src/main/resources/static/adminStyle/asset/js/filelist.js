@@ -70,7 +70,7 @@ function flieUpload() {
     $('#file').on("input propertychange",function(){
         $('#fileName').html( $('#file').val());
     });
-
+    //发送Ajax请求
     $('#uploadBtn').click(function () {
         var fileobj = $('#file')[0].files[0];
         var form = new FormData();

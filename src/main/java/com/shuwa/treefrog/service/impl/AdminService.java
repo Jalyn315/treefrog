@@ -45,6 +45,9 @@ public class AdminService implements IAdminService {
         throw new RegisterException("用户名重复！");
     }
 
+
+
+
     @Override
     public String getUserName(String userName) {
         return adminDao.getUserName(userName);

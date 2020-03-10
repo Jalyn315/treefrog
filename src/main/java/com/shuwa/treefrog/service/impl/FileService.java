@@ -135,11 +135,9 @@ public class FileService implements IFileService {
             }
             in.close();
             out.close();
-
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -238,4 +236,20 @@ public class FileService implements IFileService {
         }
         return true;
     }
+
+    /**
+     * 更新文件权限
+     * @param id
+     * @param upload
+     * @param delete
+     * @param edit
+     * @param visit
+     * @return
+     */
+    public boolean updatePermission(Long id, Integer upload, Integer delete, Integer edit, Integer visit){
+        return fileDao.updatePermission(id,upload,delete,edit,visit);
+    }
+
+
+
 }
