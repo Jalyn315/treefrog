@@ -321,6 +321,16 @@ public class AdminController {
         model.addAttribute("filePage", pageParam);
         return "admin/permissionlist";
     }
+
+    /**
+     * 更改权限
+     * @param id
+     * @param upload
+     * @param delete
+     * @param edit
+     * @param visit
+     * @return
+     */
     @PostMapping("/editPermission")
     @ResponseBody
     public String editPermisson(Long id, Integer upload, Integer delete, Integer edit, Integer visit){

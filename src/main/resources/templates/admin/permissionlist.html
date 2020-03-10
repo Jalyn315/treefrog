@@ -24,54 +24,7 @@
             </ul>
         </div>
 <!--        权限修改模态框-->
-        <div id="dispose-box">
-            <div class="permissionBox">
-                <div class="titlebox"><h4>权限编辑</h4><button>×</button></div>
-                <div class="inputbox">
-                    <div class="filen">
-                        <input type="text" value="文件名">
-                    </div>
 
-                    <div class="editBox">
-
-                        <div>
-                            <label for="up" style="color: green;">下载</label>
-                            <select name="" id="up">
-                                <option value="0">拒绝</option>
-                                <option value="1">允许</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="de" style="color: red;">删除</label>
-                            <select name="" id="de">
-                                <option value="0">拒绝</option>
-                                <option value="1">允许</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="ed" style="color: purple;">修改</label>
-                            <select name="" id="ed">
-                                <option value="0">拒绝</option>
-                                <option value="1">允许</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="vi" style="color:rgb(0, 115, 255);">可见</label>
-                            <select name="" id="vi">
-                                <option value="0">拒绝</option>
-                                <option value="1">允许</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="btnbox">
-                    <button id="update">更新</button>
-                    <button id="close">×关闭</button>
-                    <button id="next1">下一个</button>
-                    <button id="last1">上一个</button>
-                </div>
-            </div>
-        </div>
          <!-- 文件管理 -->
          <table></table>
          <div class="file addtable">
@@ -126,7 +79,6 @@
     msg();
     editPermission();
     search();
-    btnClose();
     $(function () {
         $('#s4').addClass('active')
     });

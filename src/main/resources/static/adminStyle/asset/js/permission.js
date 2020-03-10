@@ -51,6 +51,7 @@ function searchList(strValue) {
 }
 function editPermission() {
     $('.up').click(function () {
+        addDispose_box();
         var fileName = [];
         var index = 0;
         var aId = [];
@@ -86,7 +87,6 @@ function editPermission() {
         });
 
         $('#update').click(function () {
-
             var upload = $('#up option:selected').val();
             var del = $('#de option:selected').val();
             var edit = $('#ed option:selected').val();
@@ -107,19 +107,67 @@ function editPermission() {
                 }
             });
         });
-
-
-
-
-
-
+        return false;
     });
 }
-function btnClose() {
-    $('.titlebox button').click(function () {
-        $('#dispose-box').hide();
-    });
-    $('#close').click(function () {
-        $('#dispose-box').hide();
-    });
+//添加模态框
+function addDispose_box() {
+
+        var box = " <div id=\"dispose-box\">\n" +
+            "            <div class=\"permissionBox\">\n" +
+            "                <div class=\"titlebox\"><h4>权限编辑</h4><button>×</button></div>\n" +
+            "                <div class=\"inputbox\">\n" +
+            "                    <div class=\"filen\">\n" +
+            "                        <input type=\"text\" value=\"文件名\">\n" +
+            "                    </div>\n" +
+            "\n" +
+            "                    <div class=\"editBox\">\n" +
+            "\n" +
+            "                        <div>\n" +
+            "                            <label for=\"up\" style=\"color: green;\">下载</label>\n" +
+            "                            <select name=\"\" id=\"up\">\n" +
+            "                                <option value=\"0\">拒绝</option>\n" +
+            "                                <option value=\"1\">允许</option>\n" +
+            "                            </select>\n" +
+            "                        </div>\n" +
+            "                        <div>\n" +
+            "                            <label for=\"de\" style=\"color: red;\">删除</label>\n" +
+            "                            <select name=\"\" id=\"de\">\n" +
+            "                                <option value=\"0\">拒绝</option>\n" +
+            "                                <option value=\"1\">允许</option>\n" +
+            "                            </select>\n" +
+            "                        </div>\n" +
+            "                        <div>\n" +
+            "                            <label for=\"ed\" style=\"color: purple;\">修改</label>\n" +
+            "                            <select name=\"\" id=\"ed\">\n" +
+            "                                <option value=\"0\">拒绝</option>\n" +
+            "                                <option value=\"1\">允许</option>\n" +
+            "                            </select>\n" +
+            "                        </div>\n" +
+            "                        <div>\n" +
+            "                            <label for=\"vi\" style=\"color:rgb(0, 115, 255);\">可见</label>\n" +
+            "                            <select name=\"\" id=\"vi\">\n" +
+            "                                <option value=\"0\">拒绝</option>\n" +
+            "                                <option value=\"1\">允许</option>\n" +
+            "                            </select>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "                <div class=\"btnbox\">\n" +
+            "                    <button id=\"update\">更新</button>\n" +
+            "                    <button id=\"close\">×关闭</button>\n" +
+            "                    <button id=\"next1\">下一个</button>\n" +
+            "                    <button id=\"last1\">上一个</button>\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "        </div>";
+
+    $('body').append(box);
+
+        $('.titlebox button').click(function () {
+            $('#dispose-box').remove();
+        });
+        $('#close').click(function () {
+            $('#dispose-box').remove();
+        });
 }
