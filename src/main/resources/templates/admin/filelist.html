@@ -78,12 +78,13 @@
 
             //启动复选框点击事件
             checkbox();
-
+            //提示框
+            msg();
+            removeFiles();
             $('#s3').addClass('active');
             var pageNum = [[${filePage.pageNum}]];
             //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
             $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
-
         });
     </script>
 </html>

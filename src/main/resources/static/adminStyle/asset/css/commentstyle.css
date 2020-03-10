@@ -241,3 +241,51 @@ table tbody tr:hover{
 .checked{
     background-color: #b1ffc3;
 }
+
+/*提示框*/
+.msgbox{
+    position: absolute;
+    left: 40%;
+    top: 20%;
+    width: 250px;
+    height: 150px;
+    border: 1px solid green;
+    border-radius: 0px 0px 3px 3px ;
+    z-index: 999;
+    background: white;
+    border-top: none;
+    display: none;
+}
+.msgbox #sure{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 50px;
+    height: 25px;
+    background: green;
+    color: white;
+    border: none;
+}
+
+.msgbox .msgtitle{
+    width: 251px;
+    height: 30px;
+    background: green;
+}
+.msgbox .msgtitle::before{
+    content: "";
+    display: table;
+}
+
+.msgbox .msgtitle h4{
+    color: white;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.msgbox p{
+    margin-top: 20px;
+    color: black;
+    font-family: "微软雅黑";
+    margin-left: 30px;
+    font-size: 15px;
+}

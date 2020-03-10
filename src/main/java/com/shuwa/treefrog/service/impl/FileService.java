@@ -193,6 +193,12 @@ public class FileService implements IFileService {
         return null;
     }
 
+    /**
+     *分页查询文件管理
+     * @param currentPage
+     * @param limit
+     * @return
+     */
     @Override
     public PageInfo<File> filePageQuery(Integer currentPage, Integer limit) {
         PageHelper.startPage(currentPage, limit);
@@ -202,5 +208,34 @@ public class FileService implements IFileService {
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
         return new PageInfo<>(fileInfo);
+    }
+
+    /**
+     * 根据id删除一个或者多个文件
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean removeFile(Long[] id) {
+
+        for (int i = 0; i < id.length; i++) {
+            //获取存储数据库中的文件信息
+            File fileInfo = fileDao.getFile(id[i]);
+            //获取文件名
+            String fileName = fileInfo.getName();
+            //获取文件路径
+            String fileUrl = fileInfo.getLocalUrl();
+            //获取存储目录下的文件
+            java.io.File file = new java.io.File(fileUrl+fileName);
+            //判断文件是否存在
+            if (!file.exists()){
+                return true;
+            }
+            //删除数据库中的文件信息
+            fileDao.removeById(id[i]);
+            //删除存储目录下的文件
+            file.delete();
+        }
+        return true;
     }
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.model.UploadedRecord;
 import org.springframework.web.multipart.MultipartFile;
+import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -69,6 +70,19 @@ public interface IFileService {
      */
     PageInfo<File> listFiles(Integer page, Integer limit);
 
-
+    /**
+     * 后台文件管理分页查询
+     * @param currentPage
+     * @param limit
+     * @return
+     */
     PageInfo<File> filePageQuery(Integer currentPage, Integer limit);
+
+    /**
+     * 根据id数组删除多个文件
+     * @param id
+     * @return
+     */
+    boolean removeFile(Long[] id);
+
 }

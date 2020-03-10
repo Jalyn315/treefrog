@@ -252,6 +252,22 @@ public class AdminController {
         return "admin/downloadlist";
     }
 
+    /**
+     * 删除文件
+     * @param id
+     * @return
+     */
+    @PostMapping("/filesDelete")
+    @ResponseBody
+    public String deleteFiles(Long id[]){
+        String msg = "";
+        if(fileService.removeFile(id)){
+            msg = "删除成功!";
+        }else {
+            msg = "删除失败!";
+        }
+        return msg;
+    }
 
     @GetMapping(value = "/uploads")
     public String uploads() {
