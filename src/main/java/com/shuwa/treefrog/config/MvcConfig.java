@@ -1,6 +1,7 @@
 package com.shuwa.treefrog.config;
 
 
+import com.shuwa.treefrog.interceptor.RegisterInterceptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -31,6 +32,21 @@ public class MvcConfig  implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //pringboot已经做好静态资源映射，拦截器不用处理静态资源
         //registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns("/login.html","/","/user_login","/asserts/**");
+        //        //显示用户信息时，得先登录或者注册
+//        registry.addInterceptor(new LoginInterceptor()).addPathPatterns(
+//                "/updatePage/",
+//                "/userUpdate",
+//                "/userDelete/",
+//                "/logout",
+//                "/user",
+//                "/users",
+//                "/main.html");
+//        //防止用户重复提交，注册拦截器
+//        registry.addInterceptor(new AvoidDuplicateSubmissionInterceptor()).addPathPatterns("/signup");
+        //对注册页面过来的请求进行字段验证
+        registry.addInterceptor(new RegisterInterceptor()).addPathPatterns("/signup");
+
+//        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/index", "/signin", "/register","/signup","/login");
     }
     public  static final String filepath = "/File/";
 
