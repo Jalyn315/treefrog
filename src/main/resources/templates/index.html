@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.css}" >
     <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../static/assets/css/font-awesome.min.css" th:href="@{/assets/css/font-awesome.min.css}">
-    <link rel="stylesheet" href="../static/assets/css/indexstyle.css">
+    <link rel="stylesheet" href="../static/assets/css/indexstyle.css" th:href="@{/assets/css/indexstyle.css}">
     <title>threefrog</title>
 </head>
 <body>
 <!--  导航栏-->
 <!--        插入公共片段-->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-success" th:replace="commons/_fragments :: navbar">
     <div class="row col-sm-6 offset-2 ">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <img class="" src="../static/assets/img/logo.png" width="40" height="40">
             <h2 > TreeFrog</h2>
+            <small style="margin-top: 15px;">&mdash;分享你的快乐</small>
             <ul id="navtag" class="navbar-nav mr-auto">
                 <li class="nav-item active ">
                     <a class="nav-link" >首页</span></a>
@@ -66,7 +68,6 @@
             </ul>
     </div>
     </nav>
-
 <!--            中间栏-->
 <div class="container col-sm-8 offset-2 row"  >
     <div class="col-sm-2">

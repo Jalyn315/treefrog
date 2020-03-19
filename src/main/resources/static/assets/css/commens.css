@@ -1,0 +1,30 @@
+*{
+     margin: 0;
+     padding: 0;
+ }
+.nav-logo{
+    margin-left: 100px;
+}
+
+
+#content-nav a{
+    color: black;
+}
+/*#content-nav a:hover{*/
+/*    background: green;*/
+/*    color: white;*/
+/*}*/
+
+#navbar-right{
+    margin-right: 70px;
+}
+#content-nav{
+    margin-left: 60px;
+}
+
+#types a{
+    color: green;
+}
+#mytypes a{
+    color: green;
+}
