@@ -44,7 +44,7 @@
             </ul>
             <div class="row" id="navbar-right">
             <!-- 上传 -->
-                <a class="nav-link" th:href="@{/upload}" href="#"><img src="../../static/assets/img/upload.png"
+                <a class="nav-link" data-target="#uploadModal" data-toggle="modal"><img src="../../static/assets/img/upload.png"
                 th:src="@{/assets/img/upload.png}" alt="" width="28" height="28"></a>
             <!-- 搜索 -->
                 <form class="form-inline my-2 my-lg-0">
@@ -65,9 +65,8 @@
                             <strong class="ml-3" th:text="${session.user.username}">用户名</strong>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a role="menuitem" class="dropdown-item" href="#" th:href="@{/updatePage}">个人中心</a>
-                        <a role="menuitem" class="dropdown-item" href="#">账号设置</a>
-                        <a role="menuitem" class="dropdown-item" href="#">意见反馈</a></li>
+                        <a role="menuitem" class="dropdown-item" data-toggle="modal" data-target="#userInfo">个人中心</a>
+                        <a role="menuitem" class="dropdown-item" data-toggle="modal" data-target="#updatePassword">修改密码</a>
                         <a role="menuitem" class="dropdown-item" href="#">帮助</a></li>
                         <a role="menuitem" class="dropdown-item" th:href="@{/logout}">退出</a></li>
                     </ul>
@@ -686,6 +685,182 @@
         </div>
 </footer>
 
+<!--文件上传模态框-->
+<div class="modal fade" tabindex="-1" id="uploadModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">文件上传</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="#"  method="post" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input">
+                            <label  class="custom-file-label text-muted">选择文件.....</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileType">类型</label>
+                        <select name="type" id="fileType" class="form-control">
+                            <option value="">-请选择-</option>
+                            <option value="">视频</option>
+                            <option value="">音频</option>
+                            <option value="">图片</option>
+                            <option value="">文档</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">描述</label>
+                        <textarea class="form-control" name="description" id="description" ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">权限</label>
+                        <div class="form-check">
+                            <div class="d-inline-block">
+                                <input type="checkbox" name="isVisit" class="form-check-input">
+                                <label for="" class="form-check-label">可见</label>
+                            </div>
+                            <div class="d-inline-block ml-4">
+                                <input type="checkbox" name="isDownload" class="form-check-input">
+                                <label for="" class="form-check-label">下载</label>
+                            </div>
+                            <div class="d-inline-block ml-4">
+                                <input type="checkbox" name="isUpdata" class="form-check-input">
+                                <label for="" class="form-check-label">修改</label>
+                            </div>
+                            <div class="d-inline-block ml-4">
+                                <input type="checkbox" name="isDelete" class="form-check-input">
+                                <label for="" class="form-check-label">删除</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn  btn-secondary" data-dismiss="modal">取消</button>
+                <button class="btn  btn-success" id="upload-btn">上传</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--个人中心模态框-->
+<div class="modal fade" tabindex="-1" id="userInfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-center text-white">个人中心</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    <div class="form-group text-center" >
+                        <img class="rounded-circle border" src="../../static/assets/img/via.jpg"
+                             th:src="@{/assets/img/via.jpg}"  width="50" height="50">
+                        <strong class="ml-2 text-muted">用户名</strong>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">姓名</span>
+                        </div>
+                        <input type="text" name="realName" placeholder="您的姓名" class="form-control">
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="form-check d-inline-block">
+                            <input type="radio" class="form-check-input" id="man" name="sex">
+                            <label for="man" class="form-check-label">男</label>
+                        </div>
+                        <div class="form-check d-inline-block">
+                            <input type="radio" class="form-check-input" id="woman" name="sex">
+                            <label for="woman" class="form-check-label">女</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">生日</span>
+                        </div>
+                        <input type="date" name="birth" placeholder="您的生日" class="form-control">
+                    </div>
+
+                    <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">邮箱</span>
+                        </div>
+                        <input type="email" name="email" placeholder="您的邮箱" class="form-control">
+                    </div>
+
+                    <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">手机号码</span>
+                        </div>
+                        <input type="text" name="phone" placeholder="您的联系方式" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>个人说明：</label>
+                        <textarea placeholder="个人说明" class="form-control" name="description" style="border: 1px solid ;" th:text="${session.user.description}"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn  btn-secondary" data-dismiss="modal">取消</button>
+                <button class="btn  btn-success" id="saveInfo">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--修改密码模态框-->
+<div class="modal fade" tabindex="-1" id="updatePassword">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-center text-white">修改密码</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="password">新密码</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password2">确认密码</label>
+                        <input type="password" class="form-control" name="password2" id="password2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">手机号码</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="phone" id="phone">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button">发送验证码</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group w-50">
+                        <label for="verifyCode">验证码</label>
+                        <input type="text" class="form-control" name="verifyCode" id="verifyCode">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn  btn-secondary" data-dismiss="modal">取消</button>
+                <button class="btn  btn-success" id="sure">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -715,7 +890,10 @@
                   $(this).css({"background":"","color":""});
               });
           });
-
+          //  处理文件上传
+          $('.custom-file-input').bind('input propertychange',function(){
+              $('.custom-file > label').text($(this).val());
+          });
 
 
         </script>    
