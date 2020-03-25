@@ -2,10 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>treefrog</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../../static/assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}">
     <link rel="stylesheet" href="../../static/assets/css/font-awesome.min.css"
           th:href="@{/assets/css/font-awesome.min.css}">
@@ -56,7 +54,8 @@
                 </form>
             <!-- 用户信息 -->
                 <div class="dropdown" style="position: relative">
-                    <button class="btn rounded-circle border" type="button" style="background:url(../../static/assets/img/via.jpg); background-size: cover; width:40px;height: 40px" id="dropdownMenu1"  data-toggle="dropdown">
+                    <button class="btn rounded-circle border" type="button" id="dropdownMenu1" th:style="'background:url('+@{/assets/img/via.jpg}+');background-size: cover;width:40px;height: 40px'"
+                            data-toggle="dropdown">
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="usermenu" style="margin-left: -40px">
                         <div class="dropdown-item disabled" >
@@ -76,7 +75,7 @@
 </nav>
 
 <!--            中间栏-->
-<div class="container-fluid row ">
+<div class="container-fluid row " >
 <!--            左侧导航-->
             <div class="col-lg-2 col-md-3 text-center" id="content-nav">
                 <ul class="nav  justify-content-center nav-pills">
@@ -660,7 +659,7 @@
 
 <!--             footer-->
 
-<footer class="fixed-bottom border-top">
+<footer class="fixed-bottom border-top" th:fragment="footer">
         <div class="container-fluid text-center" style="height: 80px">
             <div class="row">
                 <div class="d-none d-sm-none col-md-6 col-lg-4  d-md-block text-right">
@@ -683,7 +682,7 @@
                 </div>
             </div>
         </div>
-</footer>
+</footer >
 
 <!--文件上传模态框-->
 <div class="modal fade" tabindex="-1" id="uploadModal">
@@ -836,20 +835,20 @@
                         <input type="password" class="form-control" name="password2" id="password2">
                     </div>
 
-                    <div class="form-group">
-                        <label for="phone">手机号码</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="phone" id="phone">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button">发送验证码</button>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="phone">手机号码</label>-->
+<!--                        <div class="input-group">-->
+<!--                            <input type="text" class="form-control" name="phone" id="phone">-->
+<!--                            <div class="input-group-append">-->
+<!--                                <button class="btn btn-secondary" type="button">发送验证码</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group w-50">-->
+<!--                        <label for="verifyCode">验证码</label>-->
+<!--                        <input type="text" class="form-control" name="verifyCode" id="verifyCode">-->
+<!--                    </div>-->
 
-                    <div class="form-group w-50">
-                        <label for="verifyCode">验证码</label>
-                        <input type="text" class="form-control" name="verifyCode" id="verifyCode">
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -860,9 +859,46 @@
     </div>
 </div>
 
+<!--文件详细-->
+<div class="modal fade" tabindex="-1" id="fileInfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">文件名称</h5>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item">作者：&nbsp;<strong class="text-muted">shuwa</strong></li>
+                    <li class="list-group-item">上传时间：&nbsp;<strong class="text-muted">2020-03-21</strong></li>
+                    <li class="list-group-item">文件大小：&nbsp;<strong class="text-muted">2GB</strong></li>
+                    <li class="list-group-item">文件类型：&nbsp;<strong class="text-muted">视频</strong></li>
+                    <li class="list-group-item">浏览量：&nbsp;<strong class="text-muted">500</strong></li>
+                    <li class="list-group-item">下载次数：&nbsp;<strong class="text-muted">2k</strong></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-danger" >下载</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-
+<div th:fragment="toast" class="toast ml-5 mt-5" id="mytoast" data-autohide="false" style="position: fixed; top: 20%; left: 40%; width: 250px; height: 150px; z-index: 9999;">
+    <div class="toast-header bg-success">
+        <img th:src="@{/assets/img/logo.png}" src="../../static/assets/img/logo.png" alt="title" width="30" class="rounded mr-2">
+        <!-- mr-auto自动占完右侧空余部分 -->
+        <strong class="mr-auto text-white">提示</strong>
+<!--        <small class="text-white">一分钟前</small>-->
+        <!-- data-dismiss="toast" 可以触发关闭事件 -->
+        <button class="close ml-2 mb-1" data-dismiss="toast">&times;</button>
+    </div>
+    <div class="toast-body pl-5 pt-3">
+        你输入的账户不正确.
+    </div>
+    <button class="btn btn-success btn-sm" data-dismiss="toast" style="position: relative; left: 75%;bottom: -20px">确定</button>
+</div>
 
 
 <!--            底部栏-->
@@ -876,7 +912,7 @@
 
         <script src="../../static/assets/js/jquery-3.4.1.min.js" th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
         <script src="../../static/assets/js/bootstrap.bundle.min.js" th:src="@{/assets/js/bootstrap.bundle.min.js}"></script>
-        <script>
+        <script >
           $(".navbar-nav li").click(function (e) {
                 e.preventDefault();
                 $(this).addClass('active').siblings().removeClass('active');
@@ -894,10 +930,15 @@
           $('.custom-file-input').bind('input propertychange',function(){
               $('.custom-file > label').text($(this).val());
           });
+          //处理文件查看详细
+          $('#systemFile .btn-primary, #myFile .btn-primary').each(function () {
+              $(this).attr({
+                  "data-toggle":"modal",
+                  "data-target":"#fileInfo"
+              });
+          });
 
-
-        </script>    
-
+        </script>
     </body>
     </html>
 </head>
