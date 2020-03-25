@@ -164,5 +164,14 @@ public interface UserDao {
     @Update("update user set password = #{password} where email = #{email}")
     boolean resetPasswordByEmail(@Param("password") String password, @Param("email") String email);
 
+    /**
+     * 验证密码是否正确
+     * @param id
+     * @return
+     */
+    @Select("select password from user where id = #{id}")
+    String getpasswordById(Integer id);
+
+
 }
 
