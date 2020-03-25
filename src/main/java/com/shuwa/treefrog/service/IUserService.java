@@ -111,4 +111,7 @@ public interface IUserService {
      * @return
      */
     String getUserNameByEmail(String email);
+
+
+    boolean verifyPassword(String password, Integer id);
 }

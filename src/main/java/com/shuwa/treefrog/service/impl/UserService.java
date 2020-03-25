@@ -100,6 +100,16 @@ public class UserService implements IUserService {
         return userDao.updataPasswordById(password, id);
     }
 
+
+    @Override
+    public boolean verifyPassword(String password, Integer id) {
+        if(password.equals(userDao.getpasswordById(id))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     @Override
     public String getEmail(String email) {
         return userDao.getEmail(email);
