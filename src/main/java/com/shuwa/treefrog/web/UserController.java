@@ -194,6 +194,30 @@ public class UserController {
         return "admin/userUpdate";
     }
 
+    /**
+     * 判断原密码是否正确
+     * @param passwordAgo
+     * @param id
+     * @return
+     */
+    @PostMapping("/verify_passwordAgo")
+    @ResponseBody
+    public String verifyPasswordAgo(String passwordAgo, Integer id){
+        String msg = "";
+        if (userService.verifyPassword(passwordAgo, id)){
+            msg = "true";
+        }else {
+            msg = "原密码不正确！请重新输入";
+        }
+        return msg;
+    }
+
+    /**
+     * 根据id修改用户密码
+     * @param password
+     * @param id
+     * @return
+     */
     @PostMapping("/resetPassword")
     @ResponseBody
     public String resetPassword(String password, Integer id){
