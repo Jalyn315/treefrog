@@ -1,11 +1,9 @@
 package com.shuwa.treefrog.web;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.IFileService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.*;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Controller
 public class FileController {
