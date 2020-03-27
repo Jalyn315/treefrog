@@ -107,22 +107,137 @@ function  resetPasssword(){
                 });
         }
     });
-    
 }
+function resetUserInfo() {
+    //显示用户人人信息
+    $('#personal_center').click(function () {
+        $.get({
+            url:"/getUserInfo",
+            data:{"id":$('#userId').val()},
+            success:function (data) {
+                $('#username').html(data.username);
+                $('#realName').val(data.realName);
+                if(data.sex == "男"){
+                    $('#man').attr('checked', 'checked');
+                }else{
+                    $('#woman').attr('checked', 'checked');
+                }
+                $('#birth').val(data.birth);
+                $('#email').val(data.email);
+                $('#phone').val(data.phone);
+                $('#description').val(data.description);
+            }
+        })
+    });
+    //保存修改信息
+    $('#saveInfo').click(function () {
+        var userid = $('#userId').val();
+        var realName = $('#realName').val();
+        var sex = $('input:radio[name="sex"]:checked').val();
+        var birth = $('#birth').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
+        var description = $('#description').val();
+        var form = new FormData();
+        form.append('id',userid);
+        form.append('realName',realName);
+        form.append('sex',sex);
+        form.append('birth',birth);
+        form.append('email',email);
+        form.append('phone',phone);
+        form.append('description',description);
+        $.post({
+            url:"/updateUserInfo",
+            processData: false,  //告诉jquery要传输data对象
+            contentType: false,   //告诉jquery不需要增加请求头对于contentType的设置
+            data:form,
+            success:function (data) {
+                $('.toast-body').html(data);
+                $('#userInfo').modal('hide');
+                $('#mytoast').toast('show');
+            }
+        });
 
-function toast_treefrog() {
-    var html = "<div class=\"toast ml-5 mt-5\" id=\"mytoast\" data-autohide=\"false\" style=\"position: fixed; top: 20%; left: 40%; width: 250px; height: 150px; z-index: 999\">\n" +
-        "        <div class=\"toast-header bg-success\">\n" +
-        "            <img  th:src=\"@{/assets/img/logo.png}\" alt=\"title\" width=\"30\" class=\"rounded mr-2\">\n" +
-        "            <!-- mr-auto自动占完右侧空余部分 -->\n" +
-        "            <strong class=\"mr-auto text-white\">提示</strong>\n" +
-        // "            <small class=\"text-white\">一分钟前</small>\n" +
-        "            <!-- data-dismiss=\"toast\" 可以触发关闭事件 -->\n" +
-        "            <button class=\"close ml-2 mb-1\" data-dismiss=\"toast\">&times;</button>\n" +
-        "        </div>\n" +
-        "        <div class=\"toast-body\">\n" +
-        "            你输入的账户不正确.\n" +
-        "        </div>\n" +
-        "    </div>";
-    $('body').append(html);
+
+
+
+    });
+
+}
+function uploadFile() {
+    //隐藏表单后初始化已输入内容
+    $('#uploadModal').on('hidden.bs.modal', function () {
+        document.getElementById("file-form").reset();
+        $('#show-fileName').html('选择文件.....');
+        $('#fileType').removeClass('is-invalid');
+        $('#fileDescription').removeClass('is-invalid');
+        $('#file').removeClass('is-invalid');
+    });
+/*****************************************对信息输入进行监听*****************************/
+    $('#fileDescription').bind('input propertychange', function(){
+        $('#fileDescription').removeClass('is-invalid');
+    });
+
+    $('#fileType').bind('input propertychange', function(){
+        $('#fileType').removeClass('is-invalid');
+    });
+
+    $('#file').bind('input propertychange', function(){
+        $('#file').removeClass('is-invalid');
+    });
+    //提交按钮处理
+    $('#upload-btn').click(function () {
+        //判断是否可以上传
+        var isupload = true;
+        //获取上传信息
+        var fileobj = $('#file')[0].files[0];
+        var fileDescription = $('#fileDescription').val();
+        var fileType = $('#fileType option:selected').text();
+        var isVisit = $('#isVisit').prop('checked') ? 1 : 0;
+        var isupdate = $('#isUpdate').prop('checked') ? 1 : 0;
+        var isDelete = $('#isDelete').prop('checked') ? 1 : 0;
+        var isDownload = $('#isDownload').prop('checked') ? 1 : 0;
+
+        //下列情况不能上传文件
+        if (fileobj == null || fileDescription.length == 0 || $('#fileType option:selected').val() == 0) {
+            isupload = false;
+        }
+        /******************************************判断信息是否输入*********************************/
+        if ($('#fileType option:selected').val() == 0) {
+            $('#fileType').addClass('is-invalid');
+        }
+
+        if (fileDescription.length == 0) {
+            $('#fileDescription').addClass('is-invalid');
+        }
+
+        if (fileobj == null) {
+            $('#file').addClass('is-invalid');
+        }
+        //将信息存放到form对象中
+        var form = new FormData();
+        form.append('file', fileobj);
+        form.append('tag', fileType);
+        form.append('description', fileDescription);
+        form.append('isDeletable', isDelete);
+        form.append('isDownloadable', isDownload);
+        form.append('isVisible', isVisit);
+        form.append('isUpdatable', isupdate);
+        form.append('userId', $('#userId').val());
+
+        /*****文件上传*****/
+        if (isupdate) {
+            $.post({
+                url: "/upload",
+                data: form,
+                processData: false,  //告诉jquery要传输data对象
+                contentType: false,   //告诉jquery不需要增加请求头对于contentType的设置
+                success: function (data) {
+                    $('.toast-body').html(data);
+                    $('#uploadModal').modal('hide');
+                    $('#mytoast').toast('show');
+                }
+            });
+        }
+    });
 }

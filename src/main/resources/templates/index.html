@@ -605,48 +605,50 @@
                 <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="#"  method="post" enctype="multipart/form-data">
+                <form action="#"  method="post" class="needs-validation" enctype="multipart/form-data" id="file-form">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">upload</span>
                         </div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input">
-                            <label  class="custom-file-label text-muted">选择文件.....</label>
+                            <input type="file" class="custom-file-input" name="file" id="file">
+                            <label  class="custom-file-label text-muted" id="show-fileName">选择文件.....</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="fileType">类型</label>
                         <select name="type" id="fileType" class="form-control">
-                            <option value="">-请选择-</option>
-                            <option value="">视频</option>
-                            <option value="">音频</option>
-                            <option value="">图片</option>
-                            <option value="">文档</option>
+                            <option value="0">-请选择-</option>
+                            <option value="1">视频</option>
+                            <option value="2">音频</option>
+                            <option value="3">图片</option>
+                            <option value="4">文档</option>
                         </select>
+                        <div class="invalid-feedback">请选择文件类型!</div>
                     </div>
                     <div class="form-group">
                         <label for="description">描述</label>
-                        <textarea class="form-control" name="description" id="description" ></textarea>
+                        <textarea class="form-control" name="description" id="fileDescription" ></textarea>
+                        <div class="invalid-feedback">请对文件进行简单的描述!</div>
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">权限</label>
                         <div class="form-check">
                             <div class="d-inline-block">
-                                <input type="checkbox" name="isVisit" class="form-check-input">
-                                <label for="" class="form-check-label">可见</label>
+                                <input type="checkbox" name="isVisit" id="isVisit" class="form-check-input">
+                                <label for="isVisit" class="form-check-label">可见</label>
                             </div>
                             <div class="d-inline-block ml-4">
-                                <input type="checkbox" name="isDownload" class="form-check-input">
-                                <label for="" class="form-check-label">下载</label>
+                                <input type="checkbox" name="isDownload" id="isDownload" class="form-check-input">
+                                <label for="isDownload" class="form-check-label">下载</label>
                             </div>
                             <div class="d-inline-block ml-4">
-                                <input type="checkbox" name="isUpdata" class="form-check-input">
-                                <label for="" class="form-check-label">修改</label>
+                                <input type="checkbox" name="isUpdata" id="isUpdate" class="form-check-input">
+                                <label for="isUpdate" class="form-check-label">修改</label>
                             </div>
                             <div class="d-inline-block ml-4">
-                                <input type="checkbox" name="isDelete" class="form-check-input">
-                                <label for="" class="form-check-label">删除</label>
+                                <input type="checkbox" name="isDelete" id="isDelete" class="form-check-input">
+                                <label for="isDelete" class="form-check-label">删除</label>
                             </div>
                         </div>
                     </div>
@@ -673,13 +675,13 @@
                     <div class="form-group text-center" >
                         <img class="rounded-circle border" src="../../static/assets/img/via.jpg"
                              th:src="@{/assets/img/via.jpg}"  width="50" height="50">
-                        <strong class="ml-2 text-muted">用户名</strong>
+                        <strong class="ml-2 text-muted" id="username">用户名</strong>
                     </div>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">姓名</span>
+                            <span class="input-group-text bg-success text-white">姓名</span>
                         </div>
-                        <input type="text" name="realName" placeholder="您的姓名" class="form-control">
+                        <input type="text" name="realName" id="realName" placeholder="您的姓名" class="form-control">
                     </div>
 
                     <div class="form-group mt-3">
@@ -695,27 +697,27 @@
 
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">生日</span>
+                            <span class="input-group-text bg-success text-white">生日</span>
                         </div>
-                        <input type="date" name="birth" placeholder="您的生日" class="form-control">
+                        <input type="date" name="birth" id="birth" placeholder="您的生日" class="form-control">
                     </div>
 
                     <div class="input-group mt-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">邮箱</span>
+                            <span class="input-group-text bg-success text-white">邮箱</span>
                         </div>
-                        <input type="email" name="email" placeholder="您的邮箱" class="form-control">
+                        <input type="email" name="email" id="email" placeholder="您的邮箱" class="form-control">
                     </div>
 
                     <div class="input-group mt-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">手机号码</span>
+                            <span class="input-group-text bg-success text-white">手机号码</span>
                         </div>
-                        <input type="text" name="phone" placeholder="您的联系方式" class="form-control">
+                        <input type="text" name="phone" id="phone" placeholder="您的联系方式" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>个人说明：</label>
-                        <textarea placeholder="个人说明" class="form-control" name="description" style="border: 1px solid ;" th:text="${session.user.description}"></textarea>
+                        <textarea placeholder="个人说明" class="form-control" name="description" id="description" style="border: 1px solid ;" th:text="${session.user.description}"></textarea>
                     </div>
                 </form>
             </div>
@@ -806,8 +808,10 @@
     </div>
 </div>
 
+<!--提示框 -->
 <div th:replace="commons/_fragments :: toast"></div>
 
+<!--页尾-->
 <div th:replace="commons/_fragments :: footer"></div>
 
 </body>
@@ -844,5 +848,9 @@
     $(function () {
         //重置密码
         resetPasssword();
+        //修改个人信息
+        resetUserInfo();
+        //文件上传
+        uploadFile();
     });
 </script>
