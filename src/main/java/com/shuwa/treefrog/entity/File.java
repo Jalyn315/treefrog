@@ -260,14 +260,12 @@ public class File {
 
     /**
      * 文件作者设置文件权限
-     * @param isUploadable
      * @param isDeletable
      * @param isUpdatable
      * @param isDownloadable
      * @param isVisible
      */
-    public void setAuth(int isUploadable, int isDeletable, int isUpdatable, int isDownloadable, int isVisible) {
-        this.isUploadable = isUploadable;
+    public void setAuth( int isDeletable, int isUpdatable, int isDownloadable, int isVisible) {
         this.isDeletable = isDeletable;
         this.isUpdatable = isUpdatable;
         this.isDownloadable = isDownloadable;

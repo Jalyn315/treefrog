@@ -11,10 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -45,18 +42,26 @@ public class UploadedController {
      * @return
      */
     @PostMapping("/upload")
-    public String  upload(@RequestParam("file") MultipartFile file, UploadedRecord uploadedRecord, Model model){
+    @ResponseBody
+    public String  upload(@RequestParam("file") MultipartFile file, UploadedRecord uploadedRecord){
 
-
+        String msg = "";
         if(uploadService.uploadRecord(file, uploadedRecord)){
             logger.info("文件上传成功");
-            model.addAttribute("msg","上传成功");
+            msg = "文件上传成功！";
         }else{
             logger.info("文件上传失败");
-            model.addAttribute("msg","文件上传失败");
+            msg = "文件上传失败，请联系管理员";
         }
-        return "success";
+        return msg;
     }
+
+    /**
+     * 访问上传记录
+     * @param page
+     * @param model
+     * @return
+     */
     @GetMapping("admin/uploads/{page}")
     public String uploadInfo(@PathVariable("page") Integer page, Model model){
         int limit = 4;

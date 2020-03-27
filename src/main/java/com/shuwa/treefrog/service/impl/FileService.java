@@ -66,6 +66,7 @@ public class FileService implements IFileService {
                     File file1 = new File(0,UUID_FileName,suffix,fileSaveUrl,"",uploadedRecord.getSize(),
                             uploadedRecord.getDate(),uploadedRecord.getDescription(),0,0,
                             uploadedRecord.getTag(),uploadedRecord.getUserId(),uploadedRecord.getCategoryId());
+                    file1.setAuth(uploadedRecord.getIsDeletable(),uploadedRecord.getIsUpdatable(),uploadedRecord.getIsDownloadable(),uploadedRecord.getIsVisible());
                     //调用持久层接口 存入文件信息
                     fileDao.insertFile(file1);
                 } catch (Exception e) {

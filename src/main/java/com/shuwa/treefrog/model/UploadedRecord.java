@@ -32,6 +32,15 @@ public class UploadedRecord {
     private long size;//文件大小
 
     private int categoryId; //标签ID。
+
+    private int isDeletable;
+
+    private int isUpdatable;
+
+    private int isDownloadable;
+
+    private int isVisible;
+
     @Override
     public String toString() {
         return "UploadedRecord{" +
@@ -47,8 +56,14 @@ public class UploadedRecord {
                 ", tag='" + tag + '\'' +
                 ", date=" + date +
                 ", size=" + size +
+                ", categoryId=" + categoryId +
+                ", isDeletable=" + isDeletable +
+                ", isUpdatable=" + isUpdatable +
+                ", isDownloadable=" + isDownloadable +
+                ", isVisible=" + isVisible +
                 '}';
     }
+
     public int getCategoryId() {
         return categoryId;
     }
@@ -155,5 +170,35 @@ public class UploadedRecord {
         this.visitUrl = visitUrl;
     }
 
+    public int getIsDeletable() {
+        return isDeletable;
+    }
 
+    public void setIsDeletable(int isDeletable) {
+        this.isDeletable = isDeletable;
+    }
+
+    public int getIsUpdatable() {
+        return isUpdatable;
+    }
+
+    public void setIsUpdatable(int isUpdatable) {
+        this.isUpdatable = isUpdatable;
+    }
+
+    public int getIsDownloadable() {
+        return isDownloadable;
+    }
+
+    public void setIsDownloadable(int isDownloadable) {
+        this.isDownloadable = isDownloadable;
+    }
+
+    public int getIsVisible() {
+        return isVisible;
+    }
+
+    public void setIsVisible(int isVisible) {
+        this.isVisible = isVisible;
+    }
 }
