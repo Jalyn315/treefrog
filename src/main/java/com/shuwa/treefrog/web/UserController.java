@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.Inet4Address;
 import java.util.Map;
 
 @Controller
@@ -35,7 +36,7 @@ public class UserController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * 编辑个人信息
+     * 编辑个人信息 （不使用）
      *
      * @return 用户修改页面
      */
@@ -46,7 +47,7 @@ public class UserController {
     }
 
     /**
-     * 提交修改
+     * 提交修改   （不使用）
      * @param user
      * @return
      */
@@ -64,6 +65,23 @@ public class UserController {
         }
         return "user";
     }
+
+    @PostMapping("/updateUserInfo")
+    @ResponseBody
+    public String updateUserInfo(User user){
+        String msg = "";
+        if( userService.update(user)){
+            msg = "修改成功！";
+        }
+        else {
+            msg = "修改失败！请联系管理员!";
+        }
+        return msg;
+    }
+
+
+
+
 
     /**
      * 登陆
@@ -182,8 +200,8 @@ public class UserController {
      * [https://blog.csdn.net/leo3070/article/details/81046383]
      * @return 用户修改页面
      */
-    @RequestMapping("/userUpdate/{id}")
-    public String userUpdate(@PathVariable("id") Integer id
+    @RequestMapping("/userUpdate{id}")
+    public String userUpdate(@PathVariable("id")Integer id
             , Model model
             , HttpSession session) {
         logger.info("UserController->userUpdate");
@@ -193,6 +211,15 @@ public class UserController {
         userService.update(user);
         return "admin/userUpdate";
     }
+
+    @GetMapping("/getUserInfo")
+    @ResponseBody
+    public User userInfo(Integer id){
+        return userService.get(id);
+    }
+
+
+
 
     /**
      * 判断原密码是否正确
