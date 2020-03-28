@@ -119,7 +119,7 @@ public class UserController {
             map.put("user", user);
             //第一次进入主页初始化分页
             map.put("page", new PageParam());
-            return "index";
+            return "redirect:/index";
         } else {
             map.put("msg", "用户名或密码错误");
             return "login";
