@@ -172,6 +172,5 @@ public interface UserDao {
     @Select("select password from user where id = #{id}")
     String getpasswordById(Integer id);
 
-
 }
 

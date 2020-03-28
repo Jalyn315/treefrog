@@ -55,9 +55,19 @@ public interface TypeDao {
 
     /**
      * 查询是否有重名的 类型 名
+     *
      * @param typeName
      * @return
      */
     @Select("select type_name from type where type_name = #{type_name}")
     String returnTypeName(@Param("type_name") String typeName);
+
+    /**
+     * 根据 type_name 返回 type_name 对应的 id
+     *
+     * @param typeName
+     * @return
+     */
+    @Select("select id from type where type_name = #{typeName}")
+    Integer returnIdByName(String typeName);
 }

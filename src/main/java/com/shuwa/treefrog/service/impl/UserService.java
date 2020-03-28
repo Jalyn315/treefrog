@@ -1,17 +1,36 @@
 package com.shuwa.treefrog.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.shuwa.treefrog.dao.FileDao;
+import com.shuwa.treefrog.dao.TypeDao;
 import com.shuwa.treefrog.dao.UserDao;
+import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class UserService implements IUserService {
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private TypeDao typeDao;
+
+    @Autowired
+    private FileDao fileDao;
+
+    /**
+     * redis 存储数据的 api
+     */
+    @Resource
+    private RedisTemplate redisTemplate;
 
     /**
      * 用户登录
@@ -124,4 +143,53 @@ public class UserService implements IUserService {
     public String getUserNameByEmail(String email) {
         return userDao.getUserNameByEmail(email);
     }
+
+
+    @Override
+    public PageInfo<File> getFileByTypeNamePageQuery(String typeName, Integer currentPage, Integer limit) {
+        List<File> fileList = null;
+        if (typeName != null) {
+            Integer id = typeDao.returnIdByName(typeName);
+            PageHelper.startPage(currentPage, limit);
+            fileList = fileDao.getFileByCategoryId(id);
+        }
+        return new PageInfo<>(fileList);
+    }
+
+//    @Override
+//    public PageInfo<File> getFileByTypeName(String typeName) {
+//        //先去查询 redis 缓存中是否有以 typeName 为 key 的值
+//        //如果没有，则去数据库中第一次查询出以 typeName 的全部文件，放入 redis 缓存中
+//
+//        //然后在 redis 缓存中传入参数进行分页查询
+//
+//
+//        return null;
+//    }
+//
+//    @Override
+//    public PageInfo<File> getFileByTypeNamePageQuery(String typeName, Integer currentPage, Integer limit) {
+//        //先去查询 redis 缓存中是否有以 typeName 为 key 的值
+//        //如果没有，则去数据库中第一次查询出以 typeName 的全部文件，放入 redis 缓存中
+//
+//        //然后在 redis 缓存中传入参数进行分页查询
+//
+//
+//        return null;
+//    }
+//
+//    /**
+//     * 查询集合中指定顺序的值， 0 -1 表示获取全部的集合内容  zrange
+//     *
+//     * 返回有序的集合，score小的在前面
+//     *
+//     * @param key
+//     * @param start
+//     * @param end
+//     * @return
+//     */
+//    public Set<String> range(String key, int start, int end) {
+//        return redisTemplate.opsForZSet().range(key, start, end);
+//    }
+
 }

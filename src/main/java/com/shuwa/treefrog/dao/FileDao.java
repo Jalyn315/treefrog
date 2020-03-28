@@ -259,6 +259,15 @@ public interface FileDao {
 
     @Update("update file set is_downloadable = #{upload}, " +
             "is_deletable = #{delete}, is_updatable = #{edit}, is_visible = #{visit} where id = #{id}")
-    boolean updatePermission(long id, Integer upload, Integer delete, Integer edit, Integer visit );
+    boolean updatePermission(long id, Integer upload, Integer delete, Integer edit, Integer visit);
+
+    /**
+     * 根据 category_id 查询所有的 文件
+     *
+     * @param categoryId
+     * @return
+     */
+    @Select("select * from file where category_id = #{categoryId}")
+    List<File> getFileByCategoryId(Integer categoryId);
 
 }

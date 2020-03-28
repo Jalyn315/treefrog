@@ -1,5 +1,7 @@
 package com.shuwa.treefrog.service;
 
+import com.github.pagehelper.PageInfo;
+import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.entity.User;
 
 import java.util.List;
@@ -114,4 +116,22 @@ public interface IUserService {
 
 
     boolean verifyPassword(String password, Integer id);
+
+//    /**
+//     * 根据 type 名称获取所有的文件
+//     * @param typeName
+//     * @return
+//     */
+//    PageInfo<File> getFileByTypeName(String typeName);
+//
+
+    /**
+     * 分页查询文件
+     *
+     * @param typeName
+     * @param currentPage
+     * @param limit
+     * @return
+     */
+    PageInfo<File> getFileByTypeNamePageQuery(String typeName, Integer currentPage, Integer limit);
 }
