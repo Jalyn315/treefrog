@@ -85,4 +85,5 @@ public interface IFileService {
      */
     boolean removeFile(Long[] id);
 
+    List<File> fuzzyQuery(String keyword);
 }

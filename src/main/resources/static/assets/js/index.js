@@ -241,3 +241,91 @@ function uploadFile() {
         }
     });
 }
+function fileSearch() {
+    $('#search-btn').click(function () {
+        var searchInfo = $('#search-text').val();
+        if(searchInfo.length == 0){
+            $('.toast-body').html('请输入查询条件!');
+            $('#mytoast').toast('show');
+        }else{
+            console.log('关键字:' + searchInfo);
+            $.get({
+                url:"/fileQuery",
+                data:{"keyWord":searchInfo},
+                success:function (data) {
+                    var pageNum = Math.ceil(data.length / 4);  //计算总页数
+                    var presentPage = 0;  //从0开始
+                    if(pageNum <= 1){
+                        $('#jqueryPageList').hide();
+                    }else {
+                        //添加上一页图标
+                        $('#jqueryPageList').append("<li class=\"page-item\" >\n" +
+                            "                        <a class=\"page-link\" href=\"#\" id=\"lastPage\" aria-label=\"Previous\">\n" +
+                            "                            <span aria-hidden=\"true\">&laquo;</span>\n" +
+                            "                        </a>\n" +
+                            "                    </li>");
+                        //遍历下标
+                        for (var j = 0; j < pageNum; j++){
+                            var indexItem = "<li class=\"page-item\"><a class=\"page-link\" id = \"index"+j+"\" href=\"#\">"+(j+1)+"</a></li>"
+                            $('#jqueryPageList').append(indexItem);
+                            var pageindex = 'index'+ j;
+                            //给每一个下标添加点击事件
+                            $('#'+pageindex).click(function () {
+                                presentPage = $(this).text() - 1;
+                                addFileItem(presentPage,data);
+                            })
+                        }
+                        //添加下一页图标
+                        $('#jqueryPageList').append("<li class=\"page-item\" >\n" +
+                            "                        <a class=\"page-link\" href=\"#\" id=\"nextPage\" aria-label=\"Next\">\n" +
+                            "                            <span aria-hidden=\"true\">&raquo;</span>\n" +
+                            "                        </a>\n" +
+                            "                    </li>");
+                        //上一页点击
+                        $('#nextPage').click(function () {
+                            if(presentPage < (pageNum - 1)){
+                                presentPage++;
+                                addFileItem(presentPage,data);
+                            }
+                        });
+                        //下一页点击
+                        $('#lastPage').click(function () {
+                            if(presentPage > 0){
+                                presentPage--;
+                                addFileItem(presentPage,data);
+                            }
+                        });
+                        //显示列表
+                        $('#jqueryPageListi').show();
+                    }
+
+                    $('#jqueryResult').modal('show');
+                    addFileItem(presentPage,data);
+                }
+            });
+        }
+    });
+    //遍历文件项目
+    function addFileItem(presentPage,data){
+        //清空所有内容
+        $('#resultSet').html('');
+        if (data.length == 0){
+            $('#resultSet').html('没有找到目标文件!');
+        }
+        for(var i = presentPage*4; i < presentPage*4+4 && i < data.length; i++){
+            var item = " <tr>\n" +
+                "                            <th>"+ (i+1) +"</th>\n" +
+                "                            <td>"+data[i].name+"</td>\n" +
+                "                            <td>"+data[i].userName+"</td>\n" +
+                "                            <td><a href=\"#\">查看详细</a></td>\n" +
+                "                            <td><a href=\"#\">立即下载</a></td>\n" +
+                "                        </tr>"
+            $('#resultSet').append(item);
+        }
+    }
+    //窗口关闭后
+    $('#jqueryResult').on('hidden.bs.modal', function () {
+        $('#resultSet').html('');
+        $('#jqueryPageList').html('');
+    });
+}

@@ -46,10 +46,9 @@
                 th:src="@{/assets/img/upload.png}" alt="" width="28" height="28"></a>
             <!-- 搜索 -->
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control border-success" type="search" placeholder="文件名或作者" aria-label="Search">
-                    <button class="btn " type="submit"><span class="Search"></span>
-                        <img src="../../static/assets/img/Search.png" th:src="@{/assets/img/Search.png}" alt="" width="28"
-                             height="28">
+                    <input class="form-control border-success" type="search" id="search-text" placeholder="文件名或作者" aria-label="Search">
+                    <button class="btn " id="search-btn" data-toggle="modal"  type="button"><span class="Search"></span>
+                        <img src="../../static/assets/img/Search.png" th:src="@{/assets/img/Search.png}" alt="" width="28" height="28">
                     </button>
                 </form>
             <!-- 用户信息 -->
@@ -64,7 +63,7 @@
                             <strong class="ml-3" th:text="${session.user.username}">用户名</strong>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a role="menuitem" class="dropdown-item" data-toggle="modal" data-target="#userInfo">个人中心</a>
+                        <a role="menuitem" class="dropdown-item" id="personal_center" data-toggle="modal" data-target="#userInfo">个人中心</a>
                         <a role="menuitem" class="dropdown-item" data-toggle="modal" data-target="#updatePassword">修改密码</a>
                         <a role="menuitem" class="dropdown-item" href="#">帮助</a></li>
                         <a role="menuitem" class="dropdown-item" th:href="@{/logout}">退出</a></li>

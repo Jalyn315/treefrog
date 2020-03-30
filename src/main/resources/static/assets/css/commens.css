@@ -28,3 +28,10 @@
 #mytypes a{
     color: green;
 }
+
+@media (min-width: 992px) and (min-width: 1199px){
+    #modal-dialog{
+        max-width: 800px;
+        width: 800px;
+    }
+}

@@ -251,6 +251,18 @@ public class FileService implements IFileService {
         return fileDao.updatePermission(id,upload,delete,edit,visit);
     }
 
-
-
+    /**
+     * 模糊查询
+     * @param keyword
+     * @return
+     */
+    @Override
+    public List<File> fuzzyQuery(String keyword) {
+        List<File> fileList = fileDao.fuzzyQuery(keyword);
+        for ( File file:fileList){
+            file.setName(FileUtils.getFileRealName(file.getName()));
+            file.setUserName(userDao.getByUserName(file.getUserId()));
+        }
+        return fileList;
+    }
 }

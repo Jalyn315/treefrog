@@ -256,7 +256,15 @@ public interface FileDao {
     @Select("select * from file")
     List<File> filePageQuery();
 
-
+    /**
+     * 修改文件权限
+     * @param id
+     * @param upload
+     * @param delete
+     * @param edit
+     * @param visit
+     * @return
+     */
     @Update("update file set is_downloadable = #{upload}, " +
             "is_deletable = #{delete}, is_updatable = #{edit}, is_visible = #{visit} where id = #{id}")
     boolean updatePermission(long id, Integer upload, Integer delete, Integer edit, Integer visit);
@@ -270,4 +278,11 @@ public interface FileDao {
     @Select("select * from file where category_id = #{categoryId}")
     List<File> getFileByCategoryId(Integer categoryId);
 
+    /**
+     * 模糊查询
+     * @param keyword 关键字
+     * @return
+     */
+    @Select("select * from file where name like concat('%',#{keyword},'%')")
+    List<File> fuzzyQuery(String keyword);
 }
