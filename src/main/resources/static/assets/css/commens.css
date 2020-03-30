@@ -34,4 +34,8 @@
         max-width: 800px;
         width: 800px;
     }
+  #myFileBox{
+      height: 400px;
+  }
+
 }

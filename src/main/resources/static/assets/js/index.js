@@ -332,9 +332,32 @@ function fileSearch() {
 
 function getMyFile() {
     var isClicked = false;
+
         $('#myfiles').click(function () {
+
+            var mutationObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    /************************当DOM元素发送改变时执行的函数体***********************/
+                    if(!$('#myfiles').hasClass('active')){
+                        $('#myFileList').empty();
+                        $('#myfilePageList').empty();
+                        isClicked = false;
+                    }
+                    /*********************函数体结束*****************************/
+                });
+            });
+            mutationObserver.observe($('#myfiles')[0], {
+                attributes: true,
+                characterData: true,
+                childList: true,
+                subtree: true,
+                attributeOldValue: true,
+                characterDataOldValue: true
+            });
+
             if(!isClicked) {
                 isClicked = true;
+                console.log('点击了一次');
                 $.get({
                     url: "/personalFile",
                     success: function (data) {
@@ -357,7 +380,7 @@ function getMyFile() {
                                 //给每一个下标添加点击事件
                                 $('#' + pageindex).click(function () {
                                     presentPage = $(this).text() - 1;
-                                    addFileItem(presentPage, data);
+                                    addMyFileItem(presentPage, data);
                                 })
                             }
                             //添加下一页图标
@@ -414,6 +437,7 @@ function getMyFile() {
                 });
         }
     });
+        //判断
 
 
 }
