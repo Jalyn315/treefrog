@@ -77,12 +77,13 @@ public class FileController {
      * @return
      */
     @GetMapping("/personalFile")
-    public String personalFile(HttpSession session, Model model){
+    @ResponseBody
+    public List<File> personalFile(HttpSession session, Model model){
         List<File> fileList = fileService.getMyFileList(Integer.parseInt(session.getAttribute("userId").toString()));
         if(!fileList.isEmpty()){
             model.addAttribute("fileList", fileList);
         }
-        return "myFile";
+        return fileList;
     }
 
     /**

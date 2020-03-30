@@ -329,3 +329,91 @@ function fileSearch() {
         $('#jqueryPageList').html('');
     });
 }
+
+function getMyFile() {
+    var isClicked = false;
+        $('#myfiles').click(function () {
+            if(!isClicked) {
+                isClicked = true;
+                $.get({
+                    url: "/personalFile",
+                    success: function (data) {
+                        var pageNum = Math.ceil(data.length / 6);  //计算总页数
+                        var presentPage = 0;  //从0开始
+                        if (pageNum <= 1) {
+                            $('#myfilePageList').hide();
+                        } else {
+                            //添加上一页图标
+                            $('#myfilePageList').append("<li class=\"page-item\" >\n" +
+                                "                        <a class=\"page-link\" href=\"#\" id=\"myFileLastPage\" aria-label=\"Previous\">\n" +
+                                "                            <span aria-hidden=\"true\">&laquo;</span>\n" +
+                                "                        </a>\n" +
+                                "                    </li>");
+                            //遍历下标
+                            for (var j = 0; j < pageNum; j++) {
+                                var indexItem = "<li class=\"page-item\"><a class=\"page-link\" id = \"index" + j + "\" href=\"#\">" + (j + 1) + "</a></li>"
+                                $('#myfilePageList').append(indexItem);
+                                var pageindex = 'index' + j;
+                                //给每一个下标添加点击事件
+                                $('#' + pageindex).click(function () {
+                                    presentPage = $(this).text() - 1;
+                                    addFileItem(presentPage, data);
+                                })
+                            }
+                            //添加下一页图标
+                            $('#myfilePageList').append("<li class=\"page-item\" >\n" +
+                                "                        <a class=\"page-link\" href=\"#\" id=\"myFileNextPage\" aria-label=\"Next\">\n" +
+                                "                            <span aria-hidden=\"true\">&raquo;</span>\n" +
+                                "                        </a>\n" +
+                                "                    </li>");
+                            //上一页点击
+                            $('#myFileNextPage').click(function () {
+                                if (presentPage < (pageNum - 1)) {
+                                    presentPage++;
+                                    addMyFileItem(presentPage, data);
+                                }
+                            });
+                            //下一页点击
+                            $('#myFileLastPage').click(function () {
+                                if (presentPage > 0) {
+                                    presentPage--;
+                                    addMyFileItem(presentPage, data);
+                                }
+                            });
+                            //显示列表
+                            $('#myfilePageList').show();
+                        }
+                        addMyFileItem(presentPage, data);
+
+                        //分页展示文件项目
+                        function addMyFileItem(presentPage, data) {
+                            //清空所有内容
+                            $('#myFileList').html('');
+                            if (data.length == 0) {
+                                $('#myFileList').html('您还没有上传过文件');
+                            }
+                            for (var i = presentPage * 6; i < presentPage * 6 + 6 && i < data.length; i++) {
+                                var html = "<div class=\"card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success\" >\n" +
+                                    "                                    <div class=\"card-body text-center\">\n" +
+                                    "                                        <h5 class=\"card-title\">" + data[i].name + "</h5>\n" +
+                                    "                                        <a href=\"#\" class=\"card-link\">下载到本地</a>\n" +
+                                    "                                        <a href=\"#\" class=\"card-link\">查看详细</a>\n" +
+                                    "                                        <a href=\"#\" class=\"card-link\">删除</a>\n" +
+                                    "                                        <a href=\"#\" class=\"card-link\">更改权限</a>\n" +
+                                    "                                    </div>\n" +
+                                    "                                    <div class=\"card-footer text-muted\" style=\"padding: 5px 10px\">\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览：<span>" + data[i].checkTimes + "</span></small>\n" +
+                                    "                                        &nbsp;&nbsp;&nbsp;\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载：<span>" + data[i].downloadCount + "</span></small>\n" +
+                                    "                                    </div>\n" +
+                                    "                                </div>"
+                                $('#myFileList').append(html);
+                            }
+                        }
+                    }
+                });
+        }
+    });
+
+
+}
