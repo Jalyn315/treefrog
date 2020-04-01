@@ -16,8 +16,8 @@
 <!--     中间内容-->
 <div class="container-fluid row " >
     <!--            左侧导航-->
-    <div class="col-lg-2 col-md-3 text-center" id="content-nav">
-        <ul class="nav  justify-content-center nav-pills">
+    <div class="col-lg-3 col-md-3 col-xl-3 text-center" id="content-nav">
+        <ul class="nav col-lg-9  justify-content-center nav-pills ">
             <li class="nav-item"><a class="nav-link" href="#systemFile" id="fileList" style="font-size: 20px" data-toggle="tab"><i id="1" class="fa fa-folder-open-o"  aria-hidden="true"></i>资源列表</a></li>
             <li class="nav-item"><a class="nav-link" href="#myFile" id="myfiles" style="font-size: 20px" data-toggle="tab"><i id="2" class="fa fa-user-circle-o" aria-hidden="true" ></i>我的文件</a></li>
             <li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="3" class="fa fa-star-o" aria-hidden="true"></i>收藏</a></li>
@@ -33,237 +33,21 @@
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs" id="types">
                             <label class="mr-2"><b>分类</b></label>
-                            <li class="nav-item" >
-                                <a href="#tab1" class="nav-link " id="video" data-toggle="tab">视频</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a href="#tab2" class="nav-link " id="picture" data-toggle="tab">图片</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#tab3" class="nav-link " id="voice" data-toggle="tab">音频</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#tab4" class="nav-link " id="word" data-toggle="tab">文档</a>
-                            </li>
+
                         </ul>
                     </div>
                     <!--                    滑动门-->
-                    <div class="tab-content">
-                        <div class="tab-pane fade" id="tab1">
+                    <div class="tab-content" id="tabList">
+                        <div class="tab-pane fade" id="fileTabPanel">
                             <!--                           no-gutters出去默认的内边距 -->
-                            <div class="container-fluid row show no-gutters" >
-
+                            <div class="container-fluid row show no-gutters" id="systemFileList">
                                 <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
 
-
-
-
-
-
-                            </div>
-                            <!--                                分页列表-->
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="tab2">
-                            <div class="container-fluid row show no-gutters" >
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--                                    分页-->
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="tab3">
-                            <div class="container-fluid row show no-gutters" >
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
                                 </div>
                             </div>
                             <!--                                分页列表-->
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="tab4">
-                            <div class="container-fluid row show no-gutters" >
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                                <div class="card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success" >
-                                    <div class="card-body ">
-                                        <h5 class="card-title">文件名称</h5>
-                                        <p class="card-title">作者:<strong>shuwa</strong></p>
-                                        <a href="#" class="btn btn-danger btn-sm">立即下载</a>
-                                        <a href="#" class="btn btn-primary btn-sm ">查看详细</a>
-                                    </div>
-                                    <div class="card-footer text-muted" style="padding: 5px 10px">
-                                        <small class="card-text "><i class="fa fa-eye" aria-hidden="true"></i>浏览：<span>20</span></small>
-                                        &nbsp;&nbsp;&nbsp;
-                                        <small class="card-text "><i class="fa fa-download" aria-hidden="true"></i>下载：<span>20</span></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
+                            <ul class="pagination justify-content-center" id="systemFilePageList">
+
                             </ul>
                         </div>
                     </div>
@@ -281,7 +65,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -476,22 +259,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">文件名称</h5>
+                <h5 class="modal-title" name="fileName">文件名称</h5>
                 <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <ul class="list-group">
-                    <li class="list-group-item">作者：&nbsp;<strong class="text-muted">shuwa</strong></li>
-                    <li class="list-group-item">上传时间：&nbsp;<strong class="text-muted">2020-03-21</strong></li>
-                    <li class="list-group-item">文件大小：&nbsp;<strong class="text-muted">2GB</strong></li>
-                    <li class="list-group-item">文件类型：&nbsp;<strong class="text-muted">视频</strong></li>
-                    <li class="list-group-item">浏览量：&nbsp;<strong class="text-muted">500</strong></li>
-                    <li class="list-group-item">下载次数：&nbsp;<strong class="text-muted">2k</strong></li>
+                    <li class="list-group-item">作者：&nbsp;<strong class="text-muted" name="username"></strong></li>
+                    <li class="list-group-item">上传时间：&nbsp;<strong class="text-muted" name="uploadTime"></strong></li>
+                    <li class="list-group-item">文件大小：&nbsp;<strong class="text-muted" name="fileSize"></strong></li>
+                    <li class="list-group-item">文件类型：&nbsp;<strong class="text-muted" name="fileType"></strong></li>
+                    <li class="list-group-item">文件描述：&nbsp;<strong class="text-muted" name="description"></strong></li>
+                    <li class="list-group-item">浏览量：&nbsp;<strong class="text-muted" name="pageView"></strong></li>
+                    <li class="list-group-item">下载次数：&nbsp;<strong class="text-muted" name="downloadCount"></strong></li>
                 </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-danger" >下载</button>
+                <a href="#" type="button" class="btn btn-danger" id="fileDownload">下载</a>
             </div>
         </div>
     </div>
@@ -567,7 +351,7 @@
 
     $(function () {
         //重置密码
-        resetPasssword();
+        resetPassword();
         //修改个人信息
         resetUserInfo();
         //文件上传
@@ -575,7 +359,9 @@
         //文件查找
         fileSearch();
         //获取我的文件
-        getMyFile()
-
+        getMyFile();
+        //获取分类列表
+        //获取用户共享的文件
+        getUserShareFile();
     });
 </script>

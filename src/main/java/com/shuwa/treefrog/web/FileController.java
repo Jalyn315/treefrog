@@ -2,8 +2,10 @@ package com.shuwa.treefrog.web;
 
 import com.github.pagehelper.PageInfo;
 import com.shuwa.treefrog.entity.File;
+import com.shuwa.treefrog.entity.Type;
 import com.shuwa.treefrog.model.PageParam;
 import com.shuwa.treefrog.service.IFileService;
+import com.shuwa.treefrog.service.ITypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ public class FileController {
     @Autowired
     IFileService fileService;
 
+    @Autowired
+    ITypeService typeService;
     /**
      *
      * 分页查询文件
@@ -35,7 +39,7 @@ public class FileController {
     }
 
     /**
-     * 分页查询Controller接口
+     * 分页查询Controller接口(不使用）
      * @param page
      * @param model
      * @return
@@ -56,6 +60,20 @@ public class FileController {
 
         return "index";
     }
+
+    /**
+     * 获取所有文件
+     * @return
+     */
+    @GetMapping("/fileList")
+    @ResponseBody
+    public List<File> files(){
+        return fileService.findAll();
+    }
+
+
+
+
 
 
     /**
@@ -101,5 +119,14 @@ public class FileController {
         }
     }
 
+    /**
+     * 获取所有文件type
+     * @return
+     */
+    @GetMapping("/typeList")
+    @ResponseBody
+    public List<Type> typeList(){
+        return typeService.findAll();
+    }
 
 }

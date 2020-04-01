@@ -1,4 +1,4 @@
-function  resetPasssword(){
+function  resetPassword(){
     var isupdatePsw = false;
     //判断原密码是否已经输入
     $('#passwordAgo').keyup(function () {
@@ -329,7 +329,6 @@ function fileSearch() {
         $('#jqueryPageList').html('');
     });
 }
-
 function getMyFile() {
     var isClicked = false;
 
@@ -357,7 +356,6 @@ function getMyFile() {
 
             if(!isClicked) {
                 isClicked = true;
-                console.log('点击了一次');
                 $.get({
                     url: "/personalFile",
                     success: function (data) {
@@ -440,4 +438,193 @@ function getMyFile() {
         //判断
 
 
+}
+function getTypeList() {
+    $.get({
+        url:"/typeList",
+        success:function (data) {
+            for (var i = 0; i < data.length; i++){
+                var typeItem = "<li class=\"nav-item\">\n" +
+                    "              <a href=\"#fileTabPanel\" class=\"nav-link \" data-toggle=\"tab\">"+data[i].typeName+"</a>\n" +
+                    "           </li>"
+                $('#types').append(typeItem);
+            }
+            var typeItem = "<li class=\"nav-item\">\n" +
+                "              <a href=\"#fileTabPanel\" class=\"nav-link \" data-toggle=\"tab\">其他</a>\n" +
+                "           </li>";
+            $('#types').append(typeItem);
+        }
+    });
+}
+function getUserShareFile() {
+    var isTypesExist = false;   //类型列表是否已经存在
+    $('#fileList').click(function () {
+        if(!isTypesExist){ //判读
+            getTypeList(); //遍历类型列表
+            isTypesExist = true;
+        }
+        //对导航进行监听
+        var mutationObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                /************************当DOM元素发送改变时执行的函数体***********************/
+                if(!$('#systemFile').hasClass('active')){
+                    //隐藏所有的面板
+
+                    $('#fileTabPanel').removeClass('active show');
+                    //清除type列表，方便下一次重新查询
+                    $('#types li').each(function () {
+                        this.remove();
+                    })
+                    isTypesExist = false;
+                }
+                /*********************函数体结束*****************************/
+            });
+        });
+        mutationObserver.observe($('#systemFile')[0], {
+            attributes: true   //只捕获属性值的改变
+            // characterData: true,
+            // childList: true,
+            // subtree: true,
+            // attributeOldValue: true,
+            // characterDataOldValue: true
+        });//启动监听
+        $.get({     //发送请求获取数据库中的所有文件
+            url:"/fileList",
+            success:function (data) {
+                $('#types').on("click","li",function(){   //获取type的选项列表，对其进行遍历。
+                        var fileNum = [];  //保存当前类型总个数
+                        var fileNumIndex = 0; //记录下标
+                        $('#systemFileList').empty(); //清空显示文件的面板
+                        $('#systemFilePageList').empty();//清空分页列表
+                        for (var i = 0; i < data.length; i++) {   //求出与当前分类标签名称相同的文件的总个数
+                            if (data[i].tag == $(this).children().text()) {
+                                fileNum[fileNumIndex++] = data[i];
+                            }
+                        }
+                         var pageNum = Math.ceil(fileNum.length / 6); //获取总页数
+                         var presentPage = 0; //当前页
+                         //遍历文件
+                         addSystemFileItem(presentPage,fileNum);
+                         if (pageNum <= 1){  //如果总页数只有一页
+                             $('#systemFilePageList').empty();
+                         }else //处理分页列表问题
+                             {
+                             //上一页
+                             $('#systemFilePageList').append("<li class=\"page-item\" >\n" +
+                                 "                        <a class=\"page-link\" href=\"#\" id=\"systemFileLastPage\" aria-label=\"Previous\">\n" +
+                                 "                            <span aria-hidden=\"true\">&laquo;</span>\n" +
+                                 "                        </a>\n" +
+                                 "                    </li>");
+                             //遍历下标
+                             for (var j = 0; j < pageNum; j++) {
+                                 var indexItem = "<li class=\"page-item\"><a class=\"page-link\" id = \"index" + j + "\" href=\"#\">" + (j + 1) + "</a></li>"
+                                 $('#systemFilePageList').append(indexItem);
+                                 var pageindex = 'index' + j;
+                                 //给每一个下标添加点击事件
+                                 $('#' + pageindex).click(function () {
+                                     $('#systemFileList').empty();
+                                     presentPage = $(this).text() - 1;
+                                     addSystemFileItem(presentPage,fileNum);
+                                 })
+                             }
+                             //添加下一页图标
+                             $('#systemFilePageList').append("<li class=\"page-item\" >\n" +
+                                 "                        <a class=\"page-link\" href=\"#\" id=\"systemFileNextPage\" aria-label=\"Next\">\n" +
+                                 "                            <span aria-hidden=\"true\">&raquo;</span>\n" +
+                                 "                        </a>\n" +
+                                 "                    </li>");
+                             //下一页点击
+                             $('#systemFileNextPage').click(function () {
+                                 if (presentPage < (pageNum - 1)) {
+                                     $('#systemFileList').empty();
+                                     presentPage++;
+                                     addSystemFileItem(presentPage,fileNum);
+                                 }
+                             });
+                             //上一页点击
+                             $('#systemFileLastPage').click(function () {
+                                 if (presentPage > 0) {
+                                     $('#systemFileList').empty();
+                                     presentPage--;
+                                     addSystemFileItem(presentPage,fileNum);
+                                 }
+                             });
+                         }
+                         /*用于遍历文件项**/
+                    function addSystemFileItem(presentPage,fileList) {
+                        for (var i = presentPage * 6; i < presentPage * 6 + 6 && i < fileNum.length; i++){
+                            {
+                                var fileItem = "<div class=\"card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success\" >\n" +
+                                    "                                    <div class=\"card-body \">\n" +
+                                    "                                        <input type='hidden' value=\""+i+"\">                                                       "+
+                                    "                                        <h5 class=\"card-title\">" + fileList[i].name + "</h5>\n" +
+                                    "                                        <p class=\"card-title\">作者:<strong>" + fileList[i].userName + "</strong></p>\n" +
+                                    "                                        <a href=\"/downloadFile/"+fileList[i].id+"\" class=\"btn btn-danger btn-sm\">立即下载</a>\n" +
+                                    "                                        <a href=\"#\" class=\"btn btn-primary btn-sm \" data-toggle=\"modal\" name=\"check\" index = \""+i+"\" data-target=\"#fileInfo\">查看详细</a>\n" +
+                                    "                                    </div>\n" +
+                                    "                                    <div class=\"card-footer text-muted\" style=\"padding: 5px 10px\">\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览：<span>" + fileList[i].checkTimes + "</span></small>\n" +
+                                    "                                        &nbsp;&nbsp;&nbsp;\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载：<span>" + fileList[i].downloadCount + "</span></small>\n" +
+                                    "                                    </div>\n" +
+                                    "                                </div>"
+                            }
+                            $('#systemFileList').append(fileItem);
+
+                        }
+                        $('#systemFileList a[name="check"]').each(function (i) {
+                            $(this).click(function () {
+                                var temp = $(this).attr('index');
+                                $('#fileInfo h5[name="fileName"]').html(fileList[temp].name);
+                                $('#fileInfo strong[name="username"]').html(fileList[temp].userName);
+                                $('#fileInfo strong[name="uploadTime"]').html(getMyDate(fileList[temp].createTime));
+                                $('#fileInfo strong[name="fileSize"]').html(getFileSize(fileList[temp].size));
+                                $('#fileInfo strong[name="fileType"]').html(fileList[temp].tag);
+                                $('#fileInfo strong[name="description"]').html(fileList[temp].description);
+                                $('#fileInfo strong[name="pageView"]').html(fileList[temp].checkTimes);
+                                $('#fileInfo strong[name="downloadCount"]').html(fileList[temp].downloadCount);
+                                $('#fileInfo #fileDownload').attr('href',"/downloadFile/"+fileList[i].id);
+                            });
+                        });
+                    }
+
+                });
+            }
+        });
+    });
+}
+
+/************************对日期格式进行转换***********************/
+function getMyDate(str){
+    var oDate = new Date(str),
+        oYear = oDate.getFullYear(),
+        oMonth = oDate.getMonth()+1,
+        oDay = oDate.getDate(),
+        oHour = oDate.getHours(),
+        oMin = oDate.getMinutes(),
+        oSen = oDate.getSeconds(),
+        oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+    return oTime;
+};
+function getzf(num){
+    if(parseInt(num) < 10){
+        num = '0'+num;
+    }
+    return num;
+}
+/************************end***********************/
+function getFileSize(size) {
+    var fileSize = 0;
+    if (size < 1024*1024){
+        fileSize = new Number (size / 1024).toFixed(2) + "KB";
+    }
+
+    if (size > 1024*1024 && size < 1024*1024*1024){
+        fileSize = new Number (size / (1024*1024)).toFixed(2) + "MB";
+    }
+
+    if (size > 1024*1024*1024*1024){
+        fileSize = new Number (size / (1024*1024*1024)).toFixed(2) + "GB";
+    }
+    return fileSize;
 }

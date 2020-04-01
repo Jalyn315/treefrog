@@ -85,5 +85,16 @@ public interface IFileService {
      */
     boolean removeFile(Long[] id);
 
+    /**
+     * m模糊查询
+     * @param keyword
+     * @return
+     */
     List<File> fuzzyQuery(String keyword);
+
+    /**
+     * 查询全部
+     * @return
+     */
+    List<File> findAll();
 }

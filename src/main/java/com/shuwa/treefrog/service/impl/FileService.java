@@ -177,6 +177,10 @@ public class FileService implements IFileService {
         return new PageInfo<>(fileList);
     }
 
+
+
+
+
     @Override
     public File findOne(Integer id) {
         return null;
@@ -259,6 +263,20 @@ public class FileService implements IFileService {
     @Override
     public List<File> fuzzyQuery(String keyword) {
         List<File> fileList = fileDao.fuzzyQuery(keyword);
+        for ( File file:fileList){
+            file.setName(FileUtils.getFileRealName(file.getName()));
+            file.setUserName(userDao.getByUserName(file.getUserId()));
+        }
+        return fileList;
+    }
+
+    /**
+     * 查询全部文件
+     * @return
+     */
+    @Override
+    public List<File> findAll() {
+        List<File> fileList = fileDao.findAll();
         for ( File file:fileList){
             file.setName(FileUtils.getFileRealName(file.getName()));
             file.setUserName(userDao.getByUserName(file.getUserId()));
