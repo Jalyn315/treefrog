@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -54,6 +55,13 @@ public class UploadedController {
             msg = "文件上传失败，请联系管理员";
         }
         return msg;
+    }
+    @RequestMapping(value = "/uploadStatus")
+    @ResponseBody
+    public Integer uploadStatus(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Object percent = session.getAttribute("upload_percent");
+        return null != percent ? (Integer) percent : 0;
     }
 
     /**
