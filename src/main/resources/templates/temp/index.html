@@ -1,16 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="../../static/assets/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/4.3.0/css/bootstrap.css}" >
+    <link rel="stylesheet" href="../../static/assets/css/bootstrap.min.css" th:href="@{/static/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/assets/css/font-awesome.min.css" th:href="@{/static/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="../static/assets/css/indexstyle.css" th:href="@{/assets/css/indexstyle.css}">
+    <title>threefrog</title>
 </head>
 <body>
-    
+<!--  导航栏-->
+<!--        插入公共片段-->
 
-    <script src="/static/assets/js/jquery-3.4.1.min.js"></script>
-    <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+<nav class="navbar navbar-expand-lg navbar-light bg-success" th:replace="commons/_fragments :: navbar">
+    <div class="row col-sm-6 offset-2 ">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <img class="" src="../../static/assets/img/logo.png" width="40" height="40">
+            <h2 > TreeFrog</h2>
+            <small style="margin-top: 15px;">&mdash;分享你的快乐</small>
+            <ul id="navtag" class="navbar-nav mr-auto">
+                <li class="nav-item active ">
+                    <a class="nav-link" >首页</span></a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link " >探索</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " >发现</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row col-sm-4 float-right">
+            <ul id="navtag01" class="navbar-nav  navbar-right">
+                <li class="nav-item active ">
+                    <a  class="nav-link" href="#"><img src="../../static/assets/img/upload.png" alt="" width="28" height="28" ></a>
+                </li>
+                <li class="nav-item active ">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control border-success" type="search" placeholder="文件名或作者" aria-label="Search">
+                    <button class="btn " type="submit"><span class="Search"></span>
+                        <img src="../../static/assets/img/Search.png" alt="" width="28" height="28" >
+                    </button>
+                </form>
+                </li>
+                <li class="nav-item active ">
+                   <div class="dropdown">
+                        <img class="rounded-circle border" src="../../static/assets/img/via.jpg" data-toggle="dropdown" width="40" height="40">
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="usermenu">
+                            <div class="container row">
+                                <div>
+                                <img class="rounded-circle border" src="../../static/assets/img/via.jpg" data-toggle="dropdown" width="40" height="40">
+                                </div>
+                                <div >
+                                    <span>用户名</span>
+                                </div>
+                            </div>
+                            <div calss="divider"></div>
+                            <li><a role="menuitem" href="#">查看个人资料</a></li>
+                            <li><a role="menuitem" href="#">帮助</a></li>
+                            <li><a role="menuitem" href="#">注销</a></li>
+                        </ul>
+                   </div>
+                </li>
+            </ul>
+    </div>
+    </nav>
+<!--            中间栏-->
+<div class="container col-sm-8 offset-2 row"  >
+    <div class="col-sm-2">
+        <div class="offset-3">
+           <nav class="navbar navbar-light nflex-column" th:replace="commons/_fragments :: centered">
+            <ul class="navbar-nav nav-pills" id="nav-vertical">
+                <li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="1" class="fa fa-folder-open-o" aria-hidden="true"></i>资源列表</a></li>
+                <li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="2" class="fa fa-user-circle-o" aria-hidden="true"></i>我的文件</a></li>
+                <li class="nav-item"><a class="nav-link" href="" style="font-size: 20px"><i id="3" class="fa fa-star-o" aria-hidden="true"></i>收藏</a></li>
+            </ul>
+           </nav>
+        </div>
+    </div>
+<!--                    内容-->
+
+    <div class="col-sm-8 " >
+            <table>
+                <tr th:each="file:${files}">
+                    <td><a th:href="@{/downloadFile/}+${file.id}" class="list-group-item list-group-item-action" th:text="${file.name}"></a></td>
+                    <td>作者:</td><td th:text="${file.userName}"></td><td>上传时间:</td><td th:text="${#dates.format(file.createTime,'yyyy-MM-dd')}"></td><td>下载:</td><td th:text="${file.downloadCount}"></td>
+                </tr>
+            </table>
+              <div>
+                    <a th:href="@{/listfile/}+${page.pageNum - 1}" id="down" class="btn btn-primary" href="">上一页</a>
+                    <a th:href="@{/listfile/}+${page.pageNum + 1}" id="up" class="btn btn-primary" href="">下一页</a>
+
+              </div>
+        </div>
+
+
+    </div>
+
+    </div>
+<!--文件列表-->
+
+
+
+<script src="../../static/assets/js/jquery-3.4.1.min.js" th:src="@{/static/assets/js/jquery-3.4.1.min.js}"></script>
+<script src="../../static/assets/js/bootstrap.bundle.min.js" th:src="@{/static/assets/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>
