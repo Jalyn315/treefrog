@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
@@ -128,5 +129,36 @@ public class FileController {
     public List<Type> typeList(){
         return typeService.findAll();
     }
+
+    @PostMapping("/addCollect")
+    @ResponseBody
+    public String addCollect(Integer fileId, Integer userId){
+        String msg = "";
+        if(fileService.addCollect(fileId,userId)){
+            msg = "已添加到个人收藏!";
+        }else {
+            msg = "收藏失败!详细问题联系管理员!";
+        }
+        return msg;
+    }
+
+    @GetMapping("/removeCollect")
+    @ResponseBody
+    public String removeCollect(Integer fileId){
+        String msg = "";
+        if(fileService.removeCollect(fileId)){
+            msg = "该文件已经移除收藏夹!";
+        }else {
+            msg = "删除失败!详细问题联系管理员!";
+        }
+        return msg;
+    }
+
+    @GetMapping("/collectList")
+    @ResponseBody
+    public List<File> collectList( HttpSession session){
+        return fileService.findAllToCollect(Integer.parseInt(session.getAttribute("userId").toString()));
+    }
+
 
 }

@@ -702,7 +702,6 @@ function getUserShareFile() {
                                 $('#fileInfo strong[name="description"]').html(fileList[temp].description);
                                 $('#fileInfo strong[name="pageView"]').html(fileList[temp].checkTimes);
                                 $('#fileInfo strong[name="downloadCount"]').html(fileList[temp].downloadCount);
-                                $('#fileInfo #fileDownload').attr('href',"/downloadFile/"+fileList[i].id);
                             });
                         });
                     }
@@ -714,6 +713,145 @@ function getUserShareFile() {
 }
 /****************************end*******************************/
 
+/*****************************个人收藏**************************/
+function getMyCollect() {
+    var isClicked = false;
+
+    $('#collectFile').click(function () {
+
+        var mutationObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                /************************当DOM元素发送改变时执行的函数体***********************/
+                if(!$('#collectFile').hasClass('active')){
+                    $('#collectFileList').empty();
+                    $('#collectPageList').empty();
+                    isClicked = false;
+                }
+                /*********************函数体结束*****************************/
+            });
+        });
+        mutationObserver.observe($('#collectFile')[0], {
+            attributes: true,
+            // characterData: true,
+            // childList: true,
+            // subtree: true,
+            // attributeOldValue: true,
+            // characterDataOldValue: true
+        });
+
+        if(!isClicked) {
+            isClicked = true;
+            $.get({
+                url: "/collectList",
+                success: function (data) {
+                    var pageNum = Math.ceil(data.length / 6);  //计算总页数
+                    var presentPage = 0;  //从0开始
+                    if (pageNum <= 1) {
+                        $('#collectPageList').hide();
+                    } else {
+                        $('#collectPageList').empty();
+                        //添加上一页图标
+                        $('#collectPageList').append("<li class=\"page-item\" >\n" +
+                            "                        <a class=\"page-link\" href=\"#\" id=\"collectLastPage\" aria-label=\"Previous\">\n" +
+                            "                            <span aria-hidden=\"true\">&laquo;</span>\n" +
+                            "                        </a>\n" +
+                            "                    </li>");
+                        //遍历下标
+                        for (var j = 0; j < pageNum; j++) {
+                            var indexItem = "<li class=\"page-item\"><a class=\"page-link\" id = \"index" + j + "\" href=\"#\">" + (j + 1) + "</a></li>"
+                            $('#collectPageList').append(indexItem);
+                            var pageindex = 'index' + j;
+                            //给每一个下标添加点击事件
+                            $('#' + pageindex).click(function () {
+                                presentPage = $(this).text() - 1;
+                                addCollectFileItem(presentPage, data);
+                            })
+                        }
+                        //添加下一页图标
+                        $('#collectPageList').append("<li class=\"page-item\" >\n" +
+                            "                        <a class=\"page-link\" href=\"#\" id=\"collectNextPage\" aria-label=\"Next\">\n" +
+                            "                            <span aria-hidden=\"true\">&raquo;</span>\n" +
+                            "                        </a>\n" +
+                            "                    </li>");
+                        //下一页点击事件
+                        $('#collectNextPage').click(function () {
+                            if (presentPage < (pageNum - 1)) {
+                                presentPage++;
+                                addCollectFileItem(presentPage, data);
+                            }
+                        });
+                        //上一页点击事件
+                        $('#collectLastPage').click(function () {
+                            if (presentPage > 0) {
+                                presentPage--;
+                                addCollectFileItem(presentPage, data);
+                            }
+                        });
+                        //显示列表
+                        $('#collectPageList').show();
+                    }
+                    addCollectFileItem(presentPage, data);
+
+                    //分页展示文件项目
+                    function addCollectFileItem(presentPage, data) {
+
+                        $('#collectFileList').html('');//清空所有内容，重新遍历新的一页
+
+                        if (data.length == 0) {//判断是否上传过文件
+                            $('#collectFileList').html('您的收藏空空如也!');
+                        }
+                        //突出显示当前分页的下标
+                        $('#collectPageList li').each(function () {
+                            if ($(this).children().html() == presentPage+1){
+                                $(this).addClass('active');
+                            }else {
+                                $(this).removeClass('active');
+                            }
+                        });
+                        //遍历当前分页da
+                        for (var i = presentPage * 6; i < presentPage * 6 + 6 && i < data.length; i++){
+                            {
+                                var fileItem = "<div class=\"card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success\" >\n" +
+                                    "                                    <div class=\"card-body \">\n" +
+                                    "                                        <input type='hidden' value=\""+i+"\">                                                       "+
+                                    "                                        <h5 class=\"card-title\">" + data[i].name + "</h5>\n" +
+                                    "                                        <p class=\"card-title\">作者:<strong>" + data[i].userName + "</strong></p>\n" +
+                                    "                                        <a href=\"/downloadFile/"+data[i].id+"\" class=\"btn btn-danger btn-sm\">立即下载</a>\n" +
+                                    "                                        <a href=\"#\" class=\"btn btn-primary btn-sm \" data-toggle=\"modal\" name=\"check\" index = \""+i+"\" data-target=\"#fileInfo\">查看详细</a>\n" +
+                                    "                                    </div>\n" +
+                                    "                                    <div class=\"card-footer text-muted\" style=\"padding: 5px 10px\">\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览：<span>" + data[i].checkTimes + "</span></small>\n" +
+                                    "                                        &nbsp;&nbsp;&nbsp;\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载：<span>" + data[i].downloadCount + "</span></small>\n" +
+                                    "                                    </div>\n" +
+                                    "                                </div>"
+                            }
+                            $('#collectFileList').append(fileItem);
+                            $('#collectFileList a[name="check"]').each(function () {
+                                $(this).click(function () {
+                                    var temp = $(this).attr('index');
+                                    $('#fileInfo h5[name="fileName"]').html(data[temp].name);
+                                    $('#fileInfo strong[name="username"]').html(data[temp].userName);
+                                    $('#fileInfo strong[name="uploadTime"]').html(getMyDate(data[temp].createTime));
+                                    $('#fileInfo strong[name="fileSize"]').html(getFileSize(data[temp].size));
+                                    $('#fileInfo strong[name="fileType"]').html(data[temp].tag);
+                                    $('#fileInfo strong[name="description"]').html(data[temp].description);
+                                    $('#fileInfo strong[name="pageView"]').html(data[temp].checkTimes);
+                                    $('#fileInfo strong[name="downloadCount"]').html(data[temp].downloadCount);
+                                });
+                            });
+                        }
+                    }
+                }
+            });
+        }
+    });
+    //判断
+
+
+}
+
+/*******************************end****************************/
 
 /************************对日期格式进行转换***********************/
 function getMyDate(str){

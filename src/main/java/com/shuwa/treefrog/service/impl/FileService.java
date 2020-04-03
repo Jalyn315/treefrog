@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -282,5 +283,39 @@ public class FileService implements IFileService {
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
         return fileList;
+    }
+
+    /**
+     * 添加收藏
+     * @param fileId
+     * @param userId
+     * @return
+     */
+    @Override
+    public boolean addCollect(Integer fileId, Integer userId) {
+        return fileDao.collectFile(fileId,userId);
+    }
+
+    /**
+     * 查询个人收藏
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<File> findAllToCollect(Integer userId) {
+        List<File> fileList = new ArrayList<>();
+        for (Integer i : fileDao.findAllToCollect(userId)){
+            fileList.add(fileDao.getFile(i));
+        }
+        for ( File file:fileList){
+            file.setName(FileUtils.getFileRealName(file.getName()));
+            file.setUserName(userDao.getByUserName(file.getUserId()));
+        }
+        return fileList;
+    }
+
+    @Override
+    public boolean removeCollect(Integer fileId) {
+        return fileDao.deleteToCollect(fileId);
     }
 }

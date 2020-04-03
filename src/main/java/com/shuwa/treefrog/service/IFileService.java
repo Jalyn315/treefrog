@@ -97,4 +97,26 @@ public interface IFileService {
      * @return
      */
     List<File> findAll();
+
+    /**
+     * 添加收藏
+     * @param fileId
+     * @param userId
+     * @return
+     */
+    boolean addCollect(Integer fileId, Integer userId);
+
+    /**
+     * 获取全部收藏
+     * @param userId
+     * @return
+     */
+    List<File> findAllToCollect(Integer userId);
+
+    /**
+     * 移出个人收藏
+     * @param fileId
+     * @return
+     */
+    boolean removeCollect(Integer fileId);
 }

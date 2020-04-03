@@ -285,4 +285,30 @@ public interface FileDao {
      */
     @Select("select * from file where name like concat('%',#{keyword},'%')")
     List<File> fuzzyQuery(String keyword);
+
+
+    /**
+     * 添加收藏
+     * @param fileId
+     * @param userId
+     * @return
+     */
+    @Insert("insert into collect(fileId, userId) values(#{fileId}, #{userId})")
+    boolean collectFile(Integer fileId, Integer userId);
+
+    /**
+     * 查询个人收藏
+     * @param userId
+     * @return
+     */
+    @Select("select fileId from collect where userId = #{userId}")
+    List<Integer> findAllToCollect(Integer userId);
+
+    /**
+     * 删除收藏
+     * @param fileId
+     * @return
+     */
+    @Delete("delete from collect where fileId = #{fileId}")
+    boolean deleteToCollect(Integer fileId);
 }
