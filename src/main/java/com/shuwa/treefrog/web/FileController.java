@@ -132,9 +132,9 @@ public class FileController {
 
     @PostMapping("/addCollect")
     @ResponseBody
-    public String addCollect(Integer fileId, Integer userId){
+    public String addCollect(Integer fileId, HttpSession session){
         String msg = "";
-        if(fileService.addCollect(fileId,userId)){
+        if(fileService.addCollect(fileId,Integer.parseInt(session.getAttribute("userId").toString()))){
             msg = "已添加到个人收藏!";
         }else {
             msg = "收藏失败!详细问题联系管理员!";
@@ -144,9 +144,9 @@ public class FileController {
 
     @GetMapping("/removeCollect")
     @ResponseBody
-    public String removeCollect(Integer fileId){
+    public String removeCollect(Integer fileId, HttpSession session){
         String msg = "";
-        if(fileService.removeCollect(fileId)){
+        if(fileService.removeCollect(fileId,Integer.parseInt(session.getAttribute("userId").toString()))){
             msg = "该文件已经移除收藏夹!";
         }else {
             msg = "删除失败!详细问题联系管理员!";
@@ -160,5 +160,10 @@ public class FileController {
         return fileService.findAllToCollect(Integer.parseInt(session.getAttribute("userId").toString()));
     }
 
+    @GetMapping("/isCollect")
+    @ResponseBody
+    public boolean isCollect(Integer fileId, HttpSession session){
+        return fileService.isCollected(fileId, Integer.parseInt(session.getAttribute("userId").toString()));
+    }
 
 }

@@ -309,6 +309,15 @@ public interface FileDao {
      * @param fileId
      * @return
      */
-    @Delete("delete from collect where fileId = #{fileId}")
-    boolean deleteToCollect(Integer fileId);
+    @Delete("delete from collect where fileId = #{fileId} and userId = #{userId}")
+    boolean deleteToCollect(Integer fileId, Integer userId);
+
+    /**
+     * 查找已被收藏
+     * @param fileId
+     * @param userId
+     * @return
+     */
+    @Select("select fileId from collect where fileId = #{fileId} and userId = #{userId}")
+    Integer findCollectById(Integer fileId, Integer userId);
 }

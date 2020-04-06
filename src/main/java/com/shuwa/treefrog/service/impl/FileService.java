@@ -315,7 +315,23 @@ public class FileService implements IFileService {
     }
 
     @Override
-    public boolean removeCollect(Integer fileId) {
-        return fileDao.deleteToCollect(fileId);
+    public boolean removeCollect(Integer fileId, Integer userId) {
+        return fileDao.deleteToCollect(fileId, userId);
+    }
+
+    /**
+     * 检查是否已经被收藏
+     * @param fileId
+     * @param userId
+     * @return
+     */
+    @Override
+    public boolean isCollected(Integer fileId, Integer userId) {
+        if(fileDao.findCollectById(fileId, userId) == null){
+            return false;
+        }else {
+            return true;
+
+        }
     }
 }

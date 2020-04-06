@@ -118,5 +118,13 @@ public interface IFileService {
      * @param fileId
      * @return
      */
-    boolean removeCollect(Integer fileId);
+    boolean removeCollect(Integer fileId, Integer userId);
+
+    /**
+     * 是否已被收藏
+     * @param fileId
+     * @param userId
+     * @return
+     */
+    boolean isCollected(Integer fileId, Integer userId);
 }

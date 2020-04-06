@@ -354,11 +354,26 @@ function fileSearch() {
                 "                            <th>"+ (i+1) +"</th>\n" +
                 "                            <td>"+data[i].name+"</td>\n" +
                 "                            <td>"+data[i].userName+"</td>\n" +
-                "                            <td><a href=\"#\">查看详细</a></td>\n" +
-                "                            <td><a href=\"#\">立即下载</a></td>\n" +
+                "                            <td> <a href=\"#\" data-toggle=\"modal\" name=\"check\" index = \""+i+"\" data-target=\"#fileInfo\">查看详细</a></td>\n" +
+                "                            <td><a href=\"/downloadFile/"+data[i].id+"\">立即下载</a></td>\n" +
                 "                        </tr>"
             $('#resultSet').append(item);
         }
+        $('#jqueryResult a[name="check"]').each(function () {
+            $(this).click(function () {
+                $('#jqueryResult').css('z-index','9998');
+                $('#fileInfo').css('z-index','9999');
+                var temp = $(this).attr('index');
+                $('#fileInfo h5[name="fileName"]').html(data[temp].name);
+                $('#fileInfo strong[name="username"]').html(data[temp].userName);
+                $('#fileInfo strong[name="uploadTime"]').html(getMyDate(data[temp].createTime));
+                $('#fileInfo strong[name="fileSize"]').html(getFileSize(data[temp].size));
+                $('#fileInfo strong[name="fileType"]').html(data[temp].tag);
+                $('#fileInfo strong[name="description"]').html(data[temp].description);
+                $('#fileInfo strong[name="pageView"]').html(data[temp].checkTimes);
+                $('#fileInfo strong[name="downloadCount"]').html(data[temp].downloadCount);
+            });
+        });  //处理文件查看详细
     }
     //窗口关闭后
     $('#jqueryResult').on('hidden.bs.modal', function () {
@@ -671,6 +686,7 @@ function getUserShareFile() {
                                 $(this).removeClass('active');
                             }
                         });
+                        //遍历文件项
                         for (var i = presentPage * 6; i < presentPage * 6 + 6 && i < fileNum.length; i++){
                             {
                                 var fileItem = "<div class=\"card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success\" >\n" +
@@ -683,14 +699,29 @@ function getUserShareFile() {
                                     "                                    </div>\n" +
                                     "                                    <div class=\"card-footer text-muted\" style=\"padding: 5px 10px\">\n" +
                                     "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览：<span>" + fileList[i].checkTimes + "</span></small>\n" +
-                                    "                                        &nbsp;&nbsp;&nbsp;\n" +
+                                    "                                        &nbsp;&nbsp;" +
                                     "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载：<span>" + fileList[i].downloadCount + "</span></small>\n" +
+                                    "                                        &nbsp;&nbsp;" +
+                                    "                                        <small class=\"card-text \" name=\"collectBtn\" fileId=\""+fileList[i].id+"\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"点击收藏\">收藏：<i  class=\"fa fa-star-o\"  aria-hidden=\"true\"></i></small>\n" +
                                     "                                    </div>\n" +
                                     "                                </div>"
                             }
-                            $('#systemFileList').append(fileItem);
-
+                            $('#systemFileList').append(fileItem); //添加文件项
+                            var fileId = fileList[i].id; //文件id
+                            $.get({     //判断是否已经被收藏，如果已经收藏则小心心变成实体
+                                url:"/isCollect",
+                                data:{"fileId":fileId},
+                                async: false, //关闭异步请求
+                                success:function (data) {
+                                    if(data){
+                                        $('#systemFileList small[fileId='+fileId+']').children().attr('class','fa fa-star');
+                                    }
+                                }
+                            });
                         }
+
+
+                        $('[data-toggle="tooltip"]').tooltip() //开启冒泡提示框
                         $('#systemFileList a[name="check"]').each(function (i) {
                             $(this).click(function () {
                                 var temp = $(this).attr('index');
@@ -703,9 +734,62 @@ function getUserShareFile() {
                                 $('#fileInfo strong[name="pageView"]').html(fileList[temp].checkTimes);
                                 $('#fileInfo strong[name="downloadCount"]').html(fileList[temp].downloadCount);
                             });
+                        }); //查看详细
+                        $('#systemFileList small[name="collectBtn"]').each(function () {  //收藏
+
+                            $(this).css('cursor', 'pointer'); //修改鼠标指针样式
+                            // var isCollected = false;
+                            if ($(this).children().hasClass('fa-star-o')) { //判断是否已经被收藏，如果还没被收藏则添加鼠标滑过事件
+                                $(this).mouseover(function () {
+                                    $(this).children().attr('class', 'fa fa-star');
+                                });
+                                $(this).mouseout(function () {
+                                    $(this).children().attr('class', 'fa fa-star-o');
+                                });
+                            }
+
+                            $(this).click(function () {  //当点击收藏时
+                                var fileId = $(this).attr('fileId'); //获取该文件的id
+                                $.get({    //发生请求判断该文件是否已经被收藏
+                                    url:"/isCollect",
+                                    data:{"fileId":fileId},
+                                    async: false, //关闭异步请求
+                                    success:function (data) {
+                                        if (!data){  //如果文件还没有被收藏
+                                            $.post({   //发送收藏请求
+                                                url:"/addCollect",
+                                                data:{"fileId":fileId},
+                                                async: false, //关闭异步请求
+                                                success:function (data) {
+                                                    //标记文件已经被收藏
+                                                    $('#systemFileList small[fileId='+fileId+']').children().attr('class','fa fa-star');
+                                                    //移除文件为收藏时，鼠标滑过收藏的提示
+                                                    $('#systemFileList small[fileId='+fileId+']').unbind('mouseover').unbind('mouseout');
+                                                }
+                                            });
+                                        }else {  //如果文件已经被收藏
+                                            $.get({  //发送移除收藏请求
+                                                url:"/removeCollect",
+                                                data:{"fileId":fileId},
+                                                async: false, //关闭异步请求
+                                                success:function (data) {
+                                                    //标记文件为未收藏状态
+                                                    $('#systemFileList small[fileId='+fileId+']').children().attr('class','fa fa-star-o');
+                                                    //重新添加鼠标滑过收藏按钮时的行为
+                                                    $('#systemFileList small[fileId='+fileId+']').mouseover(function () {
+                                                        $('#systemFileList small[fileId='+fileId+']').children().attr('class', 'fa fa-star');
+                                                    });
+                                                    $('#systemFileList small[fileId='+fileId+']').mouseout(function () {
+                                                        $('#systemFileList small[fileId='+fileId+']').children().attr('class', 'fa fa-star-o');
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+                             });
                         });
                     }
-
                 });
             }
         });
@@ -890,4 +974,5 @@ function getFileSize(size) {
     return fileSize;
 }
 /************************end***********************/
+
 
