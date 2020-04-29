@@ -162,7 +162,7 @@
                 <form action="#" method="post">
                     <div class="form-group text-center" >
                         <img class="rounded-circle border" src="../../static/assets/img/via.jpg"
-                             th:src="@{/assets/img/via.jpg}"  width="50" height="50">
+                             th:src="@{/assets/img/via.jpg}"  name="userVia" width="50" height="50" id="userVia" data-target="#via" data-toggle="modal">
                         <strong class="ml-2 text-muted" id="username">用户名</strong>
                     </div>
                     <div class="input-group">
@@ -216,6 +216,30 @@
         </div>
     </div>
 </div>
+
+<div class="modal mt-5 fade" tabindex="-1" id="via">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body mb-2" style="width: 400px; height: 365px;">
+                <img src="" width="400px" height="350px"  id="viaBox">
+            </div>
+            <div class="modal-footer">
+
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="userViaUrl">
+                            <label class="custom-file-label" for="userViaUrl" aria-describedby="userViaUrl" id="via-label">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn bg-primary"  id="viaBtn">上传头像</button>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!--修改密码模态框-->
 <div class="modal fade" tabindex="-1" id="updatePassword">
@@ -417,6 +441,9 @@
         });
     });
 
+
+
+
     $(function () {
         //重置密码
         resetPassword();
@@ -433,5 +460,9 @@
         getUserShareFile();
         //我的收藏
         getMyCollect();
+        //上传头像
+        uploadVia();
+        //显示头像
+        showVia();
     });
 </script>

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -259,6 +260,23 @@ public class UserController {
             msg = "密码不能为空!";
         }
         return msg;
+    }
+
+    @PostMapping("/update/via")
+    @ResponseBody
+    public String updateVia(@RequestParam("file") MultipartFile file, HttpSession session){
+        try {
+            userService.uploadUserVia(file,Integer.parseInt(session.getAttribute("userId").toString()));
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return "上传成功";
+    }
+
+    @GetMapping("/via")
+    @ResponseBody
+    public String getvia(HttpSession session){
+        return userService.getVia(Integer.parseInt(session.getAttribute("userId").toString()));
     }
 
 }

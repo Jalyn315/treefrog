@@ -172,5 +172,21 @@ public interface UserDao {
     @Select("select password from user where id = #{id}")
     String getpasswordById(Integer id);
 
+    /**
+     * 更新用户头像
+     * @param viaUrl
+     * @param id
+     * @return
+     */
+    @Update("update user set via = #{viaUrl} where id =#{id}")
+    boolean updateVia(String viaUrl, Integer id);
+
+    /**
+     * 获取用户头像
+     * @param id
+     * @return
+     */
+    @Select("select via from user where id = #{id}")
+    String getVia(Integer id);
 }
 

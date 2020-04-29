@@ -27,7 +27,7 @@ public class FileUtils {
     public static String getUploadPath(){
         return ConfigConstant.UPLOAD_PATH;
     }
-
+    
     /**
      * 获取文件后缀名
      * @param fileName

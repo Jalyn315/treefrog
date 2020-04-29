@@ -975,4 +975,64 @@ function getFileSize(size) {
 }
 /************************end***********************/
 
+function  uploadVia() {
 
+    $('#via').on('hidden.bs.modal', function () {
+        $('#userViaUrlr').val("");
+        $("#viaBox").attr("src", "");
+        $('#via-label').html("Choose file");
+    });
+
+    $('#userViaUrl').on('change', function(e) {//当chooseImage的值改变时，执行此函数
+        let file = e.target.files[0]; //获取图片资源
+        // 只选择图片文件
+        if (!file.type.match('image.*')) {
+            return false;
+        }
+        let reader = new FileReader();
+        reader.readAsDataURL(file); // 读取文件
+        // 渲染文件
+
+        reader.onload = function(arg) {
+
+            $("#viaBox").attr("src", arg.target.result);
+        }
+    });
+
+    $('#viaBtn').click(function () {
+        var fileobj = $('#userViaUrl')[0].files[0];
+        var form = new FormData();
+        form.append('file', fileobj);
+        console.log(fileobj);
+        $.post({
+            url:"/update/via",
+            data:form,
+            processData: false,  //告诉jquery要传输data对象
+            contentType: false,   //告诉jquery不需要增加请求头对于contentType的设置
+            success:function (data) {
+                showVia();
+                $('#via').modal("hide");
+            }
+        });
+    });
+
+
+}
+
+function  showVia() {
+    $.get({
+        url:"/via",
+        success:function (data) {
+            var path = data;
+            $("img[name='userVia']").each(function () {
+                $(this).attr("src",path);
+            });
+
+            bgPath = "url("+data+")";
+            $('#dropdownMenu1').css("background-image", bgPath);
+        }
+    });
+
+
+
+}

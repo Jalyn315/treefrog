@@ -8,9 +8,13 @@ import com.shuwa.treefrog.dao.UserDao;
 import com.shuwa.treefrog.entity.File;
 import com.shuwa.treefrog.entity.User;
 import com.shuwa.treefrog.service.IUserService;
+import com.shuwa.treefrog.util.FileUtils;
+import io.netty.util.internal.ResourcesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -154,6 +158,28 @@ public class UserService implements IUserService {
             fileList = fileDao.getFileByCategoryId(id);
         }
         return new PageInfo<>(fileList);
+    }
+
+    /**
+     * 上传头像
+     * @param file
+     * @returnid
+     */
+    @Override
+    public boolean uploadUserVia(MultipartFile file, Integer id) throws Exception{
+        //获取文件名
+        String fileName = FileUtils.getFileName(file.getOriginalFilename());
+        //获取上传路径
+        String path = ResourceUtils.getURL("classpath:static/userVia").getPath() + "/";
+        file.transferTo(new java.io.File(path + fileName));
+        userDao.updateVia("/userVia/" + fileName, id);
+        System.out.println("上传成功");
+        return true;
+    }
+
+    @Override
+    public String getVia(Integer id) {
+        return userDao.getVia(id);
     }
 
 //    @Override
