@@ -12,14 +12,16 @@ public interface IUploadedService {
 
     /**
      * 获取上传的所有信息
+     *
      * @param file
      * @param uploadedRecord
      * @return
      */
-    boolean uploadRecord (MultipartFile file, UploadedRecord uploadedRecord );
+    boolean uploadRecord(MultipartFile file, UploadedRecord uploadedRecord);
 
     /**
      * 获取文件上传记录
+     *
      * @return
      */
     PageInfo<File> fileUploadInfo(Integer page, Integer limit);

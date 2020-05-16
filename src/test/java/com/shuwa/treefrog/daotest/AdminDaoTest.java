@@ -27,12 +27,12 @@ public class AdminDaoTest {
 
     @Test
     public void addAdminTest() {
-        System.out.println("添加管理员是否成功："+adminDao.addAdmin(userName,password));
+        System.out.println("添加管理员是否成功：" + adminDao.addAdmin(userName, password));
     }
 
     @Test
     public void deleteAdminTest() {
-        System.out.println("删除管理员是否成功："+adminDao.deleteAdmin(id));
+        System.out.println("删除管理员是否成功：" + adminDao.deleteAdmin(id));
     }
 
     @Test
@@ -40,27 +40,27 @@ public class AdminDaoTest {
         admin.setIdAdmin(id);
         admin.setUserNameAdmin(userName);
         admin.setPasswordAdmin(password);
-        System.out.println("更新管理员是否成功："+adminDao.updateAdmin(admin));
+        System.out.println("更新管理员是否成功：" + adminDao.updateAdmin(admin));
     }
 
     @Test
     public void getAdminTest() {
-        System.out.println("获取到的管理员信息："+adminDao.getAdminById(id));
+        System.out.println("获取到的管理员信息：" + adminDao.getAdminById(id));
     }
 
     @Test
     public void listAdminTest() {
-        System.out.println("获取到的所有管理员信息："+adminDao.listAdmin());
+        System.out.println("获取到的所有管理员信息：" + adminDao.listAdmin());
     }
 
     @Test
     public void getAdminByUserNameAndPasswordTest() {
-        System.out.println("获取到的管理员信息："+adminDao.getAdminByUserNameAndPassword(userName,password));
+        System.out.println("获取到的管理员信息：" + adminDao.getAdminByUserNameAndPassword(userName, password));
     }
 
     @Test
     public void getUserName() {
-        System.out.println("获取到的用户名："+adminDao.getUserName(userName));
+        System.out.println("获取到的用户名：" + adminDao.getUserName(userName));
     }
 
 

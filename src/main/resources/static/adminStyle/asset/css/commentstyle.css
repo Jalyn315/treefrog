@@ -1,15 +1,16 @@
 
-*{
+* {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-html,body{
+html, body {
     height: 100%;
     background-color: #f5f5f5;
 }
-.nav{
+
+.nav {
     position: absolute;
     top: 0;
     left: 0;
@@ -18,14 +19,14 @@ html,body{
     background: #28a745;
 }
 
-.box{
+.box {
     height: 30px;
     border-bottom: 1px #ccc solid;
     text-align: center;
     color: white;
 }
 
-.nav a{
+.nav a {
     display: block;
     /* 溢出隐藏 */
     overflow: hidden;
@@ -36,86 +37,85 @@ html,body{
     text-decoration: none;
 }
 
-.nav li:hover{
+.nav li:hover {
     background-color: #99cc99;
     border-left: 2px solid green;
 }
 
-.active{
+.active {
     background-color: #99cc99;
     border-left: 2px solid green;
 }
 
-.pagediv{
+.pagediv {
     margin-top: 10px;
     margin-left: 50px;
     margin-bottom: 10px;
 }
 
-.pageBtn{
+.pageBtn {
     display: inline-block;
     width: 60px;
     height: 30px;
-    background-color:#28a745;
+    background-color: #28a745;
     color: white;
     text-decoration: none;
     line-height: 30px;
     text-align: center;
 }
 
-.pageBtn:hover{
+.pageBtn:hover {
     background-color: #1e7a34;
 }
 
-table{
-    border-collapse:collapse;
+table {
+    border-collapse: collapse;
     margin-left: 50px;
 }
 
- table tr{
+table tr {
     height: 50px;
     border: 1px #ccc solid;
 }
 
-table tbody tr:hover{
+table tbody tr:hover {
     background-color: #b1ffc3;
 }
 
- table th{
+table th {
     border-left: 1px solid #ccc;
     border-bottom: 2px solid #ccc;
     padding-left: 10px;
     padding-right: 10px;
     background-color: #28a745;
 }
- table td{
+
+table td {
     border: 1px solid #ccc;
     text-align: center;
     padding-left: 10px;
     padding-right: 10px;
 }
 
- .List{
-     width: 800px;
-     background-color: white;
-     margin: 30px 300px;
+.List {
+    width: 800px;
+    background-color: white;
+    margin: 30px 300px;
 }
 
-.clearfix ::after{
+.clearfix ::after {
     content: "";
     display: block;
     clear: both;
 }
 
-.btn:before{
+.btn:before {
     content: "";
     display: table;
 }
 
 
-
-
- .btn{
+.btn {
     margin-top: 10px;
     height: 40px;
     position: relative;
@@ -124,98 +124,110 @@ table tbody tr:hover{
 
 }
 
- .btn div{
+.btn div {
     height: 40px;
     width: 85px;
     display: inline-block;
     padding-top: 5px;
 }
 
- .btn a{
+.btn a {
     position: absolute;
-   text-decoration: none;
-   display: inline-block;
-   width: 80px;
-   height: 30px;
-   text-align: center;
-   border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    border-radius: 5px;
 
 }
 
- .btn a span{
+.btn a span {
     line-height: 30px;
     color: white;
 }
 
-    /* 按钮效果 */
-.share{
+/* 按钮效果 */
+.share {
     background-color: #007bff;
 }
-.share:hover{
+
+.share:hover {
     background-color: #006cdf;
     cursor: pointer;
 }
-.share:active{
+
+.share:active {
     border: 2px solid #3e93ee;
 
 }
 
-.up{
+.up {
     background-color: #28a745;
 }
-.up:hover{
+
+.up:hover {
     background-color: #238e3c;
     cursor: pointer;
 }
-.up:active{
+
+.up:active {
     border: 2px solid #61bf77;
 }
 
-.modify{
+.modify {
     background-color: #ffc107;
 }
-.modify:hover{
+
+.modify:hover {
     background-color: #d09d05;
     cursor: pointer;
 }
-.modify:active{
+
+.modify:active {
     border: 2px solid #e6c35a;
 }
 
-.permission{
+.permission {
     background-color: #343a40;
 }
-.permission:hover{
-    background-color:  #5b5b5b;
+
+.permission:hover {
+    background-color: #5b5b5b;
     cursor: pointer;
 }
-.permission:active{
-    border: 2px solid  #4b4d4f;
+
+.permission:active {
+    border: 2px solid #4b4d4f;
 }
 
-.delete{
+.delete {
     background-color: #dc3545;
 }
-.delete:hover{
+
+.delete:hover {
     background-color: #c13341;
     cursor: pointer;
 }
-.delete:active{
-    border: 2px solid  #fa6473;
+
+.delete:active {
+    border: 2px solid #fa6473;
 }
-.pageIndex{
+
+.pageIndex {
     display: inline-block;
     list-style: none;
     height: 40px;
     background-color: white;
 
 }
-.pageIndex li{
+
+.pageIndex li {
     display: inline-block;
     margin: 0px 2px;
 }
 
-.pageIndex li a{
+.pageIndex li a {
     display: inline-block;
     text-decoration: none;
     text-align: center;
@@ -227,36 +239,41 @@ table tbody tr:hover{
     color: black;
 
 }
-.pageIndex li a p{
+
+.pageIndex li a p {
     margin-top: 4px;
     font-size: 10px;
     font-weight: bold;
 }
-.pageIndex li p:hover{
+
+.pageIndex li p:hover {
     color: green;
 }
-.select{
+
+.select {
     background-color: green;
 }
-.checked{
+
+.checked {
     background-color: #b1ffc3;
 }
 
 /*提示框*/
-.msgbox{
+.msgbox {
     position: absolute;
     left: 40%;
     top: 20%;
     width: 250px;
     height: 150px;
     border: 1px solid green;
-    border-radius: 0px 0px 3px 3px ;
+    border-radius: 0px 0px 3px 3px;
     z-index: 999;
     background: white;
     border-top: none;
     display: none;
 }
-.msgbox #sure{
+
+.msgbox #sure {
     position: absolute;
     right: 10px;
     bottom: 10px;
@@ -267,33 +284,36 @@ table tbody tr:hover{
     border: none;
 }
 
-.msgbox .msgtitle{
+.msgbox .msgtitle {
     width: 251px;
     height: 30px;
     background: green;
 }
-.msgbox .msgtitle::before{
+
+.msgbox .msgtitle::before {
     content: "";
     display: table;
 }
 
-.msgbox .msgtitle h4{
+.msgbox .msgtitle h4 {
     color: white;
     margin-top: 5px;
     margin-left: 5px;
 }
-.msgbox p{
+
+.msgbox p {
     margin-top: 20px;
     color: black;
     font-family: "微软雅黑";
     margin-left: 30px;
     font-size: 15px;
 }
-#dispose-box{
+
+#dispose-box {
     position: absolute;
     width: 100%;
     height: 100%;
-    background:rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     left: 0;
     top: 0;
     z-index: 10;

@@ -117,6 +117,7 @@ public interface IUserService {
 
     /**
      * 上传用户头像
+     *
      * @param password
      * @param id
      * @return

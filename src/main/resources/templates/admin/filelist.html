@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/adminStyle/asset/css/commentstyle.css" th:href="@{/adminStyle/asset/css/commentstyle.css}">
-    <link rel="stylesheet" href="../../static/adminStyle/asset/css/filelist.css" th:href="@{/adminStyle/asset/css/filelist.css}">
-    <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css" th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
-    <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js" th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/commentstyle.css"
+          th:href="@{/adminStyle/asset/css/commentstyle.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/filelist.css"
+          th:href="@{/adminStyle/asset/css/filelist.css}">
+    <link rel="stylesheet" href="../../static/adminStyle/asset/css/font-awesome.min.css"
+          th:href="@{/adminStyle/asset/css/font-awesome.min.css}">
+    <script src="../../static/adminStyle/asset/js/jquery-3.4.1.min.js"
+            th:src="@{/adminStyle/asset/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/adminStyle/asset/js/filelist.js}"></script>
     <title>文件管理</title>
 </head>
@@ -32,7 +36,7 @@
             </select>
         </div>
         <div class="fileDescription">
-            <textarea  cols="40" rows="7" id = "description" placeholder="文件描述..."></textarea>
+            <textarea cols="40" rows="7" id="description" placeholder="文件描述..."></textarea>
         </div>
         <div class="uploadBtns">
             <button id="uploadBtn">上传</button>
@@ -42,80 +46,82 @@
 
 
 <div class="nav" th:replace="commons/nav_fragments::navbar"></div>
-         <!-- 文件管理 -->
-         <table></table>
-         <div class="file ">
-            <div class="List">
-                <table></table>
-                <div class="btn addtable">
-<!--                    <div>-->
-<!--                        <a href="#" class="share"><span class="fa fa-share-square-o" aria-hidden="true">&nbsp;<b>共享</b></span></a>-->
-<!--                    </div>-->
-                    <div>
-                        <a href="#" class="up"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传</b></span></a>
-                    </div>
-                    <div>
-                        <a href="#" class="modify"><span class="fa fa-wrench" aria-hidden="true">&nbsp;<b>修改</b></span></a>
-                    </div>
-<!--                    <div>-->
-<!--                        <a href="#" class="permission"><span class="fa fa-eye-slash" aria-hidden="true">&nbsp;<b>权限</b></span></a>-->
-<!--                    </div>-->
-                    <div>
-                        <a href="#" class="delete"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
-                    </div>
-                   
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>编号</th>
-                            <th>用户名</th>
-                            <th>文件名</th>
-                            <th>本地路径</th>
-                            <th>分类</th>
-                            <th>链接</th>
-                            <th>下载次数</th>
-                            <th>上传时间</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="file:${files}">
-                        <td><input type="checkbox" ></td>
-                        <td th:text="${file.id}"></td>
-                        <td th:text="${file.userName}">shuwa</td>
-                        <td th:text="${file.name}"></td>
-                        <td th:text="${file.localUrl}"></td>
-                        <td th:text="${file.tag}"></td>
-                        <td ><a href="#">查看</a></td>
-                        <td th:text="${file.downloadCount}"></td>
-                        <td th:text="${#dates.format(file.createTime,'yyyy-MM-dd')}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="pagediv">
-                <a href="" id="lastPage" th:href="@{/admin/files/}+${filePage.pageNum-1}" th:if="not ${filePage.isFirstPage}" class="pageBtn">上一页</a>
-                <ul class="pageIndex" th:each="i:${#numbers.sequence(1,filePage.pageTotal)}" th:if="${filePage}">
-                    <li><a th:href="@{/admin/files/}+${i}" ><p th:text="${i}"></p></a></li>
-                </ul>
-                <a href="" th:href="@{/admin/files/}+${filePage.pageNum+1}" th:if="not ${filePage.isLastPage}" class="pageBtn">下一页</a>
+<!-- 文件管理 -->
+<table></table>
+<div class="file ">
+    <div class="List">
+        <table></table>
+        <div class="btn addtable">
+            <!--                    <div>-->
+            <!--                        <a href="#" class="share"><span class="fa fa-share-square-o" aria-hidden="true">&nbsp;<b>共享</b></span></a>-->
+            <!--                    </div>-->
+            <div>
+                <a href="#" class="up"><span class="fa fa-cloud-upload" aria-hidden="true">&nbsp;<b>上传</b></span></a>
             </div>
+            <div>
+                <a href="#" class="modify"><span class="fa fa-wrench" aria-hidden="true">&nbsp;<b>修改</b></span></a>
             </div>
-        </div>
-    </body>
-    <script >
-        $(function () {
+            <!--                    <div>-->
+            <!--                        <a href="#" class="permission"><span class="fa fa-eye-slash" aria-hidden="true">&nbsp;<b>权限</b></span></a>-->
+            <!--                    </div>-->
+            <div>
+                <a href="#" class="delete"><span class="fa fa-trash-o" aria-hidden="true">&nbsp;<b>删除</b></span></a>
+            </div>
 
-            //启动复选框点击事件
-            checkbox();
-            //提示框
-            msg();
-            removeFiles();
-            flieUpload();
-            $('#s3').addClass('active');
-            var pageNum = [[${filePage.pageNum}]];
-            //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
-            $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
-        });
-    </script>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>编号</th>
+                <th>用户名</th>
+                <th>文件名</th>
+                <th>本地路径</th>
+                <th>分类</th>
+                <th>链接</th>
+                <th>下载次数</th>
+                <th>上传时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="file:${files}">
+                <td><input type="checkbox"></td>
+                <td th:text="${file.id}"></td>
+                <td th:text="${file.userName}">shuwa</td>
+                <td th:text="${file.name}"></td>
+                <td th:text="${file.localUrl}"></td>
+                <td th:text="${file.tag}"></td>
+                <td><a href="#">查看</a></td>
+                <td th:text="${file.downloadCount}"></td>
+                <td th:text="${#dates.format(file.createTime,'yyyy-MM-dd')}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagediv">
+            <a href="" id="lastPage" th:href="@{/admin/files/}+${filePage.pageNum-1}"
+               th:if="not ${filePage.isFirstPage}" class="pageBtn">上一页</a>
+            <ul class="pageIndex" th:each="i:${#numbers.sequence(1,filePage.pageTotal)}" th:if="${filePage}">
+                <li><a th:href="@{/admin/files/}+${i}"><p th:text="${i}"></p></a></li>
+            </ul>
+            <a href="" th:href="@{/admin/files/}+${filePage.pageNum+1}" th:if="not ${filePage.isLastPage}"
+               class="pageBtn">下一页</a>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+
+        //启动复选框点击事件
+        checkbox();
+        //提示框
+        msg();
+        removeFiles();
+        flieUpload();
+        $('#s3').addClass('active');
+        var pageNum = [[${filePage.pageNum}]];
+        //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
+        $('.pageIndex li:eq(' + (pageNum - 1) + ')').children().addClass('select');
+    });
+</script>
 </html>

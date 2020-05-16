@@ -36,8 +36,9 @@ public class UserServiceTest {
      */
     @Test
     public void loginTest() {
-        System.out.println("用户登录："+userService.login(username,password));
+        System.out.println("用户登录：" + userService.login(username, password));
     }
+
     /**
      * 测试 update 方法
      */
@@ -55,6 +56,7 @@ public class UserServiceTest {
         boolean isSuccess = userService.update(user);
         System.out.println("更新用户是否成功：" + isSuccess);
     }
+
     /**
      * 测试 get 方法
      */
@@ -75,14 +77,16 @@ public class UserServiceTest {
         boolean isSuccess = userService.register(user);
         System.out.println("是否注册新用户成功：" + isSuccess);
     }
+
     /**
      * 测试 isAllowRegister 方法
      */
     @Test
     public void isAllowRegisterTest() {
-        boolean isSuccess = userService.isAllowRegister(username,phone);
+        boolean isSuccess = userService.isAllowRegister(username, phone);
         System.out.println("是否允许用户注册：" + isSuccess);
     }
+
     /**
      * 测试 deleteUser 方法
      */
@@ -91,15 +95,15 @@ public class UserServiceTest {
         boolean isSuccess = userService.deleteUser(id);
         System.out.println("删除用户是否成功：" + isSuccess);
     }
+
     /**
      * 测试 getAllUser 方法
      */
     @Test
     public void getAllUserTest() {
         List<User> allUser = userService.getAllUser();
-        System.out.println("所有用户信息："+allUser);
+        System.out.println("所有用户信息：" + allUser);
     }
-
 
 
 }

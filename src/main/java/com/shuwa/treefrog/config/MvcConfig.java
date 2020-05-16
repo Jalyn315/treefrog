@@ -11,9 +11,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @ConfigurationProperties(prefix = "file-upload")
-public class MvcConfig  implements WebMvcConfigurer {
-//    文件上传路径
-    private static String profile="G:/treefrog/";
+public class MvcConfig implements WebMvcConfigurer {
+    //    文件上传路径
+    private static String profile = "G:/treefrog/";
 
     @Override
 
@@ -48,7 +48,8 @@ public class MvcConfig  implements WebMvcConfigurer {
 
 //        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/index", "/signin", "/register","/signup","/login");
     }
-    public  static final String filepath = "/File/";
+
+    public static final String filepath = "/File/";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

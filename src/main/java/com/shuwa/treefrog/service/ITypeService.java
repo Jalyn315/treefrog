@@ -13,6 +13,7 @@ import java.util.List;
 public interface ITypeService {
     /**
      * 增加 类型
+     *
      * @param typeName
      * @param createTime
      * @return
@@ -21,13 +22,15 @@ public interface ITypeService {
 
     /**
      * 删除类型
+     *
      * @param id
      * @return
      */
-    boolean deleteType( Integer id);
+    boolean deleteType(Integer id);
 
     /**
      * 更新类型
+     *
      * @param type
      * @return
      */
@@ -35,18 +38,21 @@ public interface ITypeService {
 
     /**
      * 查询所有类型
+     *
      * @return
      */
     List<Type> findAll();
 
     /**
      * 分页查询类型
+     *
      * @return
      */
     PageInfo<Type> typePageQuery(Integer currentPage, Integer limit);
 
     /**
      * 查询是否有同名的类型
+     *
      * @param typeName
      * @return
      */

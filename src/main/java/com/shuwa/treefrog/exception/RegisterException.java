@@ -5,12 +5,12 @@ package com.shuwa.treefrog.exception;
  */
 public class RegisterException extends Exception {
     //无参构造方法
-    public RegisterException(){
+    public RegisterException() {
         super();
     }
 
     //有参的构造方法
-    public RegisterException(String message){
+    public RegisterException(String message) {
         super(message);
     }
 }

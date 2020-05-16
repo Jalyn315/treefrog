@@ -166,6 +166,7 @@ public interface UserDao {
 
     /**
      * 验证密码是否正确
+     *
      * @param id
      * @return
      */
@@ -174,6 +175,7 @@ public interface UserDao {
 
     /**
      * 更新用户头像
+     *
      * @param viaUrl
      * @param id
      * @return
@@ -183,6 +185,7 @@ public interface UserDao {
 
     /**
      * 获取用户头像
+     *
      * @param id
      * @return
      */

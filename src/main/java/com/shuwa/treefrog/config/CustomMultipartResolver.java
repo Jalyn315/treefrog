@@ -27,7 +27,7 @@ public class CustomMultipartResolver extends CommonsMultipartResolver {
         try {
             List<FileItem> fileItems = ((ServletFileUpload) fileUpload).parseRequest(request);
             return parseFileItems(fileItems, encoding);
-        }catch (FileUploadException ex) {
+        } catch (FileUploadException ex) {
             throw new MultipartException("Failed to parse multipart servlet request", ex);
         }
     }

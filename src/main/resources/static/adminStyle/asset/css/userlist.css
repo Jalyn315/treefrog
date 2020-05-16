@@ -1,63 +1,67 @@
-.user{
+.user {
     margin-top: 50px;
 }
+
 /* 调节宽度 */
-.List{
+.List {
     width: 920px;
 }
-.List1{
+
+.List1 {
     width: 920px;
     background-color: white;
     margin: 30px 300px;
     padding: 20px 0px;
 }
 
-.List1 input{
+.List1 input {
     display: inline-block;
     width: 300px;
     height: 35px;
     margin-right: 40px;
     margin-left: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;   
-    outline:none;
+    border-radius: 5px;
+    outline: none;
 }
 
-table{
-    border-collapse:collapse;
+table {
+    border-collapse: collapse;
     margin-left: 20px;
 }
 
-.List1 input:focus{
+.List1 input:focus {
     border: 2px solid #007bff;
 }
 
-.btn{
-   left: 50%;
+.btn {
+    left: 50%;
 }
- .btn div{
+
+.btn div {
     height: 40px;
     width: 200px;
 }
 
- .btn a{
-   width: 200px;
-   height: 30px;
+.btn a {
+    width: 200px;
+    height: 30px;
 }
 
-.pageIndex{
+.pageIndex {
     display: inline-block;
     list-style: none;
     height: 40px;
     background-color: white;
 
 }
-.pageIndex li{
+
+.pageIndex li {
     display: inline-block;
     margin: 0px 2px;
 }
 
-.pageIndex li a{
+.pageIndex li a {
     display: inline-block;
     text-decoration: none;
     text-align: center;
@@ -69,19 +73,22 @@ table{
     color: black;
 
 }
-.pageIndex li a p{
+
+.pageIndex li a p {
     margin-top: 4px;
     font-size: 10px;
     font-weight: bold;
 }
-.pageIndex li p:hover{
+
+.pageIndex li p:hover {
     color: green;
 }
-.select{
-     background-color: green;
+
+.select {
+    background-color: green;
 }
 
-.checked{
+.checked {
     background-color: #b1ffc3;
 }
 
@@ -90,11 +97,11 @@ table{
 }
 
 
-#dispose-box{
+#dispose-box {
     position: absolute;
     width: 100%;
     height: 100%;
-    background:rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     left: 0;
     top: 0;
     z-index: 999;
@@ -103,7 +110,7 @@ table{
 
 /*重置用户名密码模态框*/
 
-.permissionBox{
+.permissionBox {
     width: 500px;
     height: 274px;
     background-color: white;
@@ -114,21 +121,21 @@ table{
     top: 25%;
 }
 
-.titlebox{
+.titlebox {
     width: 500px;
     height: 69px;
     border-bottom: 1px solid #ccc;
 }
 
-.titlebox h4{
+.titlebox h4 {
     font-size: 25px;
     font-weight: initial;
     line-height: 69px;
     margin-left: 20px;
-    display:inline;
+    display: inline;
 }
 
-.titlebox button{
+.titlebox button {
     float: right;
     width: 50px;
     height: 56px;
@@ -139,26 +146,26 @@ table{
     color: rgb(99, 99, 99);
 }
 
-.titlebox button:hover{
+.titlebox button:hover {
     color: black;
 }
 
-.titlebox button:active{
+.titlebox button:active {
     color: rgb(130, 127, 127);
 }
 
-.inputbox{
+.inputbox {
     height: 100px;
     padding: 16px;
 }
 
-.inputbox .usern{
+.inputbox .usern {
     height: 38px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.inputbox .usern input{
+.inputbox .usern input {
     display: block;
     height: 38px;
     width: 100%;
@@ -167,22 +174,7 @@ table{
     border-radius: 5px;
 }
 
-.inputbox .userp{
-    margin-top: 20px;
-    height: 38px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: none;
-}
-.inputbox .userp input{
-    display: block;
-    height: 38px;
-    width: 100%;
-    border: none;
-    line-height: 25px;
-    border-radius: 5px;
-}
-.inputbox .selectbox{
+.inputbox .userp {
     margin-top: 20px;
     height: 38px;
     border: 1px solid #ccc;
@@ -190,7 +182,7 @@ table{
     display: none;
 }
 
-.inputbox .selectbox select{
+.inputbox .userp input {
     display: block;
     height: 38px;
     width: 100%;
@@ -199,13 +191,30 @@ table{
     border-radius: 5px;
 }
 
-.btnbox{
+.inputbox .selectbox {
+    margin-top: 20px;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: none;
+}
+
+.inputbox .selectbox select {
+    display: block;
+    height: 38px;
+    width: 100%;
+    border: none;
+    line-height: 25px;
+    border-radius: 5px;
+}
+
+.btnbox {
     height: 71px;
     padding-right: 16px;
     border-top: 1px solid #ccc;
 }
 
-.btnbox button{
+.btnbox button {
     width: 78px;
     height: 38px;
     margin-top: 20px;
@@ -216,55 +225,55 @@ table{
     background-color: white;
 }
 
-.btnbox #last1{
-    color:rgb(159, 159, 159);
+.btnbox #last1 {
+    color: rgb(159, 159, 159);
 }
 
-.btnbox #next1{
-    color:rgb(0, 123, 255);
+.btnbox #next1 {
+    color: rgb(0, 123, 255);
     border: 1px solid rgb(0, 123, 255);
 }
 
-.btnbox #close{
+.btnbox #close {
     background-color: rgb(23, 162, 184);
     color: white;
     border: none;
 }
 
-.btnbox #close:hover{
+.btnbox #close:hover {
     background-color: rgb(29, 131, 147);
     color: white;
 }
 
-.btnbox #update{
+.btnbox #update {
     background-color: rgb(155, 88, 181);
     color: white;
     border: none;
 }
 
-.btnbox #update:hover{
+.btnbox #update:hover {
     background-color: rgb(124, 75, 144);
     color: white;
 }
 
-.btnbox #last1:hover{
-    background-color:rgb(159, 159, 159);
+.btnbox #last1:hover {
+    background-color: rgb(159, 159, 159);
     color: white;
 }
 
-.btnbox #next1:hover{
-    background-color:rgb(0, 123, 255);
+.btnbox #next1:hover {
+    background-color: rgb(0, 123, 255);
     color: white;
 }
 
-.userBuddle{
+.userBuddle {
     position: absolute;
     left: 50%;
     top: 17%;
     display: none;
 }
 
-.permissionBuddle{
+.permissionBuddle {
     position: absolute;
     left: 40%;
     top: 38%;
@@ -273,26 +282,27 @@ table{
 
 
 /* 绝对定位是的参照物是以最接近它的开了定位的父元素 */
-#buddle{
+#buddle {
     display: block;
 }
 
-.message{
+.message {
     width: 80px;
     height: 30px;
-    border:  2px solid green;
+    border: 2px solid green;
     border-radius: 10px;
     background-color: green;
 
 }
-.message p{
+
+.message p {
     color: white;
     margin-top: 5px;
     text-align: center;
     font-size: 14px;
 }
 
-.message::before{
+.message::before {
     content: "";
     width: 0px;
     height: 0px;
@@ -300,24 +310,25 @@ table{
     position: absolute;
     top: 30px;
     left: 50px;
-    border-color: green  transparent transparent transparent;
+    border-color: green transparent transparent transparent;
 }
 
 /*信息提示框*/
-.msgbox{
+.msgbox {
     position: absolute;
     left: 40%;
     top: 20%;
     width: 250px;
     height: 150px;
     border: 1px solid green;
-    border-radius: 0px 0px 3px 3px ;
+    border-radius: 0px 0px 3px 3px;
     z-index: 999;
     background: white;
     border-top: none;
     display: none;
 }
-.msgbox #sure{
+
+.msgbox #sure {
     position: absolute;
     right: 10px;
     bottom: 10px;
@@ -328,22 +339,24 @@ table{
     border: none;
 }
 
-.msgbox .msgtitle{
+.msgbox .msgtitle {
     width: 251px;
     height: 30px;
     background: green;
 }
-.msgbox .msgtitle::before{
+
+.msgbox .msgtitle::before {
     content: "";
     display: table;
 }
 
-.msgbox .msgtitle h4{
+.msgbox .msgtitle h4 {
     color: white;
     margin-top: 5px;
     margin-left: 5px;
 }
-.msgbox p{
+
+.msgbox p {
     margin-top: 20px;
     color: black;
     font-family: "微软雅黑";

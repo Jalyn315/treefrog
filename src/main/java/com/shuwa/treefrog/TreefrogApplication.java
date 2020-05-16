@@ -12,7 +12,7 @@ public class TreefrogApplication {
 //        SpringApplication newRun = new SpringApplication(TreefrogApplication.class);
 //        newRun.setBannerMode(Banner.Mode.OFF);
 //        newRun.run(args);
-        SpringApplication.run(TreefrogApplication.class,args);
+        SpringApplication.run(TreefrogApplication.class, args);
     }
 
 }

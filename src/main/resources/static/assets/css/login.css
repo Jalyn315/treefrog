@@ -1,12 +1,14 @@
-html,body{
+html, body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     height: 100%;
 }
-.container{
+
+.container {
     height: 100%;
 }
+
 .bg-color {
     background-color: #12411d;
     float: right;
@@ -22,20 +24,21 @@ html,body{
     width: 50%;
 }
 
-.box{
+.box {
     width: 300px;
     padding: 40px;
     position: absolute;
     top: 50%;
     left: 50%;
     /* 定义元素2D转换 */
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     background: #191919;
     text-align: center;
     border-radius: 20px;
     opacity: 0.9;
 }
-.box input[type = "text"],.box input[type="password"]{
+
+.box input[type = "text"], .box input[type="password"] {
     border: 0;
     background: none;
     display: block;
@@ -51,42 +54,47 @@ html,body{
     border-radius: 24px;
     transition: 0.25s;
 }
-.box h1{
+
+.box h1 {
     color: white;
     /* 文本以大写字母显示 */
     text-transform: uppercase;
     font-weight: bold;
 
 }
-.box input[type="text"]:focus,input[type="password"]:focus{
+
+.box input[type="text"]:focus, input[type="password"]:focus {
     width: 280px;
     border-color: #2ecc71;
 }
 
-.box span{
+.box span {
     display: block;
     margin-top: -15px;
     margin-right: -150px;
 }
-.geetest_radar_tip span{
+
+.geetest_radar_tip span {
     margin-top: 12px;
 }
-.geetest_success_radar_tip span{
+
+.geetest_success_radar_tip span {
     margin-top: 2px;
 }
-.box a{
+
+.box a {
     color: white;
     font-size: 12px;
 }
 
-.box a:hover{
+.box a:hover {
     font-size: 15px;
 }
 
-.box input[type="submit"]{
-    border:0px;
+.box input[type="submit"] {
+    border: 0px;
     background: none;
-    margin:10px auto;
+    margin: 10px auto;
     text-align: center;
     border: 2px solid #2ecc71;
     outline: none;
@@ -97,6 +105,7 @@ html,body{
     /* 改变光标 */
     cursor: pointer;
 }
-.box input[type="submit"]:hover{
+
+.box input[type="submit"]:hover {
     background: #2ecc71;
 }

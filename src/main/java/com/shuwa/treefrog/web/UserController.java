@@ -42,60 +42,57 @@ public class UserController {
      * @return 用户修改页面
      */
     @GetMapping("/updatePage")
-    public String toChangePage(){
+    public String toChangePage() {
         logger.info("UserController->toChangePage");
         return "user";
     }
 
     /**
      * 提交修改   （不使用）
+     *
      * @param user
      * @return
      */
     @PostMapping("/updateEmp")
-    public String update(User user,HttpSession session,Model model){
+    public String update(User user, HttpSession session, Model model) {
         logger.info("UserController->update");
         User u = (User) session.getAttribute("user");
         user.setId(u.getId());
-        if( userService.update(user)){
+        if (userService.update(user)) {
             session.setAttribute("user", userService.get(u.getId()));
-            model.addAttribute("message","修改信息成功");
-        }
-        else {
-            model.addAttribute("message","修改信息失败");
+            model.addAttribute("message", "修改信息成功");
+        } else {
+            model.addAttribute("message", "修改信息失败");
         }
         return "user";
     }
 
     @PostMapping("/updateUserInfo")
     @ResponseBody
-    public String updateUserInfo(User user){
+    public String updateUserInfo(User user) {
         String msg = "";
-        if( userService.update(user)){
+        if (userService.update(user)) {
             msg = "修改成功！";
-        }
-        else {
+        } else {
             msg = "修改失败！请联系管理员!";
         }
         return msg;
     }
 
 
-
-
-
     /**
      * 登陆
+     *
      * @return
      */
     @GetMapping("/login")
-    public String toLoginPage(){
+    public String toLoginPage() {
         logger.info("UserController->toLoginPage");
         return "login";
     }
 
     /**
-     *用户登录
+     * 用户登录
      *
      * @param username
      * @param password
@@ -131,10 +128,11 @@ public class UserController {
     /**
      * 注销登录
      * 重定向前台页面。清空session中的缓存
+     *
      * @return
      */
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
 
         session.removeAttribute("loginUser");
         session.removeAttribute("userId");
@@ -144,6 +142,7 @@ public class UserController {
 
     /**
      * 用户注册功能
+     *
      * @param userName
      * @param password
      * @param phone
@@ -199,10 +198,11 @@ public class UserController {
     /**
      * 编辑个人信息
      * [https://blog.csdn.net/leo3070/article/details/81046383]
+     *
      * @return 用户修改页面
      */
     @RequestMapping("/userUpdate{id}")
-    public String userUpdate(@PathVariable("id")Integer id
+    public String userUpdate(@PathVariable("id") Integer id
             , Model model
             , HttpSession session) {
         logger.info("UserController->userUpdate");
@@ -215,26 +215,25 @@ public class UserController {
 
     @GetMapping("/getUserInfo")
     @ResponseBody
-    public User userInfo(Integer id){
+    public User userInfo(Integer id) {
         return userService.get(id);
     }
 
 
-
-
     /**
      * 判断原密码是否正确
+     *
      * @param passwordAgo
      * @param id
      * @return
      */
     @PostMapping("/verify_passwordAgo")
     @ResponseBody
-    public String verifyPasswordAgo(String passwordAgo, Integer id){
+    public String verifyPasswordAgo(String passwordAgo, Integer id) {
         String msg = "";
-        if (userService.verifyPassword(passwordAgo, id)){
+        if (userService.verifyPassword(passwordAgo, id)) {
             msg = "true";
-        }else {
+        } else {
             msg = "原密码不正确！请重新输入";
         }
         return msg;
@@ -242,21 +241,22 @@ public class UserController {
 
     /**
      * 根据id修改用户密码
+     *
      * @param password
      * @param id
      * @return
      */
     @PostMapping("/resetPassword")
     @ResponseBody
-    public String resetPassword(String password, Integer id){
+    public String resetPassword(String password, Integer id) {
         String msg = "";
         if (!"".equals(password)) {
             if (userService.resetassword(password, id)) {
                 msg = "修改成功! ";
-            }else {
+            } else {
                 msg = "修改失败!";
             }
-        }else {
+        } else {
             msg = "密码不能为空!";
         }
         return msg;
@@ -264,10 +264,10 @@ public class UserController {
 
     @PostMapping("/update/via")
     @ResponseBody
-    public String updateVia(@RequestParam("file") MultipartFile file, HttpSession session){
+    public String updateVia(@RequestParam("file") MultipartFile file, HttpSession session) {
         try {
-            userService.uploadUserVia(file,Integer.parseInt(session.getAttribute("userId").toString()));
-        }catch (Exception e){
+            userService.uploadUserVia(file, Integer.parseInt(session.getAttribute("userId").toString()));
+        } catch (Exception e) {
             System.out.println(e);
         }
         return "上传成功";
@@ -275,7 +275,7 @@ public class UserController {
 
     @GetMapping("/via")
     @ResponseBody
-    public String getvia(HttpSession session){
+    public String getvia(HttpSession session) {
         return userService.getVia(Integer.parseInt(session.getAttribute("userId").toString()));
     }
 

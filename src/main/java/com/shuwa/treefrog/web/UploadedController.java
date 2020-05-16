@@ -26,10 +26,11 @@ public class UploadedController {
 
     /**
      * 来到请求页面
+     *
      * @return
      */
     @GetMapping("/upload")
-    public String  toUploadPage(HttpSession session ){
+    public String toUploadPage(HttpSession session) {
         return "upload";
     }
 
@@ -39,26 +40,28 @@ public class UploadedController {
 
     /**
      * 文件上传处理
+     *
      * @param file
      * @return
      */
     @PostMapping("/upload")
     @ResponseBody
-    public String  upload(@RequestParam("file") MultipartFile file, UploadedRecord uploadedRecord){
+    public String upload(@RequestParam("file") MultipartFile file, UploadedRecord uploadedRecord) {
 
         String msg = "";
-        if(uploadService.uploadRecord(file, uploadedRecord)){
+        if (uploadService.uploadRecord(file, uploadedRecord)) {
             logger.info("文件上传成功");
             msg = "文件上传成功！";
-        }else{
+        } else {
             logger.info("文件上传失败");
             msg = "文件上传失败，请联系管理员";
         }
         return msg;
     }
+
     @RequestMapping(value = "/uploadStatus")
     @ResponseBody
-    public Integer uploadStatus(HttpServletRequest request){
+    public Integer uploadStatus(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Object percent = session.getAttribute("upload_percent");
         return null != percent ? (Integer) percent : 0;
@@ -66,12 +69,13 @@ public class UploadedController {
 
     /**
      * 访问上传记录
+     *
      * @param page
      * @param model
      * @return
      */
     @GetMapping("admin/uploads/{page}")
-    public String uploadInfo(@PathVariable("page") Integer page, Model model){
+    public String uploadInfo(@PathVariable("page") Integer page, Model model) {
         int limit = 4;
         PageInfo<File> uploadInfo = uploadService.fileUploadInfo(page, limit);
         PageParam pageParam = new PageParam();
@@ -80,8 +84,8 @@ public class UploadedController {
         pageParam.setLastPage(limit);
         pageParam.setIsFirstPage(uploadInfo.isIsFirstPage());
         pageParam.setIsLastPage(uploadInfo.isIsLastPage());
-        model.addAttribute("uploads",uploadInfo.getList());
-        model.addAttribute("uploadPage",pageParam);
+        model.addAttribute("uploads", uploadInfo.getList());
+        model.addAttribute("uploadPage", pageParam);
         return "admin/uploadlist";
     }
 

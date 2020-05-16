@@ -15,6 +15,7 @@ public interface TypeDao {
 
     /**
      * 增加一个类型
+     *
      * @param typeName
      * @param createTime
      * @return
@@ -24,6 +25,7 @@ public interface TypeDao {
 
     /**
      * 根据 id 来删除一个类型
+     *
      * @param id
      * @return
      */
@@ -33,6 +35,7 @@ public interface TypeDao {
 
     /**
      * 更新 一个类型，比如重命名指定 id 的类型
+     *
      * @param type
      * @return
      */
@@ -41,6 +44,7 @@ public interface TypeDao {
 
     /**
      * 查询所有的 类型
+     *
      * @return
      */
     @Select("select * from type")
@@ -48,6 +52,7 @@ public interface TypeDao {
 
     /**
      * 查询所有的 类型
+     *
      * @return
      */
     @Select("select * from type")

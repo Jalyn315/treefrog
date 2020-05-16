@@ -25,7 +25,7 @@ public class TypeServiceTest {
     public void addTypeTest() {
         try {
             createTime = new Date();
-            System.out.println(typeService.addType(typeName,createTime));
+            System.out.println(typeService.addType(typeName, createTime));
         } catch (TypeNameException e) {
             e.getMessage();
         }
@@ -55,6 +55,6 @@ public class TypeServiceTest {
     public void typePageQueryTest() {
         Integer currentPage = 1;
         Integer limit = 2;
-        System.out.println(typeService.typePageQuery(currentPage,limit));
+        System.out.println(typeService.typePageQuery(currentPage, limit));
     }
 }

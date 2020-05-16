@@ -22,6 +22,7 @@ public interface FileDao {
 
     /**
      * 通过文件id获取文件路径
+     *
      * @param id 文件id
      * @return
      */
@@ -44,10 +45,11 @@ public interface FileDao {
      * @return
      */
     @Select("select id form file where local_url=#{localUrl}")
-    long  getIdByVisitUrl(String localUrl);
+    long getIdByVisitUrl(String localUrl);
 
     /**
      * 通过访问路径获取本地文件路径
+     *
      * @param visitUrl
      * @return
      */
@@ -56,6 +58,7 @@ public interface FileDao {
 
     /**
      * t通过访问路径删除文
+     *
      * @param visitUrl 访问路径
      * @return
      */
@@ -64,6 +67,7 @@ public interface FileDao {
 
     /**
      * 通过本地路径删除文件
+     *
      * @param localUrl 本地路径
      * @return
      */
@@ -72,6 +76,7 @@ public interface FileDao {
 
     /**
      * 检查本地路径
+     *
      * @param localUrl
      * @return
      */
@@ -85,8 +90,10 @@ public interface FileDao {
      */
     @Select("select count(*) from file where visit_url=#{visitUrl}")
     int checkVisitUrl(String visitUrl);
+
     /**
      * 添加一个文件
+     *
      * @param file
      * @return
      */
@@ -98,6 +105,7 @@ public interface FileDao {
 
     /**
      * 删除一个文件
+     *
      * @param id 文件编号
      */
     @Delete("delete form file where id=#{id}")
@@ -105,6 +113,7 @@ public interface FileDao {
 
     /**
      * 根据用户ID删除文件
+     *
      * @param userId
      */
     @Delete("delete from file where user_id=#{userId}")
@@ -112,6 +121,7 @@ public interface FileDao {
 
     /**
      * 删除文件
+     *
      * @param categoryId 分类编号
      */
     @Delete("delete form file where category_id=#{categoryId}")
@@ -121,7 +131,6 @@ public interface FileDao {
      * 更新文件基本信息
      *
      * @param file 文件
-     *
      * @return 是否更新成功
      */
     @Update("update file set name=#{name},suffix=#{suffix},local_url=#{localUrl},visit_url=#{visitUrl}," +
@@ -133,8 +142,8 @@ public interface FileDao {
     /**
      * 更新文件名
      *
-     * @param id 编号
-     * @param name 文件名
+     * @param id     编号
+     * @param name   文件名
      * @param suffix 后缀名
      */
     @Update("update file set name=#{name},suffix=#{suffix},last_modify_time=current_timestamp where id=#{id}")
@@ -152,7 +161,7 @@ public interface FileDao {
     /**
      * 更新文件本地路径
      *
-     * @param id 编号
+     * @param id       编号
      * @param localUrl 本地路径
      */
     @Update("update file set local_url=#{localUrl} where id=#{id}")
@@ -162,7 +171,7 @@ public interface FileDao {
     /**
      * 更新文件访问路径
      *
-     * @param id 编号
+     * @param id       编号
      * @param visitUrl 访问链接
      */
     @Update("update file set visit_url=#{visitUrl} where id=#{id}")
@@ -171,7 +180,7 @@ public interface FileDao {
     /**
      * 更新文件描述
      *
-     * @param id 文件编号
+     * @param id          文件编号
      * @param description 描述
      */
     @Update("update file set description=#{description} where id=#{id}")
@@ -196,7 +205,7 @@ public interface FileDao {
     /**
      * 更新文件标签
      *
-     * @param id 编号
+     * @param id  编号
      * @param tag 标签
      */
     @Update("update file set tag=#{tag} where id=#{id}")
@@ -205,7 +214,7 @@ public interface FileDao {
     /**
      * 更新文件分类
      *
-     * @param id 编号
+     * @param id         编号
      * @param categoryId 分类编号
      */
     @Update("update file set category_id=#{categoryId} where id=#{id}")
@@ -215,7 +224,6 @@ public interface FileDao {
      * 获取文件信息
      *
      * @param visitUrl 访问链接
-     *
      * @return {@link File}
      */
     @Select("select * from file where visit_url=#{visitUrl}")
@@ -223,6 +231,7 @@ public interface FileDao {
 
     /**
      * 查询系统中的所有文件
+     *
      * @return
      */
     @Select("select * from file")
@@ -230,6 +239,7 @@ public interface FileDao {
 
     /**
      * 根据文件id获取文件
+     *
      * @param id
      * @return
      */
@@ -258,6 +268,7 @@ public interface FileDao {
 
     /**
      * 修改文件权限
+     *
      * @param id
      * @param upload
      * @param delete
@@ -280,6 +291,7 @@ public interface FileDao {
 
     /**
      * 模糊查询
+     *
      * @param keyword 关键字
      * @return
      */
@@ -289,6 +301,7 @@ public interface FileDao {
 
     /**
      * 添加收藏
+     *
      * @param fileId
      * @param userId
      * @return
@@ -298,6 +311,7 @@ public interface FileDao {
 
     /**
      * 查询个人收藏
+     *
      * @param userId
      * @return
      */
@@ -306,6 +320,7 @@ public interface FileDao {
 
     /**
      * 删除收藏
+     *
      * @param fileId
      * @return
      */
@@ -314,6 +329,7 @@ public interface FileDao {
 
     /**
      * 查找已被收藏
+     *
      * @param fileId
      * @param userId
      * @return

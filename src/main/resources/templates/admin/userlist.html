@@ -23,38 +23,40 @@
 <div id="dispose-box">
     <!--用户权限模态框-->
     <div class="permissionBox">
-    <div class="userBuddle">
-        <div id="buddle1">
-            <div class="message">
-                <p>用户名</p>
+        <div class="userBuddle">
+            <div id="buddle1">
+                <div class="message">
+                    <p>用户名</p>
+                </div>
+                <div class="arrows"></div>
             </div>
-            <div class="arrows"></div>
         </div>
-    </div>
-    <div class="permissionBuddle">
-        <div id="buddle2">
-            <div class="message">
-                <p>新密码</p>
+        <div class="permissionBuddle">
+            <div id="buddle2">
+                <div class="message">
+                    <p>新密码</p>
+                </div>
+                <div class="arrows"></div>
             </div>
-            <div class="arrows"></div>
+        </div>
+        <div class="titlebox"><h4>重置用户权限</h4>
+            <button>×</button>
+        </div>
+        <div class="inputbox">
+            <div class="usern">
+                <input type="text" value="Jalyn">
+            </div>
+            <div class="userp">
+                <input type="password" id="newPassword">
+            </div>
+        </div>
+        <div class="btnbox">
+            <button id="update">更新</button>
+            <button id="close">×关闭</button>
+            <button id="next1">下一个</button>
+            <button id="last1">上一个</button>
         </div>
     </div>
-    <div class="titlebox"><h4>重置用户权限</h4><button>×</button></div>
-    <div class="inputbox">
-        <div class="usern">
-            <input type="text" value="Jalyn">
-        </div>
-        <div class="userp">
-            <input type="password" id="newPassword">
-        </div>
-    </div>
-    <div class="btnbox">
-        <button id="update">更新</button>
-        <button id="close">×关闭</button>
-        <button id="next1">下一个</button>
-        <button id="last1">上一个</button>
-    </div>
-</div>
 </div>
 <!-- 用户管理 -->
 <table></table>
@@ -86,7 +88,7 @@
             </thead>
             <tbody>
             <tr th:each="user:${users}">
-                <td><input type="checkbox" ></td>
+                <td><input type="checkbox"></td>
                 <td th:text="${user.getId()}"></td>
                 <td th:text="${user.getUsername()}"></td>
                 <td th:text="${user.getBirth()}"></td>
@@ -101,14 +103,15 @@
         <div class="pagediv">
             <a id="last" th:href="@{/admin/users/}+${page.pageNum-1}" th:if="not ${page.isFirstPage}" class="pageBtn">上一页</a>
             <ul class="pageIndex" th:each="i:${#numbers.sequence(1,page.pageTotal)}" th:if="${page}">
-                <li><a th:href="@{/admin/users/}+${i}" ><p th:text="${i}"></p></a></li>
+                <li><a th:href="@{/admin/users/}+${i}"><p th:text="${i}"></p></a></li>
             </ul>
-            <a id="next" th:href="@{/admin/users/}+${page.pageNum+1}" th:if="not ${page.isLastPage}" class="pageBtn">下一页</a>
+            <a id="next" th:href="@{/admin/users/}+${page.pageNum+1}" th:if="not ${page.isLastPage}"
+               class="pageBtn">下一页</a>
         </div>
     </div>
 </div>
 </body>
-<script  type="text/javascript" th:inline="javascript">
+<script type="text/javascript" th:inline="javascript">
     //入口函数
     $(function () {
         //提示框
@@ -127,14 +130,14 @@
          * 实现导航栏点击提示
          */
         $('#s6').addClass('active');
-       var a = [[${firstLoad}]];
-        if(a){
+        var a = [[${firstLoad}]];
+        if (a) {
             $('#s6')[0].click();
         }
         //分页下标处于选择选择状态
         var pageNum = [[${page.pageNum}]];
         //js语法中，引号内变量会直接解释为字符串，因此使用:eq()时参数将被识别为字符串而不是变量指代的内容
-        $('.pageIndex li:eq('+(pageNum-1)+')').children().addClass('select');
+        $('.pageIndex li:eq(' + (pageNum - 1) + ')').children().addClass('select');
         /**
          * 修改权限按钮点击事件
          */

@@ -77,6 +77,7 @@ public class ViewController {
 
     /**
      * 控制页面转发到 /admin/login.html 不带数据
+     *
      * @return
      */
     @GetMapping(value = "/adminLogin")
@@ -84,14 +85,16 @@ public class ViewController {
         logger.info("ViewController->adminLogin");
         return "admin/login";
     }
+
     /**
      * 控制页面转发到 /admin/userlist.html 不带数据
+     *
      * @return
      */
     @RequestMapping(value = "/adminUserList")
     public String adminUserList(Model model) {
         logger.info("ViewController->adminUserList");
-        model.addAttribute("page",new PageParam());
+        model.addAttribute("page", new PageParam());
         return "admin/userlist";
     }
 

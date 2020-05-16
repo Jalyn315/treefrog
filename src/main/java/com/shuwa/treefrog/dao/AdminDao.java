@@ -13,6 +13,7 @@ import java.util.List;
 public interface AdminDao {
     /**
      * 添加 管理员
+     *
      * @param userName
      * @param password
      * @return
@@ -22,6 +23,7 @@ public interface AdminDao {
 
     /**
      * 根据管理员 id 来删除管理员
+     *
      * @param id
      * @return
      */
@@ -30,6 +32,7 @@ public interface AdminDao {
 
     /**
      * 更新管理员信息
+     *
      * @param admin
      * @return
      */
@@ -38,7 +41,6 @@ public interface AdminDao {
 
 
     /**
-     *
      * @param id
      * @return
      */
@@ -47,6 +49,7 @@ public interface AdminDao {
 
     /**
      * 列出所有的管理员
+     *
      * @return
      */
     @Select("select * from admin")
@@ -54,6 +57,7 @@ public interface AdminDao {
 
     /**
      * 根据 用户名 和 密码 来查询管理员
+     *
      * @param userName
      * @param password
      * @return
@@ -63,6 +67,7 @@ public interface AdminDao {
 
     /**
      * 返回 userName
+     *
      * @param userName
      * @return
      */

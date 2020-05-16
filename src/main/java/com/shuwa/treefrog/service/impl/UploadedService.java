@@ -22,9 +22,9 @@ public class UploadedService implements IUploadedService {
     private UserDao userDao;
     @Autowired
     private IFileService fileService;
+
     @Override
-    public boolean uploadRecord(MultipartFile file, UploadedRecord uploadedRecord)
-    {
+    public boolean uploadRecord(MultipartFile file, UploadedRecord uploadedRecord) {
         //获取文件名
         String fileName = FileUtils.getFileName(file.getOriginalFilename());
         //获取上传路径
@@ -35,27 +35,28 @@ public class UploadedService implements IUploadedService {
         uploadedRecord.setSize(file.getSize());
         uploadedRecord.setFileName(fileName);
         uploadedRecord.setLocalUrl(uploadPath);
-        uploadedRecord.setUsername( userDao.getByUserName(uploadedRecord.getUserId()));
-        uploadedRecord.setEmail( userDao.getByEmail(uploadedRecord.getUserId()));
+        uploadedRecord.setUsername(userDao.getByUserName(uploadedRecord.getUserId()));
+        uploadedRecord.setEmail(userDao.getByEmail(uploadedRecord.getUserId()));
         uploadedRecord.setDate(new Date());
         System.out.println(uploadedRecord);
-        if(fileService.uploaded(file,uploadedRecord)){
+        if (fileService.uploaded(file, uploadedRecord)) {
             //上传成功
             return true;
-        }else {
+        } else {
             //上传失败
             return false;
         }
     }
+
     @Override
     public PageInfo<File> fileUploadInfo(Integer page, Integer limit) {
-        PageHelper.startPage(page,limit);
+        PageHelper.startPage(page, limit);
         List<File> uploadInfo = fileService.getFileList();
-        for(File file : uploadInfo){
+        for (File file : uploadInfo) {
             file.setName(FileUtils.getFileRealName(file.getName()));
-            if( file.getUserId() != 0) {
+            if (file.getUserId() != 0) {
                 file.setUserName(userDao.getByUserName(file.getUserId()));
-            }else {
+            } else {
                 file.setUserName("管理员");
             }
         }

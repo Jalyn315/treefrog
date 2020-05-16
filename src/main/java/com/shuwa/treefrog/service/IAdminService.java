@@ -13,6 +13,7 @@ import com.shuwa.treefrog.exception.RegisterException;
 public interface IAdminService {
     /**
      * 管理员登录
+     *
      * @param userName
      * @param password
      * @return
@@ -21,6 +22,7 @@ public interface IAdminService {
 
     /**
      * 管理员注册
+     *
      * @param userName
      * @param password
      * @return
@@ -29,6 +31,7 @@ public interface IAdminService {
 
     /**
      * 判断管理员是否重名
+     *
      * @param userName
      * @return
      */
@@ -36,8 +39,9 @@ public interface IAdminService {
 
     /**
      * 分页查询得到全部用户
+     *
      * @param currentPage 当前页数
-     * @param limit 每页显示多少条数据
+     * @param limit       每页显示多少条数据
      * @return
      */
     PageInfo<User> getAllUserByPageingQuery(Integer currentPage, Integer limit);

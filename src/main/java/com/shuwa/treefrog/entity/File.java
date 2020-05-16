@@ -227,20 +227,19 @@ public class File {
      * @param lastModifyTime
      */
     /**
-     *
-     * @param id    文件id
-     * @param name   文件名
-     * @param suffix  文件后缀
-     * @param localUrl  上传本地路径
-     * @param visitUrl   访问路径
-     * @param size         文件大小
-     * @param createTime   上传时间
+     * @param id            文件id
+     * @param name          文件名
+     * @param suffix        文件后缀
+     * @param localUrl      上传本地路径
+     * @param visitUrl      访问路径
+     * @param size          文件大小
+     * @param createTime    上传时间
      * @param description   文件描述
-     * @param checkTimes   文件浏览次数
+     * @param checkTimes    文件浏览次数
      * @param downloadCount 文件下载次数
-     * @param tag              文件标签
-     * @param userId            上传用户id
-     * @param categoryId        文件类别
+     * @param tag           文件标签
+     * @param userId        上传用户id
+     * @param categoryId    文件类别
      */
     public File(long id, String name, String suffix, String localUrl, String visitUrl, long size, Date createTime, String description, int checkTimes, int downloadCount, String tag, int userId, int categoryId) {
         this.id = id;
@@ -256,16 +255,17 @@ public class File {
         this.tag = tag;
         this.userId = userId;
         this.categoryId = categoryId;
-}
+    }
 
     /**
      * 文件作者设置文件权限
+     *
      * @param isDeletable
      * @param isUpdatable
      * @param isDownloadable
      * @param isVisible
      */
-    public void setAuth( int isDeletable, int isUpdatable, int isDownloadable, int isVisible) {
+    public void setAuth(int isDeletable, int isUpdatable, int isDownloadable, int isVisible) {
         this.isDeletable = isDeletable;
         this.isUpdatable = isUpdatable;
         this.isDownloadable = isDownloadable;

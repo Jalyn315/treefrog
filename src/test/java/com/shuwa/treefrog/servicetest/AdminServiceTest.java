@@ -22,7 +22,7 @@ public class AdminServiceTest {
     @Test
     public void loginTest() {
         try {
-            System.out.println("管理员登录："+adminService.login(userName,password));
+            System.out.println("管理员登录：" + adminService.login(userName, password));
         } catch (LoginException e) {
             System.err.println(e);
         }
@@ -31,7 +31,7 @@ public class AdminServiceTest {
     @Test
     public void registerTest() {
         try {
-            System.out.println("管理员注册："+adminService.register(userName,password));
+            System.out.println("管理员注册：" + adminService.register(userName, password));
         } catch (RegisterException e) {
             System.err.println(e);
         }

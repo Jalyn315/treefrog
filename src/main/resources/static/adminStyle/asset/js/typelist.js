@@ -9,14 +9,15 @@ function msg() {
         $('.msgbox').hide();
     });
 }
+
 function del() {
     $('.del').click(function () {
         var typeItem = $(this).parent().parent();
 
         $.get({
-            url:"/admin/typeDelete",
-            data:{"id":$(this).parent().siblings().eq(0).text()},
-            success:function (data) {
+            url: "/admin/typeDelete",
+            data: {"id": $(this).parent().siblings().eq(0).text()},
+            success: function (data) {
                 $('.msgbox #info').html(data);
                 $('.msgbox').show();
                 typeItem.remove();

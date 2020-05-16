@@ -10,7 +10,7 @@ public class User implements Serializable {
     private String username;
     private String realName;
     private String sex;
-    private  String birth;
+    private String birth;
     private String email;
     private String password;
     private String phone;
@@ -41,11 +41,11 @@ public class User implements Serializable {
         this.sex = sex;
     }
 
-    public String  getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(String  birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 

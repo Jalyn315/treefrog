@@ -11,13 +11,12 @@ public interface UploadedDao {
 
     /**
      * 根据用户id获取用户名。
+     *
      * @param id
      * @return
      */
     @Select("select username from user where id = #{id}")
     String getUserName(int id);
-
-
 
 
 }

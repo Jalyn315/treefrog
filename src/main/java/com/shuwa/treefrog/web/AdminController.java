@@ -64,12 +64,13 @@ public class AdminController {
     /**
      * 传递到主页面
      * 主页面
+     *
      * @return
      */
     @RequestMapping(value = "/user_list")
     public String userList(Model model) {
         logger.info("AdminController->userList");
-        model.addAttribute("page",new PageParam());
+        model.addAttribute("page", new PageParam());
         return "admin/userlist";
     }
 
@@ -89,25 +90,26 @@ public class AdminController {
 
     /**
      * 处理 管理员登陆
+     *
      * @return
      */
     @PostMapping(value = "/adminLoginForm")
     public String adminLoginForm(
             @RequestParam("username") String userName
-            ,@RequestParam("password") String password
-            ,HttpServletRequest request
-            ,Model model) {
+            , @RequestParam("password") String password
+            , HttpServletRequest request
+            , Model model) {
         logger.info("AdminController->adminLoginForm");
-        Map<String,String> loginErrorMap = new HashMap<>();
+        Map<String, String> loginErrorMap = new HashMap<>();
         try {
-            adminService.login(userName,password);
+            adminService.login(userName, password);
         } catch (LoginException e) {
-            loginErrorMap.put("loginError",e.getMessage());
+            loginErrorMap.put("loginError", e.getMessage());
             request.setAttribute("loginErrorMap", loginErrorMap);
             return "admin/login";
         }
-        model.addAttribute("firstLoad",'1');//判断是否是第一次加载
-        model.addAttribute("page",new PageParam());//判断是否是第一次加载
+        model.addAttribute("firstLoad", '1');//判断是否是第一次加载
+        model.addAttribute("page", new PageParam());//判断是否是第一次加载
         return "admin/userlist"; //登录成功，到用户管理页面
     }
 
@@ -116,20 +118,20 @@ public class AdminController {
             @RequestParam("username") String userName
             , @RequestParam("password") String password
             , @RequestParam("rePassword") String rePassword
-            ,Model model
-            ) {
+            , Model model
+    ) {
         logger.info("AdminController->adminRegisterForm");
-        Map<String,String> registerErrorMap = new HashMap<>();
+        Map<String, String> registerErrorMap = new HashMap<>();
         //进行简单的密码重复验证
         if (password != null && !password.equals(rePassword)) {
-           model.addAttribute("passwordmsg","两次密码不匹配！");
+            model.addAttribute("passwordmsg", "两次密码不匹配！");
             return "admin/login";
         }
         try {
-            adminService.register(userName,password);
+            adminService.register(userName, password);
         } catch (RegisterException e) {
             logger.info(e.toString());
-            model.addAttribute("usernamemsg","用户名重复！");
+            model.addAttribute("usernamemsg", "用户名重复！");
             return "admin/login";
         }
 //        注册成功后重定向的登录页面，否则再次注册转调路径会出错
@@ -138,14 +140,15 @@ public class AdminController {
 
     /**
      * 管理员进行用户分页查询功能
+     *
      * @param currentPage
      * @param model
      * @return
      */
     @GetMapping(value = "/users/{id}")
     public String userList(@PathVariable("id") Integer currentPage, Model model) {
-        int limit =2; //页面数据个数
-        PageInfo<User> pageInfo = adminService.getAllUserByPageingQuery(currentPage,limit);
+        int limit = 2; //页面数据个数
+        PageInfo<User> pageInfo = adminService.getAllUserByPageingQuery(currentPage, limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
         pageParam.setPageTotal(pageInfo.getPages());
@@ -153,21 +156,22 @@ public class AdminController {
         pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
         pageParam.setIsLastPage(pageInfo.isIsLastPage());
         //传递到 admin/userlist.html 的参数
-        model.addAttribute("users",pageInfo.getList());
-        model.addAttribute("page",pageParam);
+        model.addAttribute("users", pageInfo.getList());
+        model.addAttribute("page", pageParam);
         return "admin/userlist";
     }
 
     /**
      * typelist 的分页查询
+     *
      * @param currentPage
      * @param model
      * @return
      */
     @GetMapping(value = "/types/{id}")
-    public String types(@PathVariable("id") Integer currentPage, Model model){
+    public String types(@PathVariable("id") Integer currentPage, Model model) {
         int limit = 2;//页面显示数据个数
-        PageInfo<Type> pageInfo = typeService.typePageQuery(currentPage,limit);
+        PageInfo<Type> pageInfo = typeService.typePageQuery(currentPage, limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
         pageParam.setPageTotal(pageInfo.getPages());
@@ -175,13 +179,14 @@ public class AdminController {
         pageParam.setIsFirstPage(pageInfo.isIsFirstPage());
         pageParam.setIsLastPage(pageInfo.isIsLastPage());
         //传递到 admin/userlist.html 的参数
-        model.addAttribute("types",pageInfo.getList());
-        model.addAttribute("page",pageParam);
+        model.addAttribute("types", pageInfo.getList());
+        model.addAttribute("page", pageParam);
         return "admin/typelist";
     }
 
     /**
      * 保存一个 Type
+     *
      * @param typeName
      * @param model
      * @return
@@ -191,7 +196,7 @@ public class AdminController {
         logger.info("AdminController->saveType");
         try {
             typeService.addType(typeName, new Date());
-            model.addFlashAttribute("msg","创建成功!");
+            model.addFlashAttribute("msg", "创建成功!");
         } catch (TypeNameException e) {
             model.addFlashAttribute("addTypeError", e.getMessage());
         }
@@ -201,20 +206,22 @@ public class AdminController {
 
     /**
      * 删除一个type
+     *
      * @param id
      * @return
      */
     @GetMapping("/typeDelete")
     @ResponseBody
-    public String typeDel(Integer id){
+    public String typeDel(Integer id) {
         String msg = "";
-        if(typeService.deleteType(id)){
+        if (typeService.deleteType(id)) {
             msg = "删除成功!";
-        }else {
+        } else {
             msg = "删除失败!";
         }
         return msg;
     }
+
     /**
      * 分页查询 file
      *
@@ -240,12 +247,13 @@ public class AdminController {
 
     /**
      * 分页查询下载记录
+     *
      * @param page
      * @param model
      * @return
      */
     @GetMapping("downloads/{page}")
-    public String uploadInfo(@PathVariable("page") Integer page, Model model){
+    public String uploadInfo(@PathVariable("page") Integer page, Model model) {
         int limit = 4;
         PageInfo<DownloadRecord> downloadInfo = downloadRecordService.getDownloadRecordS(page, limit);
         PageParam pageParam = new PageParam();
@@ -254,23 +262,24 @@ public class AdminController {
         pageParam.setLastPage(limit);
         pageParam.setIsFirstPage(downloadInfo.isIsFirstPage());
         pageParam.setIsLastPage(downloadInfo.isIsLastPage());
-        model.addAttribute("downloads",downloadInfo.getList());
-        model.addAttribute("downloadPage",pageParam);
+        model.addAttribute("downloads", downloadInfo.getList());
+        model.addAttribute("downloadPage", pageParam);
         return "admin/downloadlist";
     }
 
     /**
      * 删除文件
+     *
      * @param id
      * @return
      */
     @PostMapping("/filesDelete")
     @ResponseBody
-    public String deleteFiles(Long id[]){
+    public String deleteFiles(Long id[]) {
         String msg = "";
-        if(fileService.removeFile(id)){
+        if (fileService.removeFile(id)) {
             msg = "删除成功!";
-        }else {
+        } else {
             msg = "删除失败!";
         }
         return msg;
@@ -278,6 +287,7 @@ public class AdminController {
 
     /**
      * 管理员上传文件
+     *
      * @param file
      * @param tag
      * @param description
@@ -285,16 +295,16 @@ public class AdminController {
      */
     @PostMapping("/upload")
     @ResponseBody
-    public String adminUploadFiles(@RequestParam("file") MultipartFile file, String tag, String description){
+    public String adminUploadFiles(@RequestParam("file") MultipartFile file, String tag, String description) {
         String msg = "上传成功";
         UploadedRecord uploadedRecord = new UploadedRecord();
         uploadedRecord.setUserId(0); //0表示管理员上传
         uploadedRecord.setTag(tag);
         uploadedRecord.setDescription(description);
-        if(uploadService.uploadRecord(file, uploadedRecord)){
+        if (uploadService.uploadRecord(file, uploadedRecord)) {
             logger.info("文件上传成功");
-           msg = "文件上传成功!";
-        }else{
+            msg = "文件上传成功!";
+        } else {
             logger.info("文件上传失败");
             msg = "文件上传失败";
         }
@@ -303,6 +313,7 @@ public class AdminController {
 
     /**
      * 权限管理
+     *
      * @param currentPage
      * @param model
      * @return
@@ -324,6 +335,7 @@ public class AdminController {
 
     /**
      * 更改权限
+     *
      * @param id
      * @param upload
      * @param delete
@@ -333,12 +345,12 @@ public class AdminController {
      */
     @PostMapping("/editPermission")
     @ResponseBody
-    public String editPermisson(Long id, Integer upload, Integer delete, Integer edit, Integer visit){
+    public String editPermisson(Long id, Integer upload, Integer delete, Integer edit, Integer visit) {
         String msg = "";
-        if (fileService.updatePermission(id,upload,delete,edit,visit)){
+        if (fileService.updatePermission(id, upload, delete, edit, visit)) {
             msg = "权限已更新!";
-        }else {
-            msg =  "权限更新失败!";
+        } else {
+            msg = "权限更新失败!";
         }
         return msg;
     }
@@ -348,20 +360,20 @@ public class AdminController {
     public String uploads() {
         return "admin/uploadlist";
     }
+
     @GetMapping(value = "/downloads")
     public String downloads() {
         return "admin/downloadlist";
     }
+
     @GetMapping(value = "/permissions")
-    public String permissions(){
+    public String permissions() {
         return "admin/permissionlist";
     }
 
 
-
-
     @GetMapping(value = "/systemset")
-    public String systemSet(){
+    public String systemSet() {
         return "admin/system";
     }
 }

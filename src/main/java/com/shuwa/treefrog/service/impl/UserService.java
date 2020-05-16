@@ -126,9 +126,9 @@ public class UserService implements IUserService {
 
     @Override
     public boolean verifyPassword(String password, Integer id) {
-        if(password.equals(userDao.getpasswordById(id))){
+        if (password.equals(userDao.getpasswordById(id))) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -162,11 +162,12 @@ public class UserService implements IUserService {
 
     /**
      * 上传头像
+     *
      * @param file
      * @returnid
      */
     @Override
-    public boolean uploadUserVia(MultipartFile file, Integer id) throws Exception{
+    public boolean uploadUserVia(MultipartFile file, Integer id) throws Exception {
         //获取文件名
         String fileName = FileUtils.getFileName(file.getOriginalFilename());
         //获取上传路径

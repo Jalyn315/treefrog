@@ -14,7 +14,7 @@
     <!--    <script type="text/javascript" src="/js/jquery.min.js"></script>-->
     <script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.js"></script>
     <script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
-<!--        <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.slim.min.js"></script>-->
+    <!--        <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.slim.min.js"></script>-->
     <script type="text/javascript" src="/js/jquery.cookie.js"></script>
     <script src="/js/materialize.min.js"></script>
 
@@ -66,7 +66,7 @@
                 <p style="color: red" th:text="${errorMap['phoneDup']}" th:if="${errorMap}"></p>
                 <div class="input-field">
                     <input placeholder="verification code" id="verifiCode" name="verifiCode" type="text"
-                    class="validate">
+                           class="validate">
                 </div>
                 <p style="color: red" th:text="${errorMap['verifiCode']}" th:if="${errorMap}"></p>
                 <p style="color: red" th:text="${errorMap['codeDup']}" th:if="${errorMap}"></p>
@@ -122,7 +122,7 @@
         if (expiresHours > 0) {
             var date = new Date();
             date.setTime(date.getTime() + expiresHours * 1000); //单位是毫秒
-            $.cookie(name, escape(value),{
+            $.cookie(name, escape(value), {
                 expires: date
             });
         } else {
@@ -182,6 +182,7 @@
 
     //15s倒计时实现逻辑
     var countdown;
+
     // 倒计时函数
     function setTime(obj) { //发送验证码倒计时
         countdown = getCookieValue("secondsremained");//返回15s

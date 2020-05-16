@@ -29,6 +29,7 @@ public class FileService implements IFileService {
     /**
      * 通过上传信息进行上传
      * 建立文件实体对象 将文件信息存入数据库
+     *
      * @param uploadedRecord
      */
 
@@ -38,16 +39,18 @@ public class FileService implements IFileService {
     UserDao userDao;
     @Autowired
     IDownloadRecordService downloadRecordService;
+
     /**
      * 文件上传
+     *
      * @param file
      * @param uploadedRecord
      * @return
      */
     @Override
-    public boolean uploaded(MultipartFile file ,UploadedRecord uploadedRecord) {
+    public boolean uploaded(MultipartFile file, UploadedRecord uploadedRecord) {
 
-        if(uploadedRecord != null) {
+        if (uploadedRecord != null) {
 
             //文件后缀
             String suffix = FileUtils.getFileSuffix(uploadedRecord.getFileName());
@@ -64,10 +67,10 @@ public class FileService implements IFileService {
                 try {
                     file.transferTo(new java.io.File(fileSaveUrl + UUID_FileName));  //文件上传
                     //创建文件实体类 从上传记录中获取相应的文件信息
-                    File file1 = new File(0,UUID_FileName,suffix,fileSaveUrl,"",uploadedRecord.getSize(),
-                            uploadedRecord.getDate(),uploadedRecord.getDescription(),0,0,
-                            uploadedRecord.getTag(),uploadedRecord.getUserId(),uploadedRecord.getCategoryId());
-                    file1.setAuth(uploadedRecord.getIsDeletable(),uploadedRecord.getIsUpdatable(),uploadedRecord.getIsDownloadable(),uploadedRecord.getIsVisible());
+                    File file1 = new File(0, UUID_FileName, suffix, fileSaveUrl, "", uploadedRecord.getSize(),
+                            uploadedRecord.getDate(), uploadedRecord.getDescription(), 0, 0,
+                            uploadedRecord.getTag(), uploadedRecord.getUserId(), uploadedRecord.getCategoryId());
+                    file1.setAuth(uploadedRecord.getIsDeletable(), uploadedRecord.getIsUpdatable(), uploadedRecord.getIsDownloadable(), uploadedRecord.getIsVisible());
                     //调用持久层接口 存入文件信息
                     fileDao.insertFile(file1);
                 } catch (Exception e) {
@@ -77,18 +80,19 @@ public class FileService implements IFileService {
                 return false;
             }
         }
-    return true;
+        return true;
     }
 
     /**
      * 获取数据库中所有文件信息
+     *
      * @return
      */
     @Override
     public List<File> getFileList() {
         List<File> fileList = fileDao.findAll();
         //将文件列表中的所有文件名去掉UUID唯一标识符
-        for ( File file:fileList){
+        for (File file : fileList) {
             file.setName(FileUtils.getFileRealName(file.getName()));
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
@@ -97,8 +101,9 @@ public class FileService implements IFileService {
 
     /**
      * 文件下载
+     *
      * @param response 相应对象
-     * @param id 文件id
+     * @param id       文件id
      * @return
      */
 
@@ -112,7 +117,7 @@ public class FileService implements IFileService {
         String filePath = file.getLocalUrl();
         //获取要上传的文件实体
         java.io.File file1 = new java.io.File(filePath + fileName);
-        if(!file1.exists()){
+        if (!file1.exists()) {
             System.out.println("文件已经删除");
             return false;
         }
@@ -126,18 +131,18 @@ public class FileService implements IFileService {
         downloadRecord.setFileUrl(file.getLocalUrl());
         downloadRecordService.addDownloadRecord(downloadRecord);
         response.setContentType("application/gorce-download");
-        response.addHeader("Content-disposition","attachment;fileName="+ FileUtils.getFileRealName(fileName));
+        response.addHeader("Content-disposition", "attachment;fileName=" + FileUtils.getFileRealName(fileName));
         try {
             InputStream in = new FileInputStream(file1);
             OutputStream out = response.getOutputStream();
             byte buffer[] = new byte[1024];
             int len = 0;
-            while ((len = in.read(buffer)) > 0){
-                out.write(buffer,0,len);
+            while ((len = in.read(buffer)) > 0) {
+                out.write(buffer, 0, len);
             }
             in.close();
             out.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -145,6 +150,7 @@ public class FileService implements IFileService {
 
     /**
      * 获取我的文件
+     *
      * @param id 用户id
      * @return
      */
@@ -153,7 +159,7 @@ public class FileService implements IFileService {
 
         List<File> fileList = fileDao.getMyFile(id);
         //将文件列表中的所有文件名去掉UUID唯一标识符
-        for ( File file:fileList){
+        for (File file : fileList) {
             file.setName(FileUtils.getFileRealName(file.getName()));
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
@@ -162,24 +168,22 @@ public class FileService implements IFileService {
 
     /**
      * 分页查询
-     * @param page 当前页数
+     *
+     * @param page  当前页数
      * @param limit 每页显示多少条数据
      * @return
      */
     @Override
     public PageInfo<File> listFiles(Integer page, Integer limit) {
-        PageHelper.startPage(page,limit);  //这条必须在条用持久层接口之前执行，它会帮我们自动拼接sql语句
+        PageHelper.startPage(page, limit);  //这条必须在条用持久层接口之前执行，它会帮我们自动拼接sql语句
         List<File> fileList = fileDao.findAll();
-            //将文件列表中的所有文件名去掉UUID唯一标识符
-            for ( File file:fileList){
-                file.setName(FileUtils.getFileRealName(file.getName()));
-                file.setUserName(userDao.getByUserName(file.getUserId()));
-            }
+        //将文件列表中的所有文件名去掉UUID唯一标识符
+        for (File file : fileList) {
+            file.setName(FileUtils.getFileRealName(file.getName()));
+            file.setUserName(userDao.getByUserName(file.getUserId()));
+        }
         return new PageInfo<>(fileList);
     }
-
-
-
 
 
     @Override
@@ -198,7 +202,8 @@ public class FileService implements IFileService {
     }
 
     /**
-     *分页查询文件管理
+     * 分页查询文件管理
+     *
      * @param currentPage
      * @param limit
      * @return
@@ -207,7 +212,7 @@ public class FileService implements IFileService {
     public PageInfo<File> filePageQuery(Integer currentPage, Integer limit) {
         PageHelper.startPage(currentPage, limit);
         List<File> fileInfo = fileDao.filePageQuery();
-        for(File file : fileInfo){
+        for (File file : fileInfo) {
             file.setName(FileUtils.getFileRealName(file.getName()));
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
@@ -216,6 +221,7 @@ public class FileService implements IFileService {
 
     /**
      * 根据id删除一个或者多个文件
+     *
      * @param id
      * @return
      */
@@ -230,9 +236,9 @@ public class FileService implements IFileService {
             //获取文件路径
             String fileUrl = fileInfo.getLocalUrl();
             //获取存储目录下的文件
-            java.io.File file = new java.io.File(fileUrl+fileName);
+            java.io.File file = new java.io.File(fileUrl + fileName);
             //判断文件是否存在
-            if (!file.exists()){
+            if (!file.exists()) {
                 return true;
             }
             //删除数据库中的文件信息
@@ -245,6 +251,7 @@ public class FileService implements IFileService {
 
     /**
      * 更新文件权限
+     *
      * @param id
      * @param upload
      * @param delete
@@ -252,19 +259,20 @@ public class FileService implements IFileService {
      * @param visit
      * @return
      */
-    public boolean updatePermission(Long id, Integer upload, Integer delete, Integer edit, Integer visit){
-        return fileDao.updatePermission(id,upload,delete,edit,visit);
+    public boolean updatePermission(Long id, Integer upload, Integer delete, Integer edit, Integer visit) {
+        return fileDao.updatePermission(id, upload, delete, edit, visit);
     }
 
     /**
      * 模糊查询
+     *
      * @param keyword
      * @return
      */
     @Override
     public List<File> fuzzyQuery(String keyword) {
         List<File> fileList = fileDao.fuzzyQuery(keyword);
-        for ( File file:fileList){
+        for (File file : fileList) {
             file.setName(FileUtils.getFileRealName(file.getName()));
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
@@ -273,12 +281,13 @@ public class FileService implements IFileService {
 
     /**
      * 查询全部文件
+     *
      * @return
      */
     @Override
     public List<File> findAll() {
         List<File> fileList = fileDao.findAll();
-        for ( File file:fileList){
+        for (File file : fileList) {
             file.setName(FileUtils.getFileRealName(file.getName()));
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
@@ -287,27 +296,29 @@ public class FileService implements IFileService {
 
     /**
      * 添加收藏
+     *
      * @param fileId
      * @param userId
      * @return
      */
     @Override
     public boolean addCollect(Integer fileId, Integer userId) {
-        return fileDao.collectFile(fileId,userId);
+        return fileDao.collectFile(fileId, userId);
     }
 
     /**
      * 查询个人收藏
+     *
      * @param userId
      * @return
      */
     @Override
     public List<File> findAllToCollect(Integer userId) {
         List<File> fileList = new ArrayList<>();
-        for (Integer i : fileDao.findAllToCollect(userId)){
+        for (Integer i : fileDao.findAllToCollect(userId)) {
             fileList.add(fileDao.getFile(i));
         }
-        for ( File file:fileList){
+        for (File file : fileList) {
             file.setName(FileUtils.getFileRealName(file.getName()));
             file.setUserName(userDao.getByUserName(file.getUserId()));
         }
@@ -321,15 +332,16 @@ public class FileService implements IFileService {
 
     /**
      * 检查是否已经被收藏
+     *
      * @param fileId
      * @param userId
      * @return
      */
     @Override
     public boolean isCollected(Integer fileId, Integer userId) {
-        if(fileDao.findCollectById(fileId, userId) == null){
+        if (fileDao.findCollectById(fileId, userId) == null) {
             return false;
-        }else {
+        } else {
             return true;
 
         }

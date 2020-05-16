@@ -147,14 +147,16 @@
     <!-- 注册框 -->
     <div class="signup" id="signup" th:fragment="adminRegisterForm">
         <form action="/admin/adminRegisterForm" method="POST">
-            <p style="color: red;margin-top:-25px" th:text="${usernamemsg}" th:if="${ not #strings.isEmpty(usernamemsg)}"></p>
+            <p style="color: red;margin-top:-25px" th:text="${usernamemsg}"
+               th:if="${ not #strings.isEmpty(usernamemsg)}"></p>
             <div>
                 <input type="text" placeholder="帐号" name="username">
             </div>
             <div>
                 <input type="password" placeholder="密码" name="password" id="psw">
             </div>
-            <p style="color: red;margin-top:-25px" th:text="${passwordmsg}" th:if="${ not #strings.isEmpty(passwordmsg)}"></p>
+            <p style="color: red;margin-top:-25px" th:text="${passwordmsg}"
+               th:if="${ not #strings.isEmpty(passwordmsg)}"></p>
             <div>
                 <input type="password" placeholder="确认密码" name="rePassword" id="psw_ag">
             </div>
@@ -187,15 +189,14 @@
         }
 
         var u = [[${passwordmsg}]];
-        var p =[[${usernamemsg}]]
-        if(u!=null||p!=null){
+        var p = [[${usernamemsg}]]
+        if (u != null || p != null) {
             aBtn[1].click();
         }
 
     }
-        
 
-    
+
     /*
     $("#psw_ag").bind('input propertychange',function () {
             if ($("#psw").val()!=$("#psw_ag")) {

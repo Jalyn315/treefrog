@@ -1,37 +1,41 @@
-.permission{
+.permission {
     margin-top: 50px;
 }
+
 /* 调节宽度 */
-.List{
+.List {
     width: 900px;
 }
-.List1{
+
+.List1 {
     width: 900px;
     background-color: white;
     margin: 30px 300px;
     padding: 20px 0px;
 }
 
-.List1 input{
+.List1 input {
     display: inline-block;
     width: 300px;
     height: 35px;
     margin-right: 40px;
     margin-left: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;   
-    outline:none;
+    border-radius: 5px;
+    outline: none;
 }
-.List1 input:focus{
+
+.List1 input:focus {
     border: 2px solid #007bff;
 }
-.btn{
+
+.btn {
     left: 90%;
 }
 
 /*权限修改模态框样式*/
 
-.permissionBox{
+.permissionBox {
     position: absolute;
     width: 500px;
     height: 274px;
@@ -43,19 +47,21 @@
 }
 
 
-.titlebox{
+.titlebox {
     width: 500px;
     height: 69px;
     border-bottom: 1px solid #ccc;
 }
-.titlebox h4{
+
+.titlebox h4 {
     font-size: 25px;
     font-weight: initial;
     line-height: 69px;
     margin-left: 20px;
-    display:inline;
+    display: inline;
 }
-.titlebox button{
+
+.titlebox button {
     float: right;
     width: 50px;
     height: 56px;
@@ -65,23 +71,27 @@
     background-color: white;
     color: rgb(99, 99, 99);
 }
-.titlebox button:hover{
+
+.titlebox button:hover {
     color: black;
 }
-.titlebox button:active{
+
+.titlebox button:active {
     color: rgb(130, 127, 127);
 }
-.inputbox{
+
+.inputbox {
     height: 100px;
     padding: 16px;
 }
 
-.inputbox .filen{
+.inputbox .filen {
     height: 38px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.inputbox .filen input{
+
+.inputbox .filen input {
     display: block;
     height: 38px;
     width: 100%;
@@ -90,30 +100,32 @@
     border-radius: 5px;
 }
 
-.editBox{
+.editBox {
     margin: 20px;
     height: 100px;
 }
-.editBox div{
+
+.editBox div {
     display: inline-block;
-    margin-right:4px;
+    margin-right: 4px;
 }
 
-.editBox select{
+.editBox select {
     width: 60px;
     height: 30px;
 }
-.editBox label{
+
+.editBox label {
     font-weight: bold;
 }
 
-.btnbox{
+.btnbox {
     height: 71px;
     padding-right: 16px;
     border-top: 1px solid #ccc;
 }
 
-.btnbox button{
+.btnbox button {
     width: 78px;
     height: 38px;
     margin-top: 20px;
@@ -124,40 +136,44 @@
     background-color: white;
 }
 
-.btnbox #last1{
-    color:rgb(159, 159, 159);
+.btnbox #last1 {
+    color: rgb(159, 159, 159);
 }
-.btnbox #next1{
-    color:rgb(0, 123, 255);
+
+.btnbox #next1 {
+    color: rgb(0, 123, 255);
     border: 1px solid rgb(0, 123, 255);
 }
-.btnbox #close{
+
+.btnbox #close {
     background-color: rgb(23, 162, 184);
     color: white;
     border: none;
 }
-.btnbox #close:hover{
+
+.btnbox #close:hover {
     background-color: rgb(29, 131, 147);
     color: white;
 }
 
-.btnbox #update{
+.btnbox #update {
     background-color: rgb(155, 88, 181);
     color: white;
     border: none;
 }
-.btnbox #update:hover{
+
+.btnbox #update:hover {
     background-color: rgb(124, 75, 144);
     color: white;
 }
 
-.btnbox #last1:hover{
-    background-color:rgb(159, 159, 159);
+.btnbox #last1:hover {
+    background-color: rgb(159, 159, 159);
     color: white;
 }
 
-.btnbox #next1:hover{
-    background-color:rgb(0, 123, 255);
+.btnbox #next1:hover {
+    background-color: rgb(0, 123, 255);
     color: white;
 }
 

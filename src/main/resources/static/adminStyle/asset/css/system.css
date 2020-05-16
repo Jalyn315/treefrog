@@ -1,4 +1,4 @@
-.box1{
+.box1 {
     width: 1000px;
     height: 90%;
     background-color: white;
@@ -7,22 +7,25 @@
     padding-top: 10px;
     padding-right: 10px;
 }
-.btn-save{
+
+.btn-save {
     display: block;
     float: right;
     width: 100px;
     height: 40px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    outline:none;
+    outline: none;
     font-size: 20px;
     color: white;
     background-color: #007bff;
 }
-.btn-save:active{
+
+.btn-save:active {
     background-color: #1f4267;
 }
-#setFile{
+
+#setFile {
     margin-top: 60px;
     margin-left: 40px;
     display: block;

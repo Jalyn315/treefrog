@@ -30,7 +30,7 @@ public class TypeService implements ITypeService {
         if (typeName.equals(typeDao.returnTypeName(typeName))) {
             throw new TypeNameException("添加的类型名重复");
         }
-        return typeDao.addType(typeName,createTime);
+        return typeDao.addType(typeName, createTime);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TypeService implements ITypeService {
 
     @Override
     public PageInfo<Type> typePageQuery(Integer currentPage, Integer limit) {
-        PageHelper.startPage(currentPage,limit);
+        PageHelper.startPage(currentPage, limit);
         return new PageInfo<>(typeDao.typePageQuery());
     }
 

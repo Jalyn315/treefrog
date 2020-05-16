@@ -5,12 +5,12 @@ package com.shuwa.treefrog.exception;
  */
 public class LoginException extends Exception {
     //无参构造方法
-    public LoginException(){
+    public LoginException() {
         super();
     }
 
     //有参的构造方法
-    public LoginException(String message){
+    public LoginException(String message) {
         super(message);
     }
 }

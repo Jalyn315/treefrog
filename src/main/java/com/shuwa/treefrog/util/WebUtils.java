@@ -17,16 +17,11 @@ public class WebUtils {
     @Autowired
     private File file;
 
-    public static File doFileLoad(HttpServletRequest request)throws FileUploadBase.FileSizeLimitExceededException{
-
-
+    public static File doFileLoad(HttpServletRequest request) throws FileUploadBase.FileSizeLimitExceededException {
 
 
         return null;
     }
-
-
-
 
 
 }

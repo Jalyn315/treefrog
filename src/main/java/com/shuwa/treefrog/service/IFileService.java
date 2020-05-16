@@ -13,49 +13,56 @@ public interface IFileService {
 
     /**
      * 获取文件的上传信息
+     *
      * @param uploadedRecord
      */
-     boolean  uploaded(MultipartFile file, UploadedRecord uploadedRecord);
+    boolean uploaded(MultipartFile file, UploadedRecord uploadedRecord);
 
     /**
      * 获取文件资源信息
+     *
      * @return
      */
-     List<File> getFileList();
+    List<File> getFileList();
 
     /**
      * 文件下载。
+     *
      * @param response 相应对象
-     * @param id 文件id
+     * @param id       文件id
      * @return
      */
-     boolean downloadFile(HttpServletResponse response,long id, String username);
+    boolean downloadFile(HttpServletResponse response, long id, String username);
 
     /**
      * 跟前用户id获取用户的所有上传文件
+     *
      * @param id
      * @return
      */
-     List<File> getMyFileList(Integer id);
+    List<File> getMyFileList(Integer id);
 
     /**
      * 根据id查询文件
+     *
      * @param id
      * @return
      */
 
-     File findOne(Integer id);
+    File findOne(Integer id);
 
     /**
      * 跟前文件名称查询文件
+     *
      * @param name
      * @return
      */
 
-     File findByName(String name);
+    File findByName(String name);
 
     /**
      * 根据上传用户查询文件
+     *
      * @param userName
      * @return
      */
@@ -72,6 +79,7 @@ public interface IFileService {
 
     /**
      * 后台文件管理分页查询
+     *
      * @param currentPage
      * @param limit
      * @return
@@ -80,6 +88,7 @@ public interface IFileService {
 
     /**
      * 根据id数组删除多个文件
+     *
      * @param id
      * @return
      */
@@ -87,6 +96,7 @@ public interface IFileService {
 
     /**
      * m模糊查询
+     *
      * @param keyword
      * @return
      */
@@ -94,12 +104,14 @@ public interface IFileService {
 
     /**
      * 查询全部
+     *
      * @return
      */
     List<File> findAll();
 
     /**
      * 添加收藏
+     *
      * @param fileId
      * @param userId
      * @return
@@ -108,6 +120,7 @@ public interface IFileService {
 
     /**
      * 获取全部收藏
+     *
      * @param userId
      * @return
      */
@@ -115,6 +128,7 @@ public interface IFileService {
 
     /**
      * 移出个人收藏
+     *
      * @param fileId
      * @return
      */
@@ -122,6 +136,7 @@ public interface IFileService {
 
     /**
      * 是否已被收藏
+     *
      * @param fileId
      * @param userId
      * @return
