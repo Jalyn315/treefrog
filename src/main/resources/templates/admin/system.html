@@ -32,19 +32,32 @@
 <table></table>
 <div class="box1">
     <div>
-        <button class="btn-save"><i class="fa fa-floppy-o" aria-hidden="true">&nbsp;保存</i></button>
+        <button class="btn-save" id="p-start"><i class="fa fa-play" aria-hidden="true"></i>&nbsp;启动</i></button>
     </div>
 
-    <textarea name="" id="setFile" cols="200" rows="200">
-                   fileSize : 100GB
-                   fileMaxSie : 1000GB
-                   uploadPath=G:\\treefrogFile
-            </textarea>
+    <textarea name="" id="reptile-log" cols="100" rows="100">
+
+    </textarea>
 </div>
 </body>
 <script>
     $(function () {
-        $('#s7').addClass('active')
+        $('#s7').addClass('active');
+        $("#p-start").click(function () {
+            $.get({
+                url:"start/reptile",
+                success:function (data) {
+                    $('#reptile-log').html(data);
+                }
+            });
+        });
     });
+
+
+
+
+
+
+
 </script>
 </html>

@@ -926,8 +926,8 @@
     </div>
 </div>
 
-<div th:fragment="toast" class="toast ml-5 mt-5" id="mytoast" data-autohide="false"
-     style="position: fixed; top: 20%; left: 40%; width: 250px; height: 150px; z-index: 9999;">
+<div th:fragment="toast" class="toast ml-5 mt-5 hide" id="mytoast" data-autohide="false"
+     style="position: fixed; top: 20%; left: 40%; width: 250px; height: 150px; z-index: 9999;" >
     <div class="toast-header bg-success">
         <img th:src="@{/assets/img/logo.png}" src="../../static/assets/img/logo.png" alt="title" width="30"
              class="rounded mr-2">
@@ -935,7 +935,7 @@
         <strong class="mr-auto text-white">提示</strong>
         <!--        <small class="text-white">一分钟前</small>-->
         <!-- data-dismiss="toast" 可以触发关闭事件 -->
-        <button class="close ml-2 mb-1" data-dismiss="toast">&times;</button>
+        <button class="close ml-2 mb-1" data-dismiss="toast" >&times;</button>
     </div>
     <div class="toast-body pl-5 pt-3">
         你输入的账户不正确.

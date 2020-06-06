@@ -705,7 +705,7 @@ function getUserShareFile() {
                                     "                                        <input type='hidden' value=\"" + i + "\">                                                       " +
                                     "                                        <h5 class=\"card-title\">" + fileList[i].name + "</h5>\n" +
                                     "                                        <p class=\"card-title\">作者:<strong>" + fileList[i].userName + "</strong></p>\n" +
-                                    "                                        <a href=\"/downloadFile/" + fileList[i].id + "\" class=\"btn btn-danger btn-sm\">立即下载</a>\n" +
+                                    "                                        <a href=\"/downloadFile/" + fileList[i].id +  "\" class=\"btn btn-danger btn-sm\">立即下载</a>\n" +
                                     "                                        <a href=\"#\" class=\"btn btn-primary btn-sm \" data-toggle=\"modal\" name=\"check\" index = \"" + i + "\" data-target=\"#fileInfo\">查看详细</a>\n" +
                                     "                                    </div>\n" +
                                     "                                    <div class=\"card-footer text-muted\" style=\"padding: 5px 10px\">\n" +
