@@ -20,6 +20,8 @@ import com.shuwa.treefrog.util.ReptileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +39,13 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin")
+@PropertySource("classpath:config.properties")
 public class AdminController {
+
+    @Value("${reptile.path}")
+    private String REPTILE_PATH;
+    @Value("${reptile.name}")
+    private String REPTILE_NAME;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserService userService; // userervice -> userService
@@ -381,7 +389,7 @@ public class AdminController {
     @ResponseBody
     public String systemSet() {
         StringBuffer log = new StringBuffer();
-        log = ReptileUtil.stater("C:/windows/Users/xxx.py");
+        log = ReptileUtil.stater(REPTILE_PATH, REPTILE_NAME);
         return log.toString();
     }
 }
