@@ -16,6 +16,7 @@ import com.shuwa.treefrog.service.impl.AdminService;
 import com.shuwa.treefrog.service.impl.FileService;
 import com.shuwa.treefrog.service.impl.TypeService;
 import com.shuwa.treefrog.service.impl.UserService;
+import com.shuwa.treefrog.util.ReptileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -371,9 +372,16 @@ public class AdminController {
         return "admin/permissionlist";
     }
 
-
     @GetMapping(value = "/systemset")
-    public String systemSet() {
+    public String toSystem(){
         return "admin/system";
+    }
+
+    @GetMapping(value = "/start/reptile")
+    @ResponseBody
+    public String systemSet() {
+        StringBuffer log = new StringBuffer();
+        log = ReptileUtil.stater("C:/windows/Users/xxx.py");
+        return log.toString();
     }
 }
