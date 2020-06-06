@@ -156,7 +156,7 @@ public class AdminController {
      */
     @GetMapping(value = "/users/{id}")
     public String userList(@PathVariable("id") Integer currentPage, Model model) {
-        int limit = 2; //页面数据个数
+        int limit = 5; //页面数据个数
         PageInfo<User> pageInfo = adminService.getAllUserByPageingQuery(currentPage, limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());
@@ -179,7 +179,7 @@ public class AdminController {
      */
     @GetMapping(value = "/types/{id}")
     public String types(@PathVariable("id") Integer currentPage, Model model) {
-        int limit = 2;//页面显示数据个数
+        int limit = 5;//页面显示数据个数
         PageInfo<Type> pageInfo = typeService.typePageQuery(currentPage, limit);
         PageParam pageParam = new PageParam();
         pageParam.setPageNum(pageInfo.getPageNum());

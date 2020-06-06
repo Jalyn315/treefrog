@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>填写邮件</title>
+    <link rel="stylesheet" href="../../static/assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}">
+    <style>
+        .myform{
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            left: 36%;
+            border: 1px solid seagreen;
+        }
+    </style>
 </head>
 <body>
-<form th:action="@{/sendEmail}" method="post">
+<form th:action="@{/sendEmail}" method="post" class="myform text-center">
     <p style="color: red" th:text="${emaillError}" th:if="${ not #strings.isEmpty(emaillError)}"></p>
-    输入邮箱：<input type="text" name="email">
-    <button type="submit">提交</button>
+    <h4 class="h4 text-center">找回密码</h4>
+    <br>
+    <br>
+    <br>
+
+    <input type="text" name="email" class="input" placeholder="请输入您的邮箱"><br>
+    <br>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-warning">提交</button>
 </form>
 </body>
 </html>

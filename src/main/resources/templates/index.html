@@ -9,6 +9,12 @@
           th:href="@{/assets/css/font-awesome.min.css}">
     <link rel="stylesheet" href="../../static/assets/css/commens.css" th:href="@{/assets/css/commens.css}">
     <script th:src="@{/assets/js/index.js}"></script>
+    <style>
+        .nav-pills .nav-link.active,.nav-pills .show>.nav-link{
+            color:#fff;
+            background-color: #59ca14;
+        }
+    </style>
 </head>
 <body>
 <!--    引入导航-->
@@ -29,7 +35,7 @@
         </ul>
     </div>
     <!--            主内容区域-->
-    <div class="col-lg-8 mt-3">
+    <div class="col-lg-8 mt-3" style="height: 600px">
         <!--                滑动门针对于左侧的导航-->
         <div class="tab-content">
             <!--                    系统文件-->
@@ -43,7 +49,7 @@
                     </div>
                     <!--                    滑动门-->
                     <div class="tab-content" id="tabList">
-                        <div class="tab-pane fade" id="fileTabPanel">
+                        <div class="tab-pane fade" id="fileTabPanel" style="height: 540px;">
                             <!--                           no-gutters出去默认的内边距 -->
                             <div class="container-fluid row show no-gutters" id="systemFileList">
 

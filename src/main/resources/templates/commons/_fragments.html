@@ -36,7 +36,7 @@
                 <a th:href="@{/index}" class="nav-link" style="font-size: 20px">首页</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " style="font-size: 20px">探索</a>
+                <a class="nav-link " href="www.baicu.com" style="font-size: 20px">探索</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " style="font-size: 20px">发现</a>
@@ -85,7 +85,7 @@
     <!--            左侧导航-->
     <div class="col-lg-2 col-md-3 text-center" id="content-nav">
         <ul class="nav  justify-content-center nav-pills">
-            <li class="nav-item"><a class="nav-link" href="#systemFile" th:href="@{/listfile/1}" style="font-size: 20px"
+            <li class="nav-item"><a class="nav-link active" href="#systemFile" th:href="@{/listfile/1}" style="font-size: 20px"
                                     data-toggle="tab"><i id="1" class="fa fa-folder-open-o" aria-hidden="true"></i>资源列表</a>
             </li>
             <li class="nav-item"><a class="nav-link" href="#myFile" style="font-size: 20px" data-toggle="tab"><i id="2"
@@ -699,7 +699,7 @@
 
 <!--             footer-->
 
-<footer class="fixed-bottom border-top" th:fragment="footer">
+<footer class=" border-top" th:fragment="footer">
     <div class="container-fluid text-center" style="height: 80px">
         <div class="row">
             <div class="d-none d-sm-none col-md-6 col-lg-4  d-md-block text-right">
