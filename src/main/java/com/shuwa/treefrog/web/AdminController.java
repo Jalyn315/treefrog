@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
@@ -389,7 +388,13 @@ public class AdminController {
     @ResponseBody
     public String systemSet() {
         StringBuffer log = new StringBuffer();
-        log = ReptileUtil.stater(REPTILE_PATH, REPTILE_NAME);
+        try {
+            log = ReptileUtil.stater(REPTILE_PATH, REPTILE_NAME);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.append("启动失败");
+        }
+
         return log.toString();
     }
 }
