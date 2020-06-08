@@ -532,7 +532,7 @@ function getMyFile() {
                                     $('#fileInfo strong[name="description"]').html(data[temp].description);
                                     $('#fileInfo strong[name="pageView"]').html(data[temp].checkTimes);
                                     $('#fileInfo strong[name="downloadCount"]').html(data[temp].downloadCount);
-                                    $('#fileInfo #fileDownload').attr('href', "/downloadFile/" + data[i].id);
+                                    $('#fileInfo #fileDownload').attr('href', "/downloadFile/" + data[temp].id);
                                 });
                             });
                             //给删除按钮添加事件
@@ -764,6 +764,8 @@ function getUserShareFile() {
                                 $('#fileInfo strong[name="description"]').html(fileList[temp].description);
                                 $('#fileInfo strong[name="pageView"]').html(fileList[temp].checkTimes);
                                 $('#fileInfo strong[name="downloadCount"]').html(fileList[temp].downloadCount);
+                                $('#fileInfo #fileDownload').attr('href', "/downloadFile/" + fileList[temp].id);
+
                             });
                         }); //查看详细
                         $('#systemFileList small[name="collectBtn"]').each(function () {  //收藏
