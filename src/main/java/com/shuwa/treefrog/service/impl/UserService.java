@@ -171,6 +171,11 @@ public class UserService implements IUserService {
         //获取文件名
         String fileName = FileUtils.getFileName(file.getOriginalFilename());
         //获取上传路径
+        java.io.File userVia = new java.io.File(ResourceUtils.getURL("classpath:static").getPath()+"/userVia");
+        if (!userVia.exists()){
+            userVia.mkdirs();
+            System.out.println("我创建了");
+        }
         String path = ResourceUtils.getURL("classpath:static/userVia").getPath() + "/";
         file.transferTo(new java.io.File(path + fileName));
         userDao.updateVia("/userVia/" + fileName, id);

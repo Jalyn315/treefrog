@@ -172,8 +172,8 @@ function resetUserInfo() {
 function uploadFile() {
     //判断是否已经上传，
     var isuploaded = false;
-
-    //隐藏表单后初始化已输入内容
+    var isTypeList = false;
+     //隐藏表单后初始化已输入内容
     $('#uploadModal').on('hidden.bs.modal', function () {
         document.getElementById("file-form").reset();
         $('#show-fileName').html('选择文件.....');
@@ -272,6 +272,26 @@ function uploadFile() {
             $('#mytoast').toast('show');
         }
     });
+    //获取类型信息。
+    $("#uploadBtn").click(function () {
+        if(!isTypeList){
+            $.get({
+                url:"/typeList",
+                success:function (data) {
+                    for (var i = 0; i <　data.length; i++){
+                        var html = "<option value=\" "+(i+1)+"\">"+ data[i].typeName+"</option>";
+                        $("#fileType").append(html);
+                    }
+                }
+            });
+            isTypeList = true;
+        }
+
+    });
+
+
+
+
 }
 
 /*****************************end****************************/

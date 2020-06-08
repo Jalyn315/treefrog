@@ -268,7 +268,7 @@ public class UserController {
         try {
             userService.uploadUserVia(file, Integer.parseInt(session.getAttribute("userId").toString()));
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e + "5555");
         }
         return "上传成功";
     }
