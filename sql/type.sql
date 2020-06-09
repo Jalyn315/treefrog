@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v10.00 Beta1
-MySQL - 8.0.12 : Database - treefrog
+SQLyog Ultimate v12.09 (64 bit)
+MySQL - 5.7.28 : Database - treefrog
 *********************************************************************
 */
 
@@ -14,20 +14,22 @@ MySQL - 8.0.12 : Database - treefrog
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`treefrog` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-/*Table structure for table `type` */
+USE `treefrog`;
 
-DROP TABLE IF EXISTS `type`;
+/*Table structure for table `admin` */
 
-CREATE TABLE `type` (
-  `id` int(5) NOT NULL AUTO_INCREMENT COMMENT '分类ID',
-  `type_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT '分类名称',
-  `create_time` date DEFAULT NULL COMMENT '创建分类时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+DROP TABLE IF EXISTS `admin`;
 
-/*Data for the table `type` */
+CREATE TABLE `admin` (
+  `id_admin` int(10) NOT NULL AUTO_INCREMENT COMMENT '管理员 id 号',
+  `user_name_admin` varchar(10) NOT NULL COMMENT '管理员 用户名',
+  `password_admin` varchar(18) NOT NULL COMMENT '管理员 密码',
+  PRIMARY KEY (`id_admin`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
-insert  into `type`(`id`,`type_name`,`create_time`) values (2,'文件','2020-03-01'),(3,'视频','2020-03-02'),(4,'文档','2020-03-03'),(5,'学习资料','2020-03-01'),(6,'学习视频','2020-03-01');
+/*Data for the table `admin` */
+
+insert  into `admin`(`id_admin`,`user_name_admin`,`password_admin`) values (1,'吕长旭','1315'),(4,'admin1','1314'),(7,'shuwa','12345'),(8,'17060072','123456');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
