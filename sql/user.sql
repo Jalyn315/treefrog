@@ -31,12 +31,13 @@ CREATE TABLE `user` (
   `phone` varchar(11) NOT NULL COMMENT '手机',
   `permission` int(1) DEFAULT NULL COMMENT '权限',
   `description` varbinary(300) DEFAULT NULL COMMENT '描述',
+  `via` varchar(300) DEFAULT NULL COMMENT '头像',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`username`,`password`,`realName`,`sex`,`birth`,`email`,`phone`,`permission`,`description`) values (1,'admin','123456','韦成建','男','1999-03-15','18377860349@163.com','18177860349',NULL,'快乐先生'),(2,'shuwa','123456','shuwa','男','1999-03-15','1921776332@QQ.com','18377860349',1,'一个码农的日常');
+insert  into `user`(`id`,`username`,`password`,`realName`,`sex`,`birth`,`email`,`phone`,`permission`,`description`,`via`) values (1,'admin','123456789','韦成建','男','1999-03-15','18377860349@163.com','18177860349',NULL,'快乐先生',NULL),(2,'shuwa','Jian1999','韦成建','on','1999-03-15','1921776332@qq.com','18377860349',1,'一个码农日常生活1111','/userVia/git常用命令.jpg'),(4,'wcj1999','1234567',NULL,NULL,NULL,NULL,'18177860349',NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
