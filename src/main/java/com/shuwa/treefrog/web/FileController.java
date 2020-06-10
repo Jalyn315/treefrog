@@ -129,7 +129,9 @@ public class FileController {
     @GetMapping("/typeList")
     @ResponseBody
     public List<Type> typeList() {
+        System.out.println("查询全部");
         return typeService.findAll();
+
     }
 
     @PostMapping("/addCollect")

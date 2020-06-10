@@ -6,7 +6,6 @@ import com.shuwa.treefrog.util.sendSMS.SmsSingleSenderResult;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
@@ -16,13 +15,15 @@ public class SmsService implements ISmsService {
 
 
     @Override
-    public boolean sendSms(String mobile) {
-        if (!StringUtils.isEmpty(getValue(mobile))) {
-            System.out.println("if");
-            return false;
+    public String sendSms(String mobile) {
+        //判断下传入的手机号是否为空，为空则退出
+        String verifiCode = null;
+        if ("".equals(mobile)) {
+            return "empty";
         } else {
-            System.out.println("else");
-            String verifiCode = getVerifCode();
+            verifiCode = getVerifCode();
+            System.out.println("手机号不为空");
+            //String verifiCode = "111111";
             setKey(mobile, verifiCode);
             //请根据实际 accesskey 和 secretkey，保密，不能外传
             String accesskey = "";
@@ -41,7 +42,7 @@ public class SmsService implements ISmsService {
                 e.printStackTrace();
             }
         } //end if...else
-        return true;
+        return verifiCode;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class SmsService implements ISmsService {
     @Override
     public void setKey(String key, String value) {
         ValueOperations<String, String> ops = redisTemplate.opsForValue();
-        ops.set(key, value, 60, TimeUnit.SECONDS);//1分钟过期
+        ops.set(key, value, 30, TimeUnit.SECONDS);//半分钟过期
     }
 
     @Override

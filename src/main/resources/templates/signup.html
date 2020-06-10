@@ -67,6 +67,7 @@
                 <div class="input-field">
                     <input placeholder="验证码是111111" id="verifiCode" name="verifiCode" type="text"
                            class="validate">
+
                 </div>
                 <p style="color: red" th:text="${errorMap['verifiCode']}" th:if="${errorMap}"></p>
                 <p style="color: red" th:text="${errorMap['codeDup']}" th:if="${errorMap}"></p>
@@ -74,7 +75,7 @@
                     <input id="getVerifiCode" value="获取验证码" type="button" class="btn btn-sm btn-success validate">
                 </div>
                 <div class="text-right mt-4">
-                    <a href="http://localhost:8080/signin" class="text-white" style="margin-right: 50px">已有帐号？去登录</a>
+                    <a href="/login" class="text-white" style="margin-right: 50px">已有帐号？去登录</a>
                     <button type="submit" class="waves-effect btn-large btn-large-white px-4 tm-border-radius-0">注册
                     </button>
                 </div>
@@ -139,14 +140,9 @@
             setTime(obj1);//开始倒计时
         }
     });
-    /*<--
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////
-    -->*/
     /*<!-- 发送通知到后台，发送短信  -->*/
     $("#getVerifiCode").click(function () {
-        addCookie("secondsremained", 15, 15);//添加cookie记录,有效时间15s
+        addCookie("secondsremained", 30, 30);//添加cookie记录,有效时间30s
         sendyzm($("#getVerifiCode"));
     });
 
@@ -162,26 +158,20 @@
                 phone: phoneNum
             },//传递的参数形式，以json对象格式传递
             success: function (result) {
-                var newData = JSON.stringify(result); //将json对象转换为字符串
-                newData = eval("(" + newData + ")"); //解析json
-                var loginSuccess = newData.loginSuccess;//获取其中的key所对应的value值
-                if (loginSuccess == "true") {
-                    alert('请求成功');
-                }
+                alert("您的验证码时:" + result);
             },
             error: function (data) {
-                alert('请求失败');
+                alert('手机号码为空！请刷新页面后重试！');
             }
         });//end $.ajax()
         setTime(obj);//开始倒计时
     }//end sendyzm()
 
-    //15s倒计时实现逻辑
+    //30s倒计时实现逻辑
     var countdown;
-
     // 倒计时函数
     function setTime(obj) { //发送验证码倒计时
-        countdown = getCookieValue("secondsremained");//返回15s
+        countdown = getCookieValue("secondsremained");//返回30s
         if (countdown == 0) {
             obj.attr('disabled', false);
             obj.val("点击获取验证码");

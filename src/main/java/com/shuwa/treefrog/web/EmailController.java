@@ -29,10 +29,10 @@ public class EmailController {
     @Value("${spring.mail.username}")
     private String from;
 
-    @RequestMapping(value = "/login")
-    public String toLoginPage() {
-        return "login";
-    }
+//    @RequestMapping(value = "/login")
+//    public String toLoginPage() {
+//        return "login";
+//    }
 
     /**
      * 传递到 填写邮箱 页面
