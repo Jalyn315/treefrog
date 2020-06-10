@@ -11,5 +11,7 @@
 from scrapy import cmdline
 
 if __name__ == '__main__':
-    # cmdline.execute("scrapy mycrawl".split())
-    cmdline.execute("scrapy crawl crawldb".split())
+    # 同时执行两个爬虫.py文件 
+    cmdline.execute("scrapy mycrawl".split())
+    # 执行爬虫 crawldb 
+     #cmdline.execute("scrapy crawl crawldb".split())
