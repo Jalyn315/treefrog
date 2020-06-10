@@ -504,9 +504,13 @@ function getMyFile() {
                         for (var i = presentPage * 6; i < presentPage * 6 + 6 && i < data.length; i++) {
                             //文件项
                             {
+                                var fileName = data[i].name;
+                                if (fileName.length > 6){
+                                    fileName = fileName.substring(0, 8) + "...";
+                                }
                                 var html = "<div class=\"card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success\" >\n" +
                                     "                                    <div class=\"card-body text-center\">\n" +
-                                    "                                        <h5 class=\"card-title\">" + data[i].name + "</h5>\n" +
+                                    "                                        <h5 class=\"card-title\" title='"+data[i].name+"' style='cursor: default'>" + fileName + "</h5>\n" +
                                     "                                        <a href=\"/downloadFile/" + data[i].id + "\" class=\"card-link\">下载到本地</a>\n" +
                                     "                                        <a href=\"#\" class=\"card-link\"data-toggle=\"modal\" name=\"check\" index = \"" + i + "\" data-target=\"#fileInfo\">查看详细</a>\n" +
                                     "                                        <a href=\"#\" class=\"card-link\" name=\"deleteFile\" fileId = \"" + data[i].id + "\">删除</a>\n" +
@@ -595,16 +599,39 @@ function getTypeList() {
     $.get({
         url: "/typeList",
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var typeItem = "<li class=\"nav-item\">\n" +
-                    "              <a href=\"#fileTabPanel\" class=\"nav-link \" data-toggle=\"tab\">" + data[i].typeName + "</a>\n" +
-                    "           </li>"
-                $('#types').append(typeItem);
+            var pageNum = 0;
+
+            listType(pageNum);
+            // var typeItem = "<li class=\"nav-item\">\n" +
+            //     "              <a href=\"#fileTabPanel\" class=\"nav-link \" data-toggle=\"tab\">其他</a>\n" +
+            //     "           </li>";
+            // $('#types').append(typeItem);
+            $("#type_left").click(function () {
+                if (pageNum > 0){
+                    $('#typelist').empty();
+                    pageNum --;
+                    listType(pageNum);
+                }
+            });
+            $("#type_right").click(function () {
+
+                if (pageNum < Math.floor(data.length / 9)){
+                    $('#typelist').empty();
+                    pageNum ++;
+                    listType(pageNum);
+                }
+            });
+
+
+            function listType(pageNum) {
+                for (var i = pageNum * 9; i < pageNum * 9 + 9 && i < data.length ; i++) {
+                    var typeItem = "<li class=\"nav-item\">\n" +
+                        "              <a href=\"#fileTabPanel\" class=\"nav-link \" data-toggle=\"tab\">" + data[i].typeName + "</a>\n" +
+                        "           </li>"
+                    $('#typelist').append(typeItem);
+                }
             }
-            var typeItem = "<li class=\"nav-item\">\n" +
-                "              <a href=\"#fileTabPanel\" class=\"nav-link \" data-toggle=\"tab\">其他</a>\n" +
-                "           </li>";
-            $('#types').append(typeItem);
+
         }
     });
 }
@@ -720,19 +747,25 @@ function getUserShareFile() {
                         //遍历文件项
                         for (var i = presentPage * 6; i < presentPage * 6 + 6 && i < fileNum.length; i++) {
                             {
+                                var fileName = fileList[i].name;
+
+                                if (fileName.length > 6){
+                                    fileName = fileName.substring(0, 8) + "...";
+                                }
+
                                 var fileItem = "<div class=\"card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success\" >\n" +
                                     "                                    <div class=\"card-body \">\n" +
                                     "                                        <input type='hidden' value=\"" + i + "\">                                                       " +
-                                    "                                        <h5 class=\"card-title\">" + fileList[i].name + "</h5>\n" +
+                                    "                                        <h5 class=\"card-title\" title='"+fileList[i].name+"' style='cursor: default'>" + fileName + "</h5>\n" +
                                     "                                        <p class=\"card-title\">作者:<strong>" + fileList[i].userName + "</strong></p>\n" +
                                     "                                        <a href=\"/downloadFile/" + fileList[i].id +  "\" class=\"btn btn-danger btn-sm\">立即下载</a>\n" +
                                     "                                        <a href=\"#\" class=\"btn btn-primary btn-sm \" data-toggle=\"modal\" name=\"check\" index = \"" + i + "\" data-target=\"#fileInfo\">查看详细</a>\n" +
                                     "                                    </div>\n" +
                                     "                                    <div class=\"card-footer text-muted\" style=\"padding: 5px 10px\">\n" +
-                                    "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览：<span>" + fileList[i].checkTimes + "</span></small>\n" +
-                                    "                                        &nbsp;&nbsp;" +
-                                    "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载：<span>" + fileList[i].downloadCount + "</span></small>\n" +
-                                    "                                        &nbsp;&nbsp;" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览:<span>"+fileList[i].checkTimes + "</span></small>\n" +
+                                    "                                        &nbsp;" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载:<span>"+fileList[i].downloadCount + "</span></small>\n" +
+                                    "                                        &nbsp;" +
                                     "                                        <small class=\"card-text \" name=\"collectBtn\" fileId=\"" + fileList[i].id + "\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"点击收藏\">收藏：<i  class=\"fa fa-star-o\"  aria-hidden=\"true\"></i></small>\n" +
                                     "                                    </div>\n" +
                                     "                                </div>"
@@ -929,18 +962,24 @@ function getMyCollect() {
                         //遍历当前分页da
                         for (var i = presentPage * 6; i < presentPage * 6 + 6 && i < data.length; i++) {
                             {
+                                var fileName = data[i].name;
+                                if (fileName.length > 6){
+                                    fileName = fileName.substring(0, 8) + "...";
+                                }
                                 var fileItem = "<div class=\"card mt-2 mb-2 col-lg-3 col-sm-6 ml-5 border-success\" >\n" +
                                     "                                    <div class=\"card-body \">\n" +
                                     "                                        <input type='hidden' value=\"" + i + "\">                                                       " +
-                                    "                                        <h5 class=\"card-title\">" + data[i].name + "</h5>\n" +
+                                    "                                        <h5 class=\"card-title\" title='"+data[i].name+"' style='cursor: default'>" + fileName + "</h5>\n" +
                                     "                                        <p class=\"card-title\">作者:<strong>" + data[i].userName + "</strong></p>\n" +
                                     "                                        <a href=\"/downloadFile/" + data[i].id + "\" class=\"btn btn-danger btn-sm\">立即下载</a>\n" +
                                     "                                        <a href=\"#\" class=\"btn btn-primary btn-sm \" data-toggle=\"modal\" name=\"check\" index = \"" + i + "\" data-target=\"#fileInfo\">查看详细</a>\n" +
                                     "                                    </div>\n" +
                                     "                                    <div class=\"card-footer text-muted\" style=\"padding: 5px 10px\">\n" +
-                                    "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览：<span>" + data[i].checkTimes + "</span></small>\n" +
-                                    "                                        &nbsp;&nbsp;&nbsp;\n" +
-                                    "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载：<span>" + data[i].downloadCount + "</span></small>\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i>浏览:<span>" + data[i].checkTimes + "</span></small>\n" +
+                                    "                                        &nbsp;\n" +
+                                    "                                        <small class=\"card-text \"><i class=\"fa fa-download\" aria-hidden=\"true\"></i>下载:<span>" + data[i].downloadCount + "</span></small>\n" +
+                                    "                                        &nbsp;" +
+                                    "                                        <small class=\"card-text \" name=\"collectBtn\" fileId=\"" + data[i].id + "\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"点击收藏\">收藏:<i  class=\"fa fa fa-star\"  aria-hidden=\"true\"></i></small>\n" +
                                     "                                    </div>\n" +
                                     "                                </div>"
                             }
@@ -956,6 +995,60 @@ function getMyCollect() {
                                     $('#fileInfo strong[name="description"]').html(data[temp].description);
                                     $('#fileInfo strong[name="pageView"]').html(data[temp].checkTimes);
                                     $('#fileInfo strong[name="downloadCount"]').html(data[temp].downloadCount);
+                                });
+                            });
+                            $('#collectFileList small[name="collectBtn"]').each(function () {  //收藏
+
+                                $(this).css('cursor', 'pointer'); //修改鼠标指针样式
+                                // var isCollected = false;
+                                if ($(this).children().hasClass('fa-star')) { //判断是否已经被收藏，如果还没被收藏则添加鼠标滑过事件
+                                    $(this).mouseover(function () {
+                                        $(this).attr("title","点击取消收藏");
+                                    });
+
+                                }
+
+                                $(this).click(function () {  //当点击收藏时
+                                    var item = $(this);
+                                    var fileId = $(this).attr('fileId'); //获取该文件的id
+                                    $.get({    //发生请求判断该文件是否已经被收藏
+                                        url: "/isCollect",
+                                        data: {"fileId": fileId},
+                                        async: false, //关闭异步请求
+                                        success: function (data) {
+                                            if (!data) {  //如果文件还没有被收藏
+                                                $.post({   //发送收藏请求
+                                                    url: "/addCollect",
+                                                    data: {"fileId": fileId},
+                                                    async: false, //关闭异步请求
+                                                    success: function (data) {
+                                                        //标记文件已经被收藏
+                                                        $('#collectFileList small[fileId=' + fileId + ']').children().attr('class', 'fa fa-star');
+                                                        //移除文件为收藏时，鼠标滑过收藏的提示
+                                                        $('#collectFileList small[fileId=' + fileId + ']').unbind('mouseover').unbind('mouseout');
+                                                    }
+                                                });
+                                            } else {  //如果文件已经被收藏
+                                                $.get({  //发送移除收藏请求
+                                                    url: "/removeCollect",
+                                                    data: {"fileId": fileId},
+                                                    async: false, //关闭异步请求
+                                                    success: function (data) {
+                                                        //标记文件为未收藏状态
+                                                        $('#collectFileList small[fileId=' + fileId + ']').children().attr('class', 'fa fa-star-o');
+                                                        //重新添加鼠标滑过收藏按钮时的行为
+                                                        $('#collectFileList small[fileId=' + fileId + ']').mouseover(function () {
+                                                            $('#systemFileList small[fileId=' + fileId + ']').children().attr('class', 'fa fa-star');
+                                                        });
+                                                        $('#collectFileList small[fileId=' + fileId + ']').mouseout(function () {
+                                                            $('#collectFileList small[fileId=' + fileId + ']').children().attr('class', 'fa fa-star-o');
+                                                        });
+                                                        $('#collectFileList small[fileId=' + fileId + ']').parent().parent().remove();
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
                                 });
                             });
                         }
@@ -1061,11 +1154,12 @@ function showVia() {
         url: "/via",
         success: function (data) {
             var path = data;
+            console.log(path);
             $("img[name='userVia']").each(function () {
-                $(this).attr("src", path);
+                $(this).attr("src", '/UserVia/' +　path);
             });
 
-            bgPath = "url(" + data + ")";
+           var bgPath = "url(" + '/UserVia/' +　path + ")";
             $('#dropdownMenu1').css("background-image", bgPath);
         }
     });
