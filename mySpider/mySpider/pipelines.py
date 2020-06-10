@@ -91,12 +91,12 @@ class EncodingTxtPipeline(object):
     def from_settings(cls, settings):
         try:
             connect = pymysql.connect(host=settings['MYSQL_HOST'],
-                                       port=settings['MYSQL_PORT'],
-                                       user=settings['MYSQL_USER'],
-                                       passwd=settings['MYSQL_PASSWORD'],
-                                       db=settings['MYSQL_DBNAME'],
-                                       charset='utf8',
-                                       cursorclass=pymysql.cursors.SSCursor)  # pymysql.cursors.SSCursor设置游标为无缓冲元组类型
+                                      port=settings['MYSQL_PORT'],
+                                      user=settings['MYSQL_USER'],
+                                      passwd=settings['MYSQL_PASSWORD'],
+                                      db=settings['MYSQL_DBNAME'],
+                                      charset='utf8',
+                                      cursorclass=pymysql.cursors.SSCursor)  # pymysql.cursors.SSCursor设置游标为无缓冲元组类型
         except Exception as e:
             print(e, '\nMysql connect error!')
         return cls(connect)
@@ -190,7 +190,7 @@ class EncodingTxtPipeline(object):
                     # 对文件进行压缩处理
                     zip_path, zip_size = zip_file_path(txt_file_path, src_path, file_name + '.zip')
                     print(zip_path, zip_size)
-                    item["name"] = zip_path.split('/')[3]
+                    item["name"] = zip_path.split('/')[4]
                     print("/" * 40)
                     print(item["name"])
                     print("/" * 40)
@@ -374,7 +374,7 @@ class MySQLPipeline(object):
                 try:
                     # 判断元组为空。 如果 all_data 为空元组，则下面语句为：如果不为空（即为true）时，执行if的内容
                     if not all_data:
-                    # if len(all_data) == 0:
+                        # if len(all_data) == 0:
                         self.do_insert(item)
                         print("-" * 30 + "插入了一条数据" + "-" * 30 + "\n")
                     else:

@@ -13,6 +13,7 @@ import time
 import zipfile
 import pathlib
 
+
 def get_zip_file(input_path, result):
     """
     对目录进行深度优先遍历
@@ -22,10 +23,10 @@ def get_zip_file(input_path, result):
     """
     files = os.listdir(input_path)
     for file in files:
-        if os.path.isdir(input_path + '\\' + file):
-            get_zip_file(input_path + '\\' + file, result)
+        if os.path.isdir(input_path + '/' + file):
+            get_zip_file(input_path + '/' + file, result)
         else:
-            result.append(input_path + '\\'+ file)
+            result.append(input_path + '/' + file)
 
 
 def zip_file_path(input_path, output_path, output_name):
@@ -36,7 +37,7 @@ def zip_file_path(input_path, output_path, output_name):
     :param output_name: 压缩包名称
     :return:
     """
-    zip_path = output_path + "\\" + output_name
+    zip_path = output_path + "/" + output_name
     z = pathlib.Path(zip_path)
     f = zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED)
     filelists = []
@@ -53,4 +54,4 @@ def zip_file_path(input_path, output_path, output_name):
 
 
 if __name__ == '__main__':
-    zip_file_path(".\\初中", '.\\', '初中.zip')
+    zip_file_path("./初中", './', '初中.zip')
