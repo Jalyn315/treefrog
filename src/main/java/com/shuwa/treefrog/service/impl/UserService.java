@@ -2,6 +2,7 @@ package com.shuwa.treefrog.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shuwa.treefrog.constant.ConfigConstant;
 import com.shuwa.treefrog.dao.FileDao;
 import com.shuwa.treefrog.dao.TypeDao;
 import com.shuwa.treefrog.dao.UserDao;
@@ -171,14 +172,16 @@ public class UserService implements IUserService {
         //获取文件名
         String fileName = FileUtils.getFileName(file.getOriginalFilename());
         //获取上传路径
-        java.io.File userVia = new java.io.File(ResourceUtils.getURL("classpath:static").getPath()+"/userVia");
+        //String viaPath = ResourceUtils.getURL("classpath:static").getPath();
+        String viaPath = ConfigConstant.VIA_PATH;
+
+        java.io.File userVia = new java.io.File(viaPath);
         if (!userVia.exists()){
             userVia.mkdirs();
-            System.out.println("我创建了");
         }
         String path = ResourceUtils.getURL("classpath:static/userVia").getPath() + "/";
-        file.transferTo(new java.io.File(path + fileName));
-        userDao.updateVia("/userVia/" + fileName, id);
+        file.transferTo(new java.io.File(viaPath + "/" + fileName));
+        userDao.updateVia(fileName, id);
         System.out.println("上传成功");
         return true;
     }

@@ -1,6 +1,7 @@
 package com.shuwa.treefrog.config;
 
 
+import com.shuwa.treefrog.constant.ConfigConstant;
 import com.shuwa.treefrog.interceptor.RegisterInterceptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -54,5 +55,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/File/").addResourceLocations(profile);
+        registry.addResourceHandler("/UserVia/**").addResourceLocations("file:" + ConfigConstant.VIA_PATH + "/");
     }
+
+
+
+
+
 }

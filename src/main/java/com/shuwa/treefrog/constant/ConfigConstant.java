@@ -27,9 +27,10 @@ public class ConfigConstant {
         ConfigConstant.UPLOAD_PATH = uploadPath;
     }
 
-    @Value("")
+    @Value("${viaPath}")
     public void setViaPath(String viaPath) {
         ConfigConstant.VIA_PATH = viaPath;
     }
+
 
 }
