@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.Inet4Address;
 import java.util.Map;
 
 @Controller
@@ -85,11 +84,11 @@ public class UserController {
      *
      * @return
      */
-    @GetMapping("/login")
-    public String toLoginPage() {
-        logger.info("UserController->toLoginPage");
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String toLoginPage() {
+//        logger.info("UserController->toLoginPage");
+//        return "login";
+//    }
 
     /**
      * 用户登录
@@ -186,13 +185,15 @@ public class UserController {
      */
     @ResponseBody
     @PostMapping(value = "/sms")
-    public void smsSender(HttpServletRequest request) {
+    public String smsSender(HttpServletRequest request) {
         logger.info("UserController->smsSender");
         String phoneNum = request.getParameter("phone");
-        if (!smsService.sendSms(phoneNum)) {
-            UserConstant.errorMap.put("codeDup", "验证码已发送，请一分钟后再点击发送！");
+        String verifyCode = smsService.sendSms(phoneNum);
+        if ("empty".equals(verifyCode)) {
+            UserConstant.errorMap.put("codeDup", "验证码已发送，请30s后再点击发送！");
+            return "手机号码为空，请输入手机号码！";
         }
-
+        return verifyCode;
     }
 
     /**

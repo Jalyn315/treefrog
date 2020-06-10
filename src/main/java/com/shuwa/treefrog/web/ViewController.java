@@ -51,14 +51,15 @@ public class ViewController {
         return "signup";
     }
 
+
     /**
-     * 传递到login页面
+     * 登陆
      *
      * @return
      */
-    @RequestMapping(value = "/signin")
-    public String signin() {
-        logger.info("ViewController->signin");
+    @GetMapping("/login")
+    public String toLoginPage() {
+        logger.info("UserController->toLoginPage");
         return "login";
     }
 

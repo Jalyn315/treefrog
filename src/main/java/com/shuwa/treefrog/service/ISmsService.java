@@ -8,7 +8,7 @@ public interface ISmsService {
      * @param mobile
      * @return
      */
-    boolean sendSms(String mobile);
+    String sendSms(String mobile);
 
     /**
      * 判断验证码是否正确
