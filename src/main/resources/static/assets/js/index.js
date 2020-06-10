@@ -624,7 +624,7 @@ function getTypeList() {
 
 
             function listType(pageNum) {
-                for (var i = pageNum * 9; i < pageNum * 9 + 9 && i < data.length ; i++) {
+                for (var i = pageNum * 8; i < pageNum * 8 + 8 && i < data.length ; i++) {
                     var typeItem = "<li class=\"nav-item\">\n" +
                         "              <a href=\"#fileTabPanel\" class=\"nav-link \" data-toggle=\"tab\">" + data[i].typeName + "</a>\n" +
                         "           </li>"

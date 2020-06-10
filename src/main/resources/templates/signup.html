@@ -67,6 +67,7 @@
                 <div class="input-field">
                     <input placeholder="验证码是111111" id="verifiCode" name="verifiCode" type="text"
                            class="validate">
+
                 </div>
                 <p style="color: red" th:text="${errorMap['verifiCode']}" th:if="${errorMap}"></p>
                 <p style="color: red" th:text="${errorMap['codeDup']}" th:if="${errorMap}"></p>
@@ -74,7 +75,7 @@
                     <input id="getVerifiCode" value="获取验证码" type="button" class="btn btn-sm btn-success validate">
                 </div>
                 <div class="text-right mt-4">
-                    <a href="http://localhost:8080/signin" class="text-white" style="margin-right: 50px">已有帐号？去登录</a>
+                    <a href="/login" class="text-white" style="margin-right: 50px">已有帐号？去登录</a>
                     <button type="submit" class="waves-effect btn-large btn-large-white px-4 tm-border-radius-0">注册
                     </button>
                 </div>
